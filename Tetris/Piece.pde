@@ -25,20 +25,25 @@ public class Piece {
     } else if (type==1) {
       if (rotate==0) {
         positions.add(new int[] {xPos, yPos}); //top most square
-        positions.add(new int[] {xPos, yPos-1});
-        positions.add(new int[] {xPos-1, yPos-1});
-        positions.add(new int[] {xPos+1, yPos-1});
+        positions.add(new int[] {xPos, yPos+1});
+        positions.add(new int[] {xPos-1, yPos});
+        positions.add(new int[] {xPos+1, yPos});
       }
       if (rotate==1) {
         positions.add(new int[] {xPos, yPos}); //top most square
         positions.add(new int[] {xPos, yPos-1});
-        positions.add(new int[] {xPos, yPos-2});
-        positions.add(new int[] {xPos+1, yPos-1});
+        positions.add(new int[] {xPos, yPos+1});
+        positions.add(new int[] {xPos+1, yPos});
       }if (rotate==2) {
         positions.add(new int[] {xPos, yPos}); //top most square
         positions.add(new int[] {xPos, yPos-1});
-        positions.add(new int[] {xPos, yPos-2});
-        positions.add(new int[] {xPos+1, yPos-1});
+        positions.add(new int[] {xPos-1, yPos});
+        positions.add(new int[] {xPos+1, yPos});
+      }if (rotate==3) {
+        positions.add(new int[] {xPos, yPos}); //top most square
+        positions.add(new int[] {xPos, yPos-1});
+        positions.add(new int[] {xPos, yPos+1});
+        positions.add(new int[] {xPos-1, yPos});
       }
     } else if (type==2) {
       positions.add(new int[] {xPos, yPos}); //top right most square
