@@ -1,9 +1,9 @@
 public class Board {
-  int score;
-  int level;
-  int tickSpeed;
-  int linesCleared;
-  int[][] board;
+  private int score;
+  private int level;
+  private int tickSpeed;
+  private int linesCleared;
+  private int[][] board;
 
   int getScore() {
     return score;
