@@ -12,4 +12,20 @@ public class Board{
   public Board() {
     this(10, 20);
   }
+
+  int getScore() {
+    return score;
+  }
+  int getLevel() {
+    return level;
+  }
+  int getTickSpeed() {
+    return tickSpeed;
+  }
+  int getLinesCleared() {
+    return linesCleared;
+  }
+  int[][] getBoard() {
+    return board;
+  }
 }
