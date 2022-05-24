@@ -1,7 +1,7 @@
 public class Board{
   private int score;
   private int level;
-  private int tickSpeed;
+  private int tickSpeed = ;
   private int linesCleared;
   private int[][] board;
   
@@ -28,4 +28,13 @@ public class Board{
   int[][] getBoard() {
     return board;
   }
+  
+  public void scoreIncrement(int scoreAmt) {
+    score += scoreAmt;
+  }
+  
+  public void levelIncrement() {
+    level++;
+  }
+  
 }
