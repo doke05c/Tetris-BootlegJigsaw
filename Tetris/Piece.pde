@@ -14,10 +14,19 @@ public class Piece {
     return type;
   }
   
-  public Piece(int xPos, int yPos, int type){
+  public Piece(int xPos, int yPos, int type, int rotate){
      //xPos yPos are coords on the board
      //type = piece
+     if(type==2){
+       positions.add(new int[] {xPos, yPos});
+       //edit these later for the other 3 squares
+       positions.add(new int[] {xPos, yPos});
+       positions.add(new int[] {xPos, yPos});
+       positions.add(new int[] {xPos, yPos});
+     }
   }
   
-  
+  public Piece(int xPos, int yPos, int type){
+    this(xPos, yPos, type, 0);
+  }
 }
