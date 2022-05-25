@@ -18,17 +18,17 @@ public class Piece {
     //xPos yPos are coords on the board
     //type = piece
     if (type==0) {
-      if(rotate ==0){
-      positions.add(new int[] {xPos, yPos+1}); //top most square
-      positions.add(new int[] {xPos, yPos});
-      positions.add(new int[] {xPos, yPos-1});
-      positions.add(new int[] {xPos, yPos-2});
+      if (rotate ==0) {
+        positions.add(new int[] {xPos, yPos+1}); //top most square
+        positions.add(new int[] {xPos, yPos});
+        positions.add(new int[] {xPos, yPos-1});
+        positions.add(new int[] {xPos, yPos-2});
       }
-      if(rotate==1){
-      positions.add(new int[] {xPos+1, yPos}); //top most square
-      positions.add(new int[] {xPos, yPos});
-      positions.add(new int[] {xPos-1, yPos});
-      positions.add(new int[] {xPos-2, yPos});
+      if (rotate==1) {
+        positions.add(new int[] {xPos+1, yPos}); //top most square
+        positions.add(new int[] {xPos, yPos});
+        positions.add(new int[] {xPos-1, yPos});
+        positions.add(new int[] {xPos-2, yPos});
       }
     } else if (type==1) {
       if (rotate==0) {
@@ -42,12 +42,14 @@ public class Piece {
         positions.add(new int[] {xPos, yPos-1});
         positions.add(new int[] {xPos, yPos+1});
         positions.add(new int[] {xPos+1, yPos});
-      }if (rotate==2) {
+      }
+      if (rotate==2) {
         positions.add(new int[] {xPos, yPos}); //top most square
         positions.add(new int[] {xPos, yPos-1});
         positions.add(new int[] {xPos-1, yPos});
         positions.add(new int[] {xPos+1, yPos});
-      }if (rotate==3) {
+      }
+      if (rotate==3) {
         positions.add(new int[] {xPos, yPos}); //top most square
         positions.add(new int[] {xPos, yPos-1});
         positions.add(new int[] {xPos, yPos+1});
@@ -59,40 +61,80 @@ public class Piece {
       positions.add(new int[] {xPos-1, yPos-1});
       positions.add(new int[] {xPos, yPos-1});
     } else if (type==3) {
-      positions.add(new int[] {xPos, yPos}); //top right most square
-      positions.add(new int[] {xPos, yPos-1});
-      positions.add(new int[] {xPos, yPos-2});
-      positions.add(new int[] {xPos-1, yPos-2});
-    } else if (type==4) {
-      positions.add(new int[] {xPos, yPos}); //top right most square
-      positions.add(new int[] {xPos, yPos-1});
-      positions.add(new int[] {xPos, yPos-2});
-      positions.add(new int[] {xPos+1, yPos-2});
-    } else if (type==5) {
-      if(rotate==0){
-      positions.add(new int[] {xPos+1, yPos+1}); //top right most square
-      positions.add(new int[] {xPos, yPos+1});
-      positions.add(new int[] {xPos, yPos});
-      positions.add(new int[] {xPos-1, yPos});
+      if (rotate==0) {
+        positions.add(new int[] {xPos, yPos}); //top right most square
+        positions.add(new int[] {xPos-1, yPos});
+        positions.add(new int[] {xPos-1, yPos+1});
+        positions.add(new int[] {xPos+1, yPos});
       }
-      if(rotate==1){
-      positions.add(new int[] {xPos, yPos+1}); //top most square
-      positions.add(new int[] {xPos, yPos});
-      positions.add(new int[] {xPos+1, yPos});
-      positions.add(new int[] {xPos+1, yPos-1});
+      if (rotate==1) {
+        positions.add(new int[] {xPos, yPos}); //top right most square
+        positions.add(new int[] {xPos-1, yPos});
+        positions.add(new int[] {xPos+1, yPos+1});
+        positions.add(new int[] {xPos+1, yPos});
+      }
+      if (rotate==2) {
+        positions.add(new int[] {xPos, yPos}); //top right most square
+        positions.add(new int[] {xPos-1, yPos});
+        positions.add(new int[] {xPos+1, yPos-1});
+        positions.add(new int[] {xPos+1, yPos});
+      }
+      if (rotate==3) {
+        positions.add(new int[] {xPos, yPos}); //top right most square
+        positions.add(new int[] {xPos-1, yPos});
+        positions.add(new int[] {xPos-1, yPos-1});
+        positions.add(new int[] {xPos+1, yPos});
+      }
+    } else if (type==4) {
+      if (rotate==0) {
+        positions.add(new int[] {xPos, yPos}); //top right most square
+        positions.add(new int[] {xPos-1, yPos});
+        positions.add(new int[] {xPos+1, yPos+1});
+        positions.add(new int[] {xPos+1, yPos});
+      }
+      if (rotate==1) {
+        positions.add(new int[] {xPos, yPos}); //top right most square
+        positions.add(new int[] {xPos-1, yPos});
+        positions.add(new int[] {xPos+1, yPos-1});
+        positions.add(new int[] {xPos+1, yPos});
+      }
+      if (rotate==2) {
+        positions.add(new int[] {xPos, yPos}); //top right most square
+        positions.add(new int[] {xPos-1, yPos});
+        positions.add(new int[] {xPos-1, yPos-1});
+        positions.add(new int[] {xPos+1, yPos});
+      }
+      if (rotate==3) {
+        positions.add(new int[] {xPos, yPos}); //top right most square
+        positions.add(new int[] {xPos-1, yPos});
+        positions.add(new int[] {xPos-1, yPos+1});
+        positions.add(new int[] {xPos+1, yPos});
+      }
+    } else if (type==5) {
+      if (rotate==0) {
+        positions.add(new int[] {xPos+1, yPos+1}); //top right most square
+        positions.add(new int[] {xPos, yPos+1});
+        positions.add(new int[] {xPos, yPos});
+        positions.add(new int[] {xPos-1, yPos});
+      }
+      if (rotate==1) {
+        positions.add(new int[] {xPos, yPos+1}); //top most square
+        positions.add(new int[] {xPos, yPos});
+        positions.add(new int[] {xPos+1, yPos});
+        positions.add(new int[] {xPos+1, yPos-1});
       }
     } else if (type==6) {
-      if(rotate==0){
-      positions.add(new int[] {xPos, yPos+1}); //top right most square
-      positions.add(new int[] {xPos-1, yPos+1});
-      positions.add(new int[] {xPos, yPos});
-      positions.add(new int[] {xPos+1, yPos});
+      if (rotate==0) {
+        positions.add(new int[] {xPos, yPos+1}); //top right most square
+        positions.add(new int[] {xPos-1, yPos+1});
+        positions.add(new int[] {xPos, yPos});
+        positions.add(new int[] {xPos+1, yPos});
       }
-      if(rotate==1){
-      positions.add(new int[] {xPos+1, yPos+1}); //top most square
-      positions.add(new int[] {xPos+1, yPos});
-      positions.add(new int[] {xPos, yPos});
-      positions.add(new int[] {xPos, yPos-1});
+      if (rotate==1) {
+        positions.add(new int[] {xPos+1, yPos+1}); //top most square
+        positions.add(new int[] {xPos+1, yPos});
+        positions.add(new int[] {xPos, yPos});
+        positions.add(new int[] {xPos, yPos-1});
       }
     }
   }
