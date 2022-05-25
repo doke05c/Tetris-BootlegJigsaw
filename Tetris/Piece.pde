@@ -17,7 +17,7 @@ public class Piece {
   public Piece(int xPos, int yPos, int type, int rotate) {
     //xPos yPos are coords on the board
     //type = piece
-    if (type==0) {
+    if (type==CYAN_I) {
       if (rotate ==0) {
         positions.add(new int[] {xPos, yPos+1}); //top most square
         positions.add(new int[] {xPos, yPos});
@@ -30,7 +30,7 @@ public class Piece {
         positions.add(new int[] {xPos-1, yPos});
         positions.add(new int[] {xPos-2, yPos});
       }
-    } else if (type==1) {
+    } else if (type==PURPLE_T) {
       if (rotate==0) {
         positions.add(new int[] {xPos, yPos}); //top most square
         positions.add(new int[] {xPos, yPos+1});
@@ -55,12 +55,12 @@ public class Piece {
         positions.add(new int[] {xPos, yPos+1});
         positions.add(new int[] {xPos-1, yPos});
       }
-    } else if (type==2) {
+    } else if (type==YELLOW_SQ) {
       positions.add(new int[] {xPos, yPos}); //top right most square
       positions.add(new int[] {xPos-1, yPos});
       positions.add(new int[] {xPos-1, yPos-1});
       positions.add(new int[] {xPos, yPos-1});
-    } else if (type==3) {
+    } else if (type==BLUE_L1) {
       if (rotate==0) {
         positions.add(new int[] {xPos, yPos}); //top right most square
         positions.add(new int[] {xPos-1, yPos});
@@ -85,7 +85,7 @@ public class Piece {
         positions.add(new int[] {xPos-1, yPos-1});
         positions.add(new int[] {xPos+1, yPos});
       }
-    } else if (type==4) {
+    } else if (type==ORANGE_L) {
       if (rotate==0) {
         positions.add(new int[] {xPos, yPos}); //top right most square
         positions.add(new int[] {xPos-1, yPos});
@@ -110,7 +110,7 @@ public class Piece {
         positions.add(new int[] {xPos-1, yPos+1});
         positions.add(new int[] {xPos+1, yPos});
       }
-    } else if (type==5) {
+    } else if (type==GREEN_Z1) {
       if (rotate==0) {
         positions.add(new int[] {xPos+1, yPos+1}); //top right most square
         positions.add(new int[] {xPos, yPos+1});
@@ -123,7 +123,7 @@ public class Piece {
         positions.add(new int[] {xPos+1, yPos});
         positions.add(new int[] {xPos+1, yPos-1});
       }
-    } else if (type==6) {
+    } else if (type==RED_Z) {
       if (rotate==0) {
         positions.add(new int[] {xPos, yPos+1}); //top right most square
         positions.add(new int[] {xPos-1, yPos+1});
