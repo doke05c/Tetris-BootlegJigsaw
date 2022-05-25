@@ -6,8 +6,24 @@ public class Board{
   private int linesNeeded = 0;
   private int[][] board;
   
+  static final int SPACE = -2;
+  static final int WALL = -1;
+  
    public Board(int x, int y) {
     board = new int[x][y];
+    //establishes free space, and border walls.
+    for (int i=1;i<x-1;i++) {
+      for (int j=1;j<y-1;j++) {
+        board[i][j] = SPACE;
+      }
+    }
+    for (int i=0;i<x;i++) {
+      for (int j=0;j<y;j++) {
+        if (board[i][j] != -2) {
+          board[i][j] = WALL;
+        }
+      }
+    }
   }
   
   public Board() {
