@@ -43,4 +43,11 @@ public class Board{
   public void tickSpeedIncrement() {
      tickSpeed = (int)((float)tickSpeed / 1.35);
   }
+  
+  public void linesClearedIncrement() {
+    linesCleared++;
+    if (level < 10) {
+        
+    }  
+  }
 }
