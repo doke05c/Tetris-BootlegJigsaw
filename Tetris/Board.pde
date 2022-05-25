@@ -1,7 +1,7 @@
 public class Board{
   private int score;
   private int level;
-  private int tickSpeed = ;
+  private int tickSpeed = 1000;
   private int linesCleared;
   private int[][] board;
   
@@ -35,6 +35,12 @@ public class Board{
   
   public void levelIncrement() {
     level++;
+    if (level <= 15) {  
+      tickSpeedIncrement();
+    }
   }
   
+  public void tickSpeedIncrement() {
+     tickSpeed = (int)((float)tickSpeed / 1.35);
+  }
 }
