@@ -54,5 +54,10 @@ public class Board{
       levelIncrement();
     }
     linesCleared++;
+    scoreIncrement(level*100);
+  }
+  
+  void tick(int tickSpeed) {
+    
   }
 }
