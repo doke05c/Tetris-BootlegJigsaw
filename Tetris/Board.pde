@@ -1,8 +1,9 @@
 public class Board{
   private int score;
   private int level;
-  private int tickSpeed;
+  private int tickSpeed = 1000;
   private int linesCleared;
+  private int linesNeeded = 0;
   private int[][] board;
   
    public Board(int x, int y) {
@@ -27,5 +28,36 @@ public class Board{
   }
   int[][] getBoard() {
     return board;
+  }
+  
+  public void scoreIncrement(int scoreAmt) {
+    score += scoreAmt;
+  }
+  
+  public void levelIncrement() {
+    
+    level++;
+    if (level <= 15) {  
+      tickSpeedIncrement();
+    }
+  }
+  
+  public void tickSpeedIncrement() {
+     tickSpeed = (int)((float)tickSpeed / 1.35);
+  }
+  
+  public void linesClearedIncrement() { 
+    if (level < 25) {
+      linesNeeded = (level-1)*10;
+    }
+    if (linesCleared > linesNeeded && level < 25) {
+      levelIncrement();
+    }
+    linesCleared++;
+    scoreIncrement(level*100);
+  }
+  
+  void tick(int tickSpeed) {
+    
   }
 }
