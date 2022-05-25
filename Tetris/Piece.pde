@@ -142,4 +142,23 @@ public class Piece {
   public Piece(int xPos, int yPos, int type) {
     this(xPos, yPos, type, 0);
   }
+  
+  public boolean move(int x, int y, Board board) {
+   //if the intended space any of the bricks of the Piece wants to take up on the Board is busy (wall or other Pieces), deny move() the right to move the Piece.
+    for (int i=0;i<positions.size();i++) {
+      if (board.getBoard()[positions.get(i)[0]+x][positions.get(i)[0]+y] > 0) {
+        return false;
+      } else {
+        //otherwise, simply move the Piece according to the parameters
+        positions.get(i)[0] = positions.get(i)[0]+x;
+        positions.get(i)[1] = positions.get(i)[1]+y;
+      }
+    }
+    return true;
+  }
+  
+  public boolean move(Board board) {
+    //default move function called by tick() when Piece acts solely according to gravity.
+    return move(0, 1, board);
+  }
 }

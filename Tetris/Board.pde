@@ -11,7 +11,7 @@ public class Board{
   }
   
   public Board() {
-    this(10, 20);
+    this(12, 22);//"edges" will be "taken up" by wall squares. do not display edges. meant to display as 10 x 20
   }
 
   int getScore() {
