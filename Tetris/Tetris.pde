@@ -62,3 +62,13 @@ void draw() {
 
 void keyPressed() {
 }
+
+static final int SPACE = -2;
+static final int WALL = -1;
+static final int CYAN_I = 0;
+static final int PURPLE_T = 1;
+static final int YELLOW_SQ = 2;
+static final int BLUE_L1 = 3;
+static final int ORANGE_L = 4;
+static final int GREEN_Z1 = 5;
+static final int RED_Z = 6;
