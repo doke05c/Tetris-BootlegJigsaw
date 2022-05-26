@@ -26,7 +26,7 @@ public class Piece {
     return y;
   }
 
-  Void rotate(boolean direction) {
+  void rotate(boolean direction) {
     if (direction) {
       if(rotation!=3)rotation+=1;//make sure to loop over for 3
       else rotation=0;
@@ -34,7 +34,10 @@ public class Piece {
       if(rotation!=0)rotation-=1;//make sure to loop over for 0
       else rotation =3;
     }
-    this = new Piece(x, y, type, rotation);//call with new rotation
+    //this = new Piece(x, y, type, rotation);//call with new rotation
+    Piece temp = new Piece(x,y,type,rotation);
+    positions= temp.positions;
+    
   }
 
   public Piece(int xPos, int yPos, int type, int rotate) {
