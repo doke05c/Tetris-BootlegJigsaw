@@ -1,6 +1,8 @@
 public class Piece {
   private ArrayList<int[]> positions; //arrays of size 2
   private int type; //piece type 0-6
+  private int x;
+  private int y;
 
   static final int CYAN_I = 0;
   static final int PURPLE_T = 1;
@@ -154,6 +156,8 @@ public class Piece {
         positions.get(i)[1] = positions.get(i)[1]+y;
       }
     }
+    this.x += x;
+    this.y += y;
     return true;
   }
   
