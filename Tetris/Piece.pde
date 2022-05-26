@@ -19,6 +19,13 @@ public class Piece {
     return rotation;
   }
 
+  int getX(){
+    return x;
+  }
+  int getY(){
+    return y;
+  }
+
   Void rotate(boolean direction) {
     if (direction) {
       rotation+=1;//make sure to loop over for 3
@@ -50,7 +57,7 @@ public class Piece {
       }
     } else if (type==1) {
       if (rotate==0) {
-        positions.add(new int[] {xPos, yPos}); //top most square
+        positions.add(new int[] {xPos, yPos}); //bottom right
         positions.add(new int[] {xPos, yPos+1});
         positions.add(new int[] {xPos-1, yPos});
         positions.add(new int[] {xPos+1, yPos});
