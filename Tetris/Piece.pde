@@ -26,6 +26,15 @@ public class Piece {
     return y;
   }
 
+  void stamp(Board cBoard){
+    for(int sq = 0; sq<positions.size(); sq++){
+      cBoard.getBoard()[positions.get(sq)[0]][positions.get(sq)[1]]=type;
+    }
+    for(int r=3; r>=0; r++){
+      positions.remove(r); 
+    }
+  }
+
   void rotate(boolean direction) {
     if (direction) {
       if(rotation!=3)rotation+=1;//make sure to loop over for 3
