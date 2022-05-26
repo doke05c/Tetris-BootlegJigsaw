@@ -1,7 +1,9 @@
 public class Piece {
   private ArrayList<int[]> positions; //arrays of size 2
   private int type; //piece type 0-6
-
+  private int rotation;
+  private int x;
+  private int y;
   static final int CYAN_I = 0;
   static final int PURPLE_T = 1;
   static final int YELLOW_SQ = 2;
@@ -13,10 +15,26 @@ public class Piece {
   int getType() { //accessor
     return type;
   }
+  int getRotation() { //accessor
+    return rotation;
+  }
+
+  Void rotate(boolean direction) {
+    if (direction) {
+      rotation+=1;//make sure to loop over for 3
+    } else {
+      rotation-=1;//make sure to loop over for 0
+    }
+    this = new Piece(x, y, type, rotation);//call with new rotation
+  }
 
   public Piece(int xPos, int yPos, int type, int rotate) {
     //xPos yPos are coords on the board
     //type = piece
+    rotation = rotate;
+    x = xPos;
+    y = yPos;
+    this.type = type;
     if (type==0) {
       if (rotate ==0) {
         positions.add(new int[] {xPos, yPos+1}); //top most square
