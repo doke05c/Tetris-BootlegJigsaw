@@ -26,9 +26,14 @@ public class Piece {
     for (int sq = 0; sq<positions.size(); sq++) {
       cBoard.getBoard()[positions.get(sq)[0]][positions.get(sq)[1]]=type;
     }
-    for (int r=3; r>=0; r++) {
+    for (int r=3; r>=0; r--) {
       positions.remove(r);
     }
+    Piece temp = new Piece(5, 1, (int)Math.random()*7);
+    positions = temp.positions;
+    x = temp.x;
+    y = temp.y;
+    type = temp.type;
   }
 
   void rotate(boolean direction) {
