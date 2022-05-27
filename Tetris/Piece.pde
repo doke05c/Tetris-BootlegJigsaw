@@ -24,7 +24,7 @@ public class Piece {
 
   void stamp(Board cBoard) {
     for (int sq = 0; sq<positions.size(); sq++) {
-      cBoard.getBoard()[positions.get(sq)[0]][positions.get(sq)[1]]=type+7;//(-1 + type/10+.1);
+      cBoard.getBoard()[positions.get(sq)[0]][positions.get(sq)[1]]=type+STAMP;//(-1 + type/10+.1);
     }
     for (int r=3; r>=0; r--) {
       positions.remove(r);

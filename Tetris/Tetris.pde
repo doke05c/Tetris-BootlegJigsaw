@@ -40,3 +40,4 @@ static final int BLUE_L1 = 3;
 static final int ORANGE_L = 4;
 static final int GREEN_Z1 = 5;
 static final int RED_Z = 6;
+static final int STAMP = 7;
