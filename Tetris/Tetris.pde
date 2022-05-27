@@ -22,6 +22,8 @@ void keyPressed() {
     tee.move(-1, 0, board);
   } else if (keyCode == UP) {
     tee.rotate(true);
+  } else if (key == 'z' || key == 'Z') {
+    tee.rotate(false);
   }
 }
 

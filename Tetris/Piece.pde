@@ -4,13 +4,6 @@ public class Piece {
   private int rotation;
   private int x;
   private int y;
-  static final int CYAN_I = 0;
-  static final int PURPLE_T = 1;
-  static final int YELLOW_SQ = 2;
-  static final int BLUE_L1 = 3;
-  static final int ORANGE_L = 4;
-  static final int GREEN_Z1 = 5;
-  static final int RED_Z = 6;
 
   int getType() { //accessor
     return type;
@@ -50,8 +43,26 @@ public class Piece {
     for (int i=0;i<4;i++) {
       board.getBoard()[positions.get(i)[0]][positions.get(i)[1]] = SPACE;
     }
-    Piece temp = new Piece(x, y, type, rotation);
-    positions= temp.positions;
+    if (x==1) {
+      Piece temp = new Piece(x+1, y, type, rotation);
+      positions= temp.positions;
+      x++;
+    } else if (x==board.getBoard().length-2) {
+      Piece temp = new Piece(x-1, y, type, rotation);
+      positions= temp.positions;
+      x--;
+    } else if (y==1) {
+      Piece temp = new Piece(x, y+1, type, rotation);
+      positions= temp.positions;
+      y++;
+    } else if (y==board.getBoard()[0].length-2) {
+      Piece temp = new Piece(x, y-1, type, rotation);
+      positions= temp.positions;
+      y--;
+    } else {
+      Piece temp = new Piece(x, y, type, rotation);
+      positions= temp.positions;
+    }
   }
 
   public Piece(int xPos, int yPos, int type, int rotate) {
