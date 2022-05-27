@@ -19,7 +19,7 @@ public class Board {
     }
     for (int i=0; i<x; i++) {
       for (int j=0; j<y; j++) {
-        if (board[i][j] != -2) {
+        if (board[i][j] != SPACE) {
           board[i][j] = WALL;
         }
       }
@@ -77,7 +77,7 @@ public class Board {
   }
 
   public void displayBoard() {
-    for (int r=0; r<=board.length; r++) {
+    for (int r=0; r<board.length; r++) {
       for (int c=0; c<board[0].length; c++) {
         float sz = 23;
         switch (board[r][c]) {
