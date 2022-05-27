@@ -90,22 +90,43 @@ public class Board {
         case CYAN_I:
           fill(0, 255, 255);
           break;
+        case CYAN_I+STAMP:
+          fill(0, 255, 255);
+          break;
         case PURPLE_T:
+          fill(255, 0, 255);
+          break;
+        case PURPLE_T+STAMP:
           fill(255, 0, 255);
           break;
         case YELLOW_SQ:
           fill(255, 255, 0);
           break;
+        case YELLOW_SQ+STAMP:
+          fill(255, 255, 0);
+          break;
         case BLUE_L1:
+          fill(0, 0, 255);
+          break;
+        case BLUE_L1+STAMP:
           fill(0, 0, 255);
           break;
         case ORANGE_L:
           fill(255, 69, 0);
           break;
+        case ORANGE_L+STAMP:
+          fill(255, 69, 0);
+          break;
         case GREEN_Z1:
           fill(0, 255, 0);
           break;
+        case GREEN_Z1+STAMP:
+          fill(0, 255, 0);
+          break;
         case RED_Z:
+          fill(255, 0, 0);
+          break;
+        case RED_Z+STAMP:
           fill(255, 0, 0);
           break;
         }

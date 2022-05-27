@@ -1,5 +1,5 @@
 Board board = new Board();
-Piece tee = new Piece(5, 1, (int)Math.random()*6);
+Piece tee = new Piece(5, 1, (int)random(0,7));
 void setup() {
   size(960, 540);
 }
@@ -24,7 +24,9 @@ void keyPressed() {
     tee.rotate(true);
   } else if (key == 'z' || key == 'Z') {
     tee.rotate(false);
-  } else if (keyCode == ENTER) {
+  } else if (key == ' ') {
+    while(tee.move(board)) {
+    }
     tee.stamp(board);
   }
 }
@@ -38,3 +40,4 @@ static final int BLUE_L1 = 3;
 static final int ORANGE_L = 4;
 static final int GREEN_Z1 = 5;
 static final int RED_Z = 6;
+static final int STAMP = 7;

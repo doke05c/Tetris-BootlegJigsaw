@@ -24,12 +24,12 @@ public class Piece {
 
   void stamp(Board cBoard) {
     for (int sq = 0; sq<positions.size(); sq++) {
-      cBoard.getBoard()[positions.get(sq)[0]][positions.get(sq)[1]]=type;//(-1 + type/10+.1);
+      cBoard.getBoard()[positions.get(sq)[0]][positions.get(sq)[1]]=type+STAMP;//(-1 + type/10+.1);
     }
     for (int r=3; r>=0; r--) {
       positions.remove(r);
     }
-    Piece temp = new Piece(5, 1, (int)Math.random()*7);
+    Piece temp = new Piece(5, 1, (int)random(0,7));
     positions = temp.positions;
     x = temp.x;
     y = temp.y;
@@ -48,25 +48,27 @@ public class Piece {
     for (int i=0;i<4;i++) {
       board.getBoard()[positions.get(i)[0]][positions.get(i)[1]] = SPACE;
     }
-    if (x==1) {
-      Piece temp = new Piece(x+1, y, type, rotation);
-      positions= temp.positions;
-      x++;
-    } else if (x==board.getBoard().length-2) {
-      Piece temp = new Piece(x-1, y, type, rotation);
-      positions= temp.positions;
-      x--;
-    } else if (y==1) {
-      Piece temp = new Piece(x, y+1, type, rotation);
-      positions= temp.positions;
-      y++;
-    } else if (y==board.getBoard()[0].length-2) {
-      Piece temp = new Piece(x, y-1, type, rotation);
-      positions= temp.positions;
-      y--;
-    } else {
-      Piece temp = new Piece(x, y, type, rotation);
-      positions= temp.positions;
+    if (type != YELLOW_SQ) {
+      if (x==1) {
+        Piece temp = new Piece(x+1, y, type, rotation);
+        positions= temp.positions;
+        x++;
+      } else if (x==board.getBoard().length-2) {
+        Piece temp = new Piece(x-1, y, type, rotation);
+        positions= temp.positions;
+        x--;
+      } else if (y==1) {
+        Piece temp = new Piece(x, y+1, type, rotation);
+        positions= temp.positions;
+        y++;
+      } else if (y==board.getBoard()[0].length-2) {
+        Piece temp = new Piece(x, y-1, type, rotation);
+        positions= temp.positions;
+        y--;
+      } else {
+        Piece temp = new Piece(x, y, type, rotation);
+        positions= temp.positions;
+      }
     }
   }
 
@@ -216,7 +218,9 @@ public class Piece {
       boolean xUnder = positions.get(i)[0]+x < 1;
       boolean yOver = positions.get(i)[1]+y > board.getBoard()[0].length-1;
       boolean yUnder = positions.get(i)[1]+y < 1;
-      if (xOver || xUnder || yOver || yUnder || board.getBoard()[positions.get(i)[0]+x][positions.get(i)[1]+y] == WALL) {
+      boolean isWall = board.getBoard()[positions.get(i)[0]+x][positions.get(i)[1]+y] == WALL;
+      boolean isStamped = board.getBoard()[positions.get(i)[0]+x][positions.get(i)[1]+y] > 6;
+      if (xOver || xUnder || yOver || yUnder || isWall || isStamped) {
         return false;
       }
     }
