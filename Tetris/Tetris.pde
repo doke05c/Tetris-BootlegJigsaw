@@ -14,9 +14,15 @@ void draw() {
 
 
 void keyPressed() {
-  //if (key == ' ') {
+  if (keyCode == DOWN) {
     tee.move(board);
-  //} else if (key == ' ')
+  } else if (keyCode == RIGHT) {
+    tee.move(1, 0, board);
+  } else if (keyCode == LEFT) {
+    tee.move(-1, 0, board);
+  } else if (keyCode == UP) {
+    tee.rotate(true);
+  }
 }
 
 static final int SPACE = -2;

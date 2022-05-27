@@ -47,6 +47,9 @@ public class Piece {
       else rotation =3;
     }
     //this = new Piece(x, y, type, rotation);//call with new rotation
+    for (int i=0;i<4;i++) {
+      board.getBoard()[positions.get(i)[0]][positions.get(i)[1]] = SPACE;
+    }
     Piece temp = new Piece(x, y, type, rotation);
     positions= temp.positions;
   }
@@ -206,9 +209,9 @@ public class Piece {
        board.getBoard()[positions.get(i)[0]][positions.get(i)[1]] = SPACE;
        positions.get(i)[0] = positions.get(i)[0]+x;
        positions.get(i)[1] = positions.get(i)[1]+y;
-       this.x += x;
-       this.y += y;
     }
+    this.x += x;
+    this.y += y;
     return true;
   }
 
