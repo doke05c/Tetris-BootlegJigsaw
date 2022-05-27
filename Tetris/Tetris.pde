@@ -1,5 +1,5 @@
 Board board = new Board();
-Piece tee = new Piece(5, 1, PURPLE_T);
+Piece tee = new Piece(5, 1, (int)Math.random()*6);
 void setup() {
   size(960, 540);
 }
@@ -22,6 +22,10 @@ void keyPressed() {
     tee.move(-1, 0, board);
   } else if (keyCode == UP) {
     tee.rotate(true);
+  } else if (key == 'z' || key == 'Z') {
+    tee.rotate(false);
+  } else if (keyCode == ENTER) {
+    tee.stamp(board);
   }
 }
 
