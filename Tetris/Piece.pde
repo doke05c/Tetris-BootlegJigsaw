@@ -132,26 +132,26 @@ public class Piece {
       if (rotate==0) {
         positions.set(0, new int[] {xPos, yPos}); //top right most square
         positions.set(1, new int[] {xPos-1, yPos});
-        positions.set(2, new int[] {xPos-1, yPos+1});
+        positions.set(2, new int[] {xPos-1, yPos-1});
         positions.set(3, new int[] {xPos+1, yPos});
       }
       if (rotate==1) {
+        positions.set(0, new int[] {xPos, yPos}); //top right most square
+        positions.set(1, new int[] {xPos, yPos-1});
+        positions.set(2, new int[] {xPos+1, yPos-1});
+        positions.set(3, new int[] {xPos, yPos+1});
+      }
+      if (rotate==2) {
         positions.set(0, new int[] {xPos, yPos}); //top right most square
         positions.set(1, new int[] {xPos-1, yPos});
         positions.set(2, new int[] {xPos+1, yPos+1});
         positions.set(3, new int[] {xPos+1, yPos});
       }
-      if (rotate==2) {
-        positions.set(0, new int[] {xPos, yPos}); //top right most square
-        positions.set(1, new int[] {xPos-1, yPos});
-        positions.set(2, new int[] {xPos+1, yPos-1});
-        positions.set(3, new int[] {xPos+1, yPos});
-      }
       if (rotate==3) {
         positions.set(0, new int[] {xPos, yPos}); //top right most square
-        positions.set(1, new int[] {xPos-1, yPos});
-        positions.set(2, new int[] {xPos-1, yPos-1});
-        positions.set(3, new int[] {xPos+1, yPos});
+        positions.set(1, new int[] {xPos, yPos+1});
+        positions.set(2, new int[] {xPos, yPos-1});
+        positions.set(3, new int[] {xPos-1, yPos+1});
       }
     } else if (type==ORANGE_L) {
       if (rotate==0) {
