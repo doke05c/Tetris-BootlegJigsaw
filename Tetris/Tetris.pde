@@ -9,7 +9,7 @@ void draw() {
    for (int j=0;j<4;j++) {
      board.getBoard()[tee.getPositions().get(j)[0]][tee.getPositions().get(j)[1]] = tee.getType();
    }
-  board.rowChecked();
+   board.rowChecked();
   //check for busy spots at the top of any column. if busy, reset the game.
   boolean anyAtTop = false;
   for(int i=0;i<board.getBoard().length;i++) {if (board.getBoard()[i][1] > 6) {anyAtTop = true;}}

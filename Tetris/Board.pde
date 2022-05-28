@@ -85,18 +85,15 @@ public class Board {
       if (allFilled) {toDelete.add(i);}
     }
     while (toDelete.size() > 0) {
-      for (int i=1;i<board.length-1;i++) {
-        board[i][toDelete.get(0)] = SPACE;
+       for (int j=toDelete.get(0);j>=2;j--) {
+        for (int i=1;i<board.length-1;i++) {
+          if (board[i][j-1]>=CYAN_I && board[i][j-1]<=RED_Z) {
+            board[i][j] = SPACE;
+          } else {
+            board[i][j] = board[i][j-1];
+          }
+        }
       }
-      // for (int j=toDelete.get(0);j>=2;j--) {
-      //  for (int i=1;i<board.length-1;i++) {
-      //    if (board[i][j-1]>=CYAN_I || board[i][j-1]<=RED_Z) {
-      //      board[i][j] = SPACE;
-      //    } else {
-      //      board[i][j] = board[i][j-1];
-      //    }
-      //  }
-      //}
       toDelete.remove(0);
     }
   }
