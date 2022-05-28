@@ -9,7 +9,6 @@ void draw() {
    for (int j=0;j<4;j++) {
      board.getBoard()[tee.getPositions().get(j)[0]][tee.getPositions().get(j)[1]] = tee.getType();
    }
-    //tee.move(board);
 }
 
 
@@ -28,6 +27,8 @@ void keyPressed() {
     while(tee.move(board)) {
     }
     tee.stamp(board);
+  } else if (keyCode == BACKSPACE) {
+    board = new Board();
   }
 }
 
