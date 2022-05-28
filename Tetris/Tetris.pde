@@ -31,9 +31,9 @@ void keyPressed() {
   } else if (keyCode == LEFT) { //move left
     tee.move(-1, 0, board);
   } else if (keyCode == UP) { //rotate CW
-    tee.rotate(true);
+     tee.rotate(true);
   } else if (key == 'z' || key == 'Z') { //rotate  CCW
-    tee.rotate(false);
+     tee.rotate(false);
   } else if (key == ' ') { //soft drop
     int softDropCount = -1;
     while(tee.move(board)) {softDropCount++;}
@@ -42,6 +42,8 @@ void keyPressed() {
     board.scoreIncrement(softDropCount);
     for(int i=4;i<7;i++) {if (board.getBoard()[i][2] > 6) {anyNearSpawn = true;}}
     if (anyNearSpawn) {
+      //textSize(250);
+      //text("LOSER", 25, height-50);
       board = new Board();
       tee = new Piece(5, 1, (int)random(0,7));
     } else {
