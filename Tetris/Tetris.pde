@@ -20,8 +20,6 @@ void draw() {
   text("Score: " + board.getScore(), 300, 475);
   text("Level: " + board.getLevel(), 300, 495);
   text("Lines Cleared: " + board.getLinesCleared(), 300, 515);
-  text("Lines Needed: " + board.linesNeeded, 500, 515);
-
 }
 
 
