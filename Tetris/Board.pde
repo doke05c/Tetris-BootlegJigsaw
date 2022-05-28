@@ -1,8 +1,8 @@
 public class Board {
-  private int score;
-  private int level;
+  private int score = 0;
+  private int level = 1;
   private int tickSpeed = 1000;
-  private int linesCleared;
+  private int linesCleared = 0;
   private int linesNeeded = 0;
   private int[][] board;
 
@@ -63,17 +63,18 @@ public class Board {
   }
 
   public void linesClearedIncrement() { 
-    if (level < 25) {
-      linesNeeded = (level-1)*10;
-    }
-    if (linesCleared > linesNeeded && level < 25) {
-      levelIncrement();
-    }
     linesCleared++;
+    if (linesCleared >= linesNeeded && level < 25) {
+      levelIncrement();
+      linesNeeded += 10;
+    }
     scoreIncrement(level*100);
   }
   
   void rowChecked() {
+    if (level == 1) {
+      linesNeeded = level*10;
+    }
     ArrayList<Integer> toDelete = new ArrayList<Integer>();
     for (int i=1;i<board[0].length-1;i++) {
       boolean allFilled = true;
@@ -95,6 +96,7 @@ public class Board {
         }
       }
       toDelete.remove(0);
+      linesClearedIncrement();
     }
   }
 
