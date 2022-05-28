@@ -31,6 +31,12 @@ public class Piece {
     }
   }
 
+  boolean checkPos(ArrayList<int[]> positions){
+    for(int i=0; i<positions.size(); i++){
+      if(board.getBoard()[positions.get(i)[0]][positions.get(i)[1]] >=7) return false;
+    }
+    return true;
+  }
   void rotate(boolean direction) {
     if (direction) {
       if (rotation!=3)rotation+=1;//make sure to loop over for 3
@@ -46,23 +52,30 @@ public class Piece {
     if (type != YELLOW_SQ) {
       if (x==1) {
         Piece temp = new Piece(x+1, y, type, rotation);
+        if(checkPos(temp.positions)){
         positions= temp.positions;
-        x++;
+        x++;}else{rotation-=1;}
       } else if (x==board.getBoard().length-2) {
         Piece temp = new Piece(x-1, y, type, rotation);
+        if(checkPos(temp.positions)){
         positions= temp.positions;
-        x--;
+        x--;}else{rotation-=1;}
       } else if (y==1) {
         Piece temp = new Piece(x, y+1, type, rotation);
+        if(checkPos(temp.positions)){
         positions= temp.positions;
-        y++;
+        y++;}else{rotation-=1;}
       } else if (y==board.getBoard()[0].length-2) {
         Piece temp = new Piece(x, y-1, type, rotation);
+        if(checkPos(temp.positions)){
         positions= temp.positions;
         y--;
+        }else{rotation-=1;}
       } else {
         Piece temp = new Piece(x, y, type, rotation);
+        if(checkPos(temp.positions)){
         positions= temp.positions;
+        }else{rotation-=1;}
       }
     }
   }
