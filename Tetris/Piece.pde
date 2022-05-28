@@ -29,11 +29,6 @@ public class Piece {
     for (int r=3; r>=0; r--) {
       positions.remove(r);
     }
-    Piece temp = new Piece(5, 1, (int)random(0,7));
-    positions = temp.positions;
-    x = temp.x;
-    y = temp.y;
-    type = temp.type;
   }
 
   void rotate(boolean direction) {

@@ -9,6 +9,12 @@ void draw() {
    for (int j=0;j<4;j++) {
      board.getBoard()[tee.getPositions().get(j)[0]][tee.getPositions().get(j)[1]] = tee.getType();
    }
+  //check for busy spots at the top of any column. if busy, reset the game.
+  boolean anyAtTop = false;
+  for(int i=0;i<board.getBoard().length;i++) {if (board.getBoard()[i][1] > 6) {anyAtTop = true;}}
+  if (anyAtTop) {
+    board = new Board();
+  }
 }
 
 
@@ -24,9 +30,16 @@ void keyPressed() {
   } else if (key == 'z' || key == 'Z') {
     tee.rotate(false);
   } else if (key == ' ') {
-    while(tee.move(board)) {
-    }
+    while(tee.move(board)) {}
+    boolean anyNearSpawn = false; //check for busy spots near spawn, if exist, game will reset
     tee.stamp(board);
+    for(int i=4;i<7;i++) {if (board.getBoard()[i][2] > 6) {anyNearSpawn = true;}}
+    if (anyNearSpawn) {
+      board = new Board();
+      tee = new Piece(5, 1, (int)random(0,7));
+    } else {
+      tee = new Piece(5, 1, (int)random(0,7));  
+    }
   } else if (keyCode == BACKSPACE) {
     board = new Board();
   }
