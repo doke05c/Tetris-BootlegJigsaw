@@ -270,7 +270,6 @@ public class Piece {
 
   public boolean move(Board board) {
     //default move function called by tick() when Piece acts solely according to gravity.
-    board.scoreIncrement(1);
     return move(0, 1, board);
   }
 }

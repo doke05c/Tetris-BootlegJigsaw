@@ -25,6 +25,7 @@ void draw() {
 
 void keyPressed() {
   if (keyCode == DOWN) { //move down one space
+    board.scoreIncrement(1);
     tee.move(board);
   } else if (keyCode == RIGHT) { //move right
     tee.move(1, 0, board);
