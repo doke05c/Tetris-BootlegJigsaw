@@ -14,4 +14,45 @@ Compile/Run instructions:
 This program runs in processing. Use left/right arrow keys to shift pieces in those respective directions. Up arrow rotates the piece, and the down arrow shifts the piece down. The spacebar stamps the piece on to the board and summons a new piece. 
 
 Development Log:
-(TBA)
+
+5/22/22:
+
+Afia: Today we started testing out branching and merging. I made the Board.pde file.
+
+David: 
+
+5/23/22:
+
+Afia: Added the accessor methods for the Board class.
+
+David:
+
+5/24/22:
+
+Afia: Created the instance variables for the Piece class. Created the piece constructor with all rotation states for each piece.
+
+David:
+
+5/25/22:
+
+Afia: Added x and y instance variables for piece, and added rotate accessor and rotation mutator method in piece class. Altered the piece constructor so that rotation states are set into ArrayList Positions instead of added. Also added stamp method.
+
+David:
+
+5/26/22:
+
+Afia: Fixed syntax errors in rotate method. 
+
+David:
+
+5/27/22:
+
+Afia: Fixed the piece constructor, where multiple pieces had incorrect rotation states because I incrimented incorrectly. 
+
+David: 
+
+5/28/22:
+
+Afia: Added a checkPos method, which checks the positions of a rotation before rotating to make sure a certain rotation is possible. This method aims to prevent pieces from overlapping other pieces or rotate incorrectly in tight spaces.
+
+David: 
