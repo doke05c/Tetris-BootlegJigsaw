@@ -35,7 +35,7 @@ David:
 
 5/25/22:
 
-Afia: Added x and y instance variables for piece, and added rotate accessor and rotation mutator method in piece class. Altered the piece constructor so that rotation states are set into ArrayList Positions instead of added. Also added stamp method.
+Afia: Added x and y instance variables for piece, and added rotate accessor and rotation mutator methods in piece class. Altered the piece constructor so that rotation states are set into ArrayList Positions instead of added into it. Also added stamp method.
 
 David:
 
@@ -53,6 +53,6 @@ David:
 
 5/28/22:
 
-Afia: Added a checkPos method, which checks the positions of a rotation before rotating to make sure a certain rotation is possible. This method aims to prevent pieces from overlapping other pieces or rotate incorrectly in tight spaces.
+Afia: Added a checkPos method, which checks the positions of a rotation before rotating to make sure a certain rotation is possible. This method aims to prevent pieces from overlapping other pieces or rotating incorrectly in tight spaces.
 
 David: 
