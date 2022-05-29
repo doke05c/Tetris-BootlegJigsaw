@@ -11,7 +11,7 @@ Prototype Document: https://docs.google.com/document/d/1B44WfTRtLe2xEvWqtp4nwDef
 
 Compile/Run instructions:
 
-This program runs in processing. Use left/right arrow keys to shift pieces in those respective directions. Up arrow rotates the piece, and the down arrow shifts the piece down. The spacebar stamps the piece on to the board and summons a new piece. 
+This program runs in processing. Download the file, open it in processing, and click run. Use left/right arrow keys to shift pieces in those respective directions. Up arrow rotates the piece clockwise while the 'z' key rotates it counterclockwise, and the down arrow shifts the piece down. The spacebar stamps the piece on to the board and summons a new piece. 
 
 Development Log:
 
