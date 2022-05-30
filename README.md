@@ -11,7 +11,7 @@ Prototype Document: https://docs.google.com/document/d/1B44WfTRtLe2xEvWqtp4nwDef
 
 Compile/Run instructions:
 
-This program runs in processing. Download the file, open it in processing, and click run. Use left/right arrow keys to shift pieces in those respective directions. Up arrow rotates the piece clockwise while the 'z' key rotates it counterclockwise, and the down arrow shifts the piece down. The spacebar stamps the piece on to the board and summons a new piece. 
+This program runs in processing. Download the file, open it in processing, and click run. Use left/right arrow keys to shift pieces in those respective directions. Up arrow rotates the piece clockwise while the 'z' key rotates it counterclockwise, and the down arrow shifts the piece down. 'c' key adds a Piece to storage to be used at a later time. (Player can only put a piece in storage once per place cycle.) The spacebar stamps the piece on to the board and summons a new piece.
 
 Development Log:
 
@@ -61,4 +61,4 @@ David: Added the ability to check and clear lines that are full of squares. I al
 
 5/29/22:
 
-David: I modified move() so that only moves that are called when down key is pressed give points. This feature will make way for tick(), which will move() the Piece according to a set timer and not add points.
+David: I modified move() so that only moves that are called when down key is pressed give points. This feature will make way for tick(), which will move() the Piece according to a set timer and not add points. Added a way to store a second Piece for gameplay convenience purposes.
