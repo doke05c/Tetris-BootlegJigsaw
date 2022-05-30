@@ -10,7 +10,7 @@ void setup() {
 void draw() {
   background(255);
   board.displayBoard();
-   for (int j=0;j<4;j++) {
+   for (int j=0;j<4;j++) { //puts Pieces on Board
      board.getBoard()[piecelist.get(0).getPositions().get(j)[0]][piecelist.get(0).getPositions().get(j)[1]] = piecelist.get(0).getType();
    }
    board.rowChecked();
@@ -22,29 +22,30 @@ void draw() {
     piecelist = new ArrayList<Piece>();
     piecelist.add(new Piece(5, 1, (int)random(0,7)));
   }
-  if (piecelist.size() >= 2) {
+  if (piecelist.size() >= 2) { //display the stored Piece
     textSize(20);
+    fill(127, 127, 127); text("Storage:", 300, 380);
     switch(piecelist.get(1).getType()) {
       case(CYAN_I):
-        text("Storage: I-Piece", 300, 400);
+        fill(0, 255, 255); rect(300, 400, 20, 20); rect(320, 400, 20, 20); rect(340, 400, 20, 20); rect(360, 400, 20, 20);
         break;
       case(PURPLE_T):
-        text("Storage: T-Piece", 300, 400);
+        fill(255, 0, 255); rect(300, 400, 20, 20); rect(320, 400, 20, 20); rect(340, 400, 20, 20); rect(320, 420, 20, 20);
         break;
       case(YELLOW_SQ):
-        text("Storage: Square-Piece", 300, 400);
+        fill(255, 255, 0); rect(300, 400, 20, 20); rect(320, 400, 20, 20); rect(300, 420, 20, 20); rect(320, 420, 20, 20);
         break;
       case(BLUE_L1):
-        text("Storage: Blue L-Piece", 300, 400);
+        fill(0, 0, 255); rect(300, 400, 20, 20); rect(340, 420, 20, 20); rect(300, 420, 20, 20); rect(320, 420, 20, 20);
         break;
       case(ORANGE_L):
-        text("Storage: Orange L-Piece", 300, 400);
+        fill(255, 69, 0); rect(340, 400, 20, 20); rect(340, 420, 20, 20); rect(300, 420, 20, 20); rect(320, 420, 20, 20);
         break;
       case(GREEN_Z1):
-        text("Storage: Green Z-Piece", 300, 400);
+        fill(0, 255, 0); rect(300, 420, 20, 20); rect(320, 400, 20, 20); rect(320, 420, 20, 20); rect(340, 400, 20, 20);
         break;
       case(RED_Z):
-        text("Storage: Red Z-Piece", 300, 400);
+        fill(255, 0, 0); rect(300, 400, 20, 20); rect(320, 400, 20, 20); rect(320, 420, 20, 20); rect(340, 420, 20, 20);        
         break;
     }
   }
