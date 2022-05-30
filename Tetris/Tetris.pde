@@ -94,7 +94,7 @@ void keyPressed() {
       for (int i=0;i<4;i++) {
         board.getBoard()[piecelist.get(0).getPositions().get(i)[0]][piecelist.get(0).getPositions().get(i)[1]] = SPACE;
       }
-      Piece temp = piecelist.get(1);
+      Piece temp = new Piece(5, 1, piecelist.get(1).getType());
       piecelist.set(1, piecelist.get(0));
       piecelist.set(0, temp);
       hasStored = true;
