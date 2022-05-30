@@ -1,8 +1,8 @@
 public class Board {
-  private int score;
-  private int level;
+  private int score = 0;
+  private int level = 1;
   private int tickSpeed = 1000;
-  private int linesCleared;
+  private int linesCleared = 0;
   private int linesNeeded = 0;
   private int[][] board;
 
@@ -63,14 +63,41 @@ public class Board {
   }
 
   public void linesClearedIncrement() { 
-    if (level < 25) {
-      linesNeeded = (level-1)*10;
-    }
-    if (linesCleared > linesNeeded && level < 25) {
-      levelIncrement();
-    }
     linesCleared++;
+    if (linesCleared >= linesNeeded && level < 25) {
+      levelIncrement();
+      linesNeeded += 10;
+    }
     scoreIncrement(level*100);
+  }
+  
+  void rowChecked() {
+    if (level == 1) {
+      linesNeeded = level*10;
+    }
+    ArrayList<Integer> toDelete = new ArrayList<Integer>();
+    for (int i=1;i<board[0].length-1;i++) {
+      boolean allFilled = true;
+      for (int j=1;j<board.length-1;j++) {
+        if (board[j][i] < STAMP) {
+          allFilled = false;
+        }
+      }
+      if (allFilled) {toDelete.add(i);}
+    }
+    while (toDelete.size() > 0) {
+       for (int j=toDelete.get(0);j>=2;j--) {
+        for (int i=1;i<board.length-1;i++) {
+          if (board[i][j-1]>=CYAN_I && board[i][j-1]<=RED_Z) {
+            board[i][j] = SPACE;
+          } else {
+            board[i][j] = board[i][j-1];
+          }
+        }
+      }
+      toDelete.remove(0);
+      linesClearedIncrement();
+    }
   }
 
   void tick(int tickSpeed) {
@@ -90,28 +117,53 @@ public class Board {
         case CYAN_I:
           fill(0, 255, 255);
           break;
+        case CYAN_I+STAMP:
+          fill(0, 255, 255);
+          break;
         case PURPLE_T:
+          fill(255, 0, 255);
+          break;
+        case PURPLE_T+STAMP:
           fill(255, 0, 255);
           break;
         case YELLOW_SQ:
           fill(255, 255, 0);
           break;
+        case YELLOW_SQ+STAMP:
+          fill(255, 255, 0);
+          break;
         case BLUE_L1:
+          fill(0, 0, 255);
+          break;
+        case BLUE_L1+STAMP:
           fill(0, 0, 255);
           break;
         case ORANGE_L:
           fill(255, 69, 0);
           break;
+        case ORANGE_L+STAMP:
+          fill(255, 69, 0);
+          break;
         case GREEN_Z1:
           fill(0, 255, 0);
           break;
+        case GREEN_Z1+STAMP:
+          fill(0, 255, 0);
+          break;
         case RED_Z:
+          fill(255, 0, 0);
+          break;
+        case RED_Z+STAMP:
           fill(255, 0, 0);
           break;
         }
         rect(10.0+r*sz, 10.0+c*sz, sz, sz);
       }
     }
+    textSize(20);
+    text("Score: " + score, 300, 475);
+    text("Level: " + level, 300, 495);
+    text("Lines Cleared: " + linesCleared, 300, 515);
   }
   
 }

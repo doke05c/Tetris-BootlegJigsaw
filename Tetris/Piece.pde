@@ -4,13 +4,6 @@ public class Piece {
   private int rotation;
   private int x;
   private int y;
-  static final int CYAN_I = 0;
-  static final int PURPLE_T = 1;
-  static final int YELLOW_SQ = 2;
-  static final int BLUE_L1 = 3;
-  static final int ORANGE_L = 4;
-  static final int GREEN_Z1 = 5;
-  static final int RED_Z = 6;
 
   int getType() { //accessor
     return type;
@@ -31,13 +24,19 @@ public class Piece {
 
   void stamp(Board cBoard) {
     for (int sq = 0; sq<positions.size(); sq++) {
-      cBoard.getBoard()[positions.get(sq)[0]][positions.get(sq)[1]]=type;
+      cBoard.getBoard()[positions.get(sq)[0]][positions.get(sq)[1]]=type+STAMP;//(-1 + type/10+.1);
     }
-    for (int r=3; r>=0; r++) {
+    for (int r=3; r>=0; r--) {
       positions.remove(r);
     }
   }
 
+  boolean checkPos(ArrayList<int[]> positions){
+    for(int i=0; i<positions.size(); i++){
+      if(board.getBoard()[positions.get(i)[0]][positions.get(i)[1]] >=7) return false;
+    }
+    return true;
+  }
   void rotate(boolean direction) {
     if (direction) {
       if (rotation!=3)rotation+=1;//make sure to loop over for 3
@@ -50,10 +49,36 @@ public class Piece {
     for (int i=0;i<4;i++) {
       board.getBoard()[positions.get(i)[0]][positions.get(i)[1]] = SPACE;
     }
-    Piece temp = new Piece(x, y, type, rotation);
-    positions= temp.positions;
+    if (type != YELLOW_SQ) {
+      if (x==1) {
+        Piece temp = new Piece(x+1, y, type, rotation);
+        if(checkPos(temp.positions)){
+        positions= temp.positions;
+        x++;}else{rotation-=1;}
+      } else if (x==board.getBoard().length-2) {
+        Piece temp = new Piece(x-1, y, type, rotation);
+        if(checkPos(temp.positions)){
+        positions= temp.positions;
+        x--;}else{rotation-=1;}
+      } else if (y==1) {
+        Piece temp = new Piece(x, y+1, type, rotation);
+        if(checkPos(temp.positions)){
+        positions= temp.positions;
+        y++;}else{rotation-=1;}
+      } else if (y==board.getBoard()[0].length-2) {
+        Piece temp = new Piece(x, y-1, type, rotation);
+        if(checkPos(temp.positions)){
+        positions= temp.positions;
+        y--;
+        }else{rotation-=1;}
+      } else {
+        Piece temp = new Piece(x, y, type, rotation);
+        if(checkPos(temp.positions)){
+        positions= temp.positions;
+        }else{rotation-=1;}
+      }
+    }
   }
-
   public Piece(int xPos, int yPos, int type, int rotate) {
     //xPos yPos are coords on the board
     //type = piece
@@ -68,17 +93,31 @@ public class Piece {
       positions.add(new int[] {xPos, yPos});
     }
     if (type==CYAN_I) {
-      if (rotate ==0 || rotate==2) {
-        positions.set(0, new int[] {xPos, yPos+1}); //top most square
-        positions.set(1, new int[] {xPos, yPos});
-        positions.set(2, new int[] {xPos, yPos-1});
-        positions.set(3, new int[] {xPos, yPos-2});
+      if (rotate ==1 || rotate==3) {
+        if (y<3) {
+          positions.set(0, new int[] {xPos, yPos+2}); //top most square
+          positions.set(1, new int[] {xPos, yPos+1});
+          positions.set(2, new int[] {xPos, yPos+0});
+          positions.set(3, new int[] {xPos, yPos-1});
+        } else {
+          positions.set(0, new int[] {xPos, yPos+1}); //top most square
+          positions.set(1, new int[] {xPos, yPos});
+          positions.set(2, new int[] {xPos, yPos-1});
+          positions.set(3, new int[] {xPos, yPos-2}); 
+        }
       }
-      if (rotate==1 || rotate==3) {
-        positions.set(0, new int[] {xPos+1, yPos}); //top most square
-        positions.set(1, new int[] {xPos, yPos});
-        positions.set(2, new int[] {xPos-1, yPos});
-        positions.set(3, new int[] {xPos-2, yPos});
+      if (rotate==0 || rotate==2) {
+        if (x<3) {
+          positions.set(0, new int[] {xPos+2, yPos}); //top most square
+          positions.set(1, new int[] {xPos+1, yPos});
+          positions.set(2, new int[] {xPos, yPos});
+          positions.set(3, new int[] {xPos-1, yPos});
+        } else {
+          positions.set(0, new int[] {xPos+1, yPos}); //top most square
+          positions.set(1, new int[] {xPos, yPos});
+          positions.set(2, new int[] {xPos-1, yPos});
+          positions.set(3, new int[] {xPos-2, yPos});
+        }
       }
     } else if (type==PURPLE_T) {
       if (rotate==0) {
@@ -91,7 +130,7 @@ public class Piece {
         positions.set(0, new int[] {xPos, yPos}); //top most square
         positions.set(1, new int[] {xPos, yPos-1});
         positions.set(2, new int[] {xPos, yPos+1});
-        positions.set(3, new int[] {xPos+1, yPos});
+        positions.set(3, new int[] {xPos-1, yPos});
       }
       if (rotate==2) {
         positions.set(0, new int[] {xPos, yPos}); //top most square
@@ -103,64 +142,76 @@ public class Piece {
         positions.set(0, new int[] {xPos, yPos}); //top most square
         positions.set(1, new int[] {xPos, yPos-1});
         positions.set(2, new int[] {xPos, yPos+1});
-        positions.set(3, new int[] {xPos-1, yPos});
+        positions.set(3, new int[] {xPos+1, yPos});
       }
     } else if (type==YELLOW_SQ) {
       positions.set(0, new int[] {xPos, yPos}); //top right most square
       positions.set(1, new int[] {xPos-1, yPos});
-      positions.set(2, new int[] {xPos-1, yPos-1});
-      positions.set(3, new int[] {xPos, yPos-1});
+      positions.set(2, new int[] {xPos-1, yPos+1});
+      positions.set(3, new int[] {xPos, yPos+1});
     } else if (type==BLUE_L1) {
-      if (rotate==0) {
+      if (rotate==0 && y>3) {
         positions.set(0, new int[] {xPos, yPos}); //top right most square
         positions.set(1, new int[] {xPos-1, yPos});
-        positions.set(2, new int[] {xPos-1, yPos+1});
+        positions.set(2, new int[] {xPos-1, yPos-1});
         positions.set(3, new int[] {xPos+1, yPos});
       }
+      if (rotate==0 && y<=3) {
+        positions.set(0, new int[] {xPos, yPos+1}); //top right most square
+        positions.set(1, new int[] {xPos-1, yPos+1});
+        positions.set(2, new int[] {xPos-1, yPos});
+        positions.set(3, new int[] {xPos+1, yPos+1});
+      }
       if (rotate==1) {
+        positions.set(0, new int[] {xPos, yPos}); //top right most square
+        positions.set(1, new int[] {xPos, yPos-1});
+        positions.set(2, new int[] {xPos+1, yPos-1});
+        positions.set(3, new int[] {xPos, yPos+1});
+      }
+      if (rotate==2) {
         positions.set(0, new int[] {xPos, yPos}); //top right most square
         positions.set(1, new int[] {xPos-1, yPos});
         positions.set(2, new int[] {xPos+1, yPos+1});
         positions.set(3, new int[] {xPos+1, yPos});
       }
-      if (rotate==2) {
-        positions.set(0, new int[] {xPos, yPos}); //top right most square
-        positions.set(1, new int[] {xPos-1, yPos});
-        positions.set(2, new int[] {xPos+1, yPos-1});
-        positions.set(3, new int[] {xPos+1, yPos});
-      }
       if (rotate==3) {
         positions.set(0, new int[] {xPos, yPos}); //top right most square
-        positions.set(1, new int[] {xPos-1, yPos});
-        positions.set(2, new int[] {xPos-1, yPos-1});
-        positions.set(3, new int[] {xPos+1, yPos});
+        positions.set(1, new int[] {xPos, yPos+1});
+        positions.set(2, new int[] {xPos, yPos-1});
+        positions.set(3, new int[] {xPos-1, yPos+1});
       }
     } else if (type==ORANGE_L) {
-      if (rotate==0) {
-        positions.set(0, new int[] {xPos, yPos}); //top right most square
-        positions.set(1, new int[] {xPos-1, yPos});
-        positions.set(2, new int[] {xPos+1, yPos+1});
-        positions.set(3, new int[] {xPos+1, yPos});
-      }
-      if (rotate==1) {
+      if (rotate==0 && y>3) {
         positions.set(0, new int[] {xPos, yPos}); //top right most square
         positions.set(1, new int[] {xPos-1, yPos});
         positions.set(2, new int[] {xPos+1, yPos-1});
         positions.set(3, new int[] {xPos+1, yPos});
       }
-      if (rotate==2) {
-        positions.set(0, new int[] {xPos, yPos}); //top right most square
-        positions.set(1, new int[] {xPos-1, yPos});
-        positions.set(2, new int[] {xPos-1, yPos-1});
-        positions.set(3, new int[] {xPos+1, yPos});
+      if (rotate==0 && y<=3) {
+        positions.set(0, new int[] {xPos, yPos+1}); //top right most square
+        positions.set(1, new int[] {xPos-1, yPos+1});
+        positions.set(2, new int[] {xPos+1, yPos});
+        positions.set(3, new int[] {xPos+1, yPos+1});        
       }
-      if (rotate==3) {
+      if (rotate==1) {
+        positions.set(0, new int[] {xPos, yPos}); //top right most square
+        positions.set(1, new int[] {xPos, yPos-1});
+        positions.set(2, new int[] {xPos+1, yPos+1});
+        positions.set(3, new int[] {xPos, yPos+1});
+      }
+      if (rotate==2) {
         positions.set(0, new int[] {xPos, yPos}); //top right most square
         positions.set(1, new int[] {xPos-1, yPos});
         positions.set(2, new int[] {xPos-1, yPos+1});
         positions.set(3, new int[] {xPos+1, yPos});
       }
-    } else if (type==GREEN_Z1) {
+      if (rotate==3) {
+        positions.set(0, new int[] {xPos, yPos}); //top right most square
+        positions.set(1, new int[] {xPos, yPos-1});
+        positions.set(2, new int[] {xPos-1, yPos-1});
+        positions.set(3, new int[] {xPos, yPos+1});
+      }
+    } else if (type==RED_Z) {
       if (rotate==0 || rotate==2) {
         positions.set(0, new int[] {xPos+1, yPos+1}); //top right most square
         positions.set(1, new int[] {xPos, yPos+1});
@@ -173,7 +224,7 @@ public class Piece {
         positions.set(2, new int[] {xPos+1, yPos});
         positions.set(3, new int[] {xPos+1, yPos-1});
       }
-    } else if (type==RED_Z) {
+    } else if (type==GREEN_Z1) {
       if (rotate==0 || rotate==2) {
         positions.set(0, new int[] {xPos, yPos+1}); //top right most square
         positions.set(1, new int[] {xPos-1, yPos+1});
@@ -200,7 +251,9 @@ public class Piece {
       boolean xUnder = positions.get(i)[0]+x < 1;
       boolean yOver = positions.get(i)[1]+y > board.getBoard()[0].length-1;
       boolean yUnder = positions.get(i)[1]+y < 1;
-      if (xOver || xUnder || yOver || yUnder || board.getBoard()[positions.get(i)[0]+x][positions.get(i)[1]+y] == WALL) {
+      boolean isWall = board.getBoard()[positions.get(i)[0]+x][positions.get(i)[1]+y] == WALL;
+      boolean isStamped = board.getBoard()[positions.get(i)[0]+x][positions.get(i)[1]+y] > 6;
+      if (xOver || xUnder || yOver || yUnder || isWall || isStamped) {
         return false;
       }
     }
