@@ -80,8 +80,6 @@ void keyPressed() {
   } else if (key == 'c' || key == 'C') {
     if (piecelist.size() < 2) {
       piecelist.add(1, new Piece(5, 1, (int)random(0,7)));
-    } else {
-      piecelist.set(1, new Piece(5, 1, (int)random(0,7)));
     }
     for (int i=0;i<4;i++) {
       board.getBoard()[piecelist.get(0).getPositions().get(i)[0]][piecelist.get(0).getPositions().get(i)[1]] = SPACE;
