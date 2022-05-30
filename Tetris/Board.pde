@@ -160,6 +160,10 @@ public class Board {
         rect(10.0+r*sz, 10.0+c*sz, sz, sz);
       }
     }
+    textSize(20);
+    text("Score: " + score, 300, 475);
+    text("Level: " + level, 300, 495);
+    text("Lines Cleared: " + linesCleared, 300, 515);
   }
   
 }

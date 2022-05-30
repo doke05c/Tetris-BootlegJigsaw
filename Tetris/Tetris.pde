@@ -1,13 +1,16 @@
 Board board = new Board();
 Piece tee = new Piece(5, 1, (int)random(0,7));
+ArrayList<Piece> piecelist = new ArrayList<Piece>();
+
 void setup() {
   size(960, 540);
+  piecelist.add(tee);
 }
 void draw() {
   background(255);
   board.displayBoard();
    for (int j=0;j<4;j++) {
-     board.getBoard()[tee.getPositions().get(j)[0]][tee.getPositions().get(j)[1]] = tee.getType();
+     board.getBoard()[piecelist.get(0).getPositions().get(j)[0]][piecelist.get(0).getPositions().get(j)[1]] = piecelist.get(0).getType();
    }
    board.rowChecked();
   //check for busy spots at the top of any column. if busy, reset the game.
@@ -16,42 +19,76 @@ void draw() {
   if (anyAtTop) {
     board = new Board();
   }
-  textSize(20);
-  text("Score: " + board.getScore(), 300, 475);
-  text("Level: " + board.getLevel(), 300, 495);
-  text("Lines Cleared: " + board.getLinesCleared(), 300, 515);
+  if (piecelist.size() >= 2) {
+    textSize(20);
+    switch(piecelist.get(1).getType()) {
+      case(CYAN_I):
+        text("Storage: I-Piece", 300, 400);
+        break;
+      case(PURPLE_T):
+        text("Storage: T-Piece", 300, 400);
+        break;
+      case(YELLOW_SQ):
+        text("Storage: Square-Piece", 300, 400);
+        break;
+      case(BLUE_L1):
+        text("Storage: Blue L-Piece", 300, 400);
+        break;
+      case(ORANGE_L):
+        text("Storage: Orange L-Piece", 300, 400);
+        break;
+      case(GREEN_Z1):
+        text("Storage: Green Z-Piece", 300, 400);
+        break;
+      case(RED_Z):
+        text("Storage: Red Z-Piece", 300, 400);
+        break;
+    }
+  }
 }
 
 
 void keyPressed() {
   if (keyCode == DOWN) { //move down one space
     board.scoreIncrement(1);
-    tee.move(board);
+    piecelist.get(0).move(board);
   } else if (keyCode == RIGHT) { //move right
-    tee.move(1, 0, board);
+    piecelist.get(0).move(1, 0, board);
   } else if (keyCode == LEFT) { //move left
-    tee.move(-1, 0, board);
+    piecelist.get(0).move(-1, 0, board);
   } else if (keyCode == UP) { //rotate CW
-     tee.rotate(true);
+     piecelist.get(0).rotate(true);
   } else if (key == 'z' || key == 'Z') { //rotate  CCW
-     tee.rotate(false);
+     piecelist.get(0).rotate(false);
   } else if (key == ' ') { //soft drop
     int softDropCount = -1;
-    while(tee.move(board)) {softDropCount++;}
+    while(piecelist.get(0).move(board)) {softDropCount++;}
     boolean anyNearSpawn = false; //check for busy spots near spawn, if exist, game will reset
-    tee.stamp(board);
+    piecelist.get(0).stamp(board);
     board.scoreIncrement(softDropCount);
     for(int i=4;i<7;i++) {if (board.getBoard()[i][2] > 6) {anyNearSpawn = true;}}
     if (anyNearSpawn) {
       //textSize(250);
       //text("LOSER", 25, height-50);
       board = new Board();
-      tee = new Piece(5, 1, (int)random(0,7));
+      piecelist.set(0, new Piece(5, 1, (int)random(0,7)));
     } else {
-      tee = new Piece(5, 1, (int)random(0,7));  
+      piecelist.set(0, new Piece(5, 1, (int)random(0,7)));
     }
   } else if (keyCode == BACKSPACE) { //reset
     board = new Board();
+  } else if (key == 'c' || key == 'C') {
+    if (piecelist.size() < 2) {
+      piecelist.add(1, new Piece(5, 1, (int)random(0,7)));
+    } else {
+      piecelist.set(1, new Piece(5, 1, (int)random(0,7)));
+    }
+    for (int i=0;i<4;i++) {
+      board.getBoard()[piecelist.get(0).getPositions().get(i)[0]][piecelist.get(0).getPositions().get(i)[1]] = SPACE;
+    }
+    Piece temp = piecelist.get(1);
+    piecelist.set(1, piecelist.get(0));
+    piecelist.set(0, temp);
   }
 }
 
