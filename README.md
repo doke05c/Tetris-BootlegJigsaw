@@ -62,3 +62,7 @@ David: Added the ability to check and clear lines that are full of squares. I al
 5/29/22:
 
 David: I modified move() so that only moves that are called when down key is pressed give points. This feature will make way for tick(), which will move() the Piece according to a set timer and not add points. Added a way to store a second Piece for gameplay convenience purposes.
+
+5/30/22:
+
+David: I made the demo branch!
