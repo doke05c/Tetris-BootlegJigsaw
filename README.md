@@ -17,42 +17,50 @@ Development Log:
 
 5/22/22:
 
-Afia: Today we started testing out branching and merging. I made the Board.pde file.
+Today we started testing out branching and merging.
 
-David: 
+Afia: I made the Board.pde file.
+
+David: I made the Piece.pde file.
 
 5/23/22:
 
-Afia: Added the accessor methods for the Board class.
+David: Added the instance variables and constructors for the Board class.
 
-David:
+Afia: Added the accessor methods for the Board class.
 
 5/24/22:
 
 Afia: Created the instance variables for the Piece class. Created the piece constructor with all rotation states for each piece.
 
-David:
+David: Made basic mutator methods for score, level, and lines cleared in Board class.
 
 5/25/22:
 
 Afia: Added x and y instance variables for piece, and added rotate accessor and rotation mutator methods in piece class. Altered the piece constructor so that rotation states are set into ArrayList Positions instead of added into it. Also added stamp method.
 
-David:
+David: Made move() in Piece class which allows for Pieces to be moved. I also displayed the Board for the first time.
 
 5/26/22:
 
-Afia: Fixed syntax errors in rotate method. 
+Afia: Fixed syntax errors in rotate method. Consolidated the Board display instructions into one method.
 
-David:
+David: Made Pieces display on Board, with downward, left, and right movement. Rotation also added but with incredibly buggy behavior. (my favorite: the Pieces would eat into the walls of the Board)
 
 5/27/22:
 
-Afia: Fixed the piece constructor, where multiple pieces had incorrect rotation states because I incrimented incorrectly. 
+Afia: Fixed the piece constructor, where multiple pieces had incorrect rotation states because I incremented incorrectly. 
 
-David: 
+David: When pieces are soft dropped, collision will no longer occur between them. Game will now reset if pieces are crammed at the top against a wall or the piece that is to spawn at the top middle.
 
 5/28/22:
 
 Afia: Added a checkPos method, which checks the positions of a rotation before rotating to make sure a certain rotation is possible. This method aims to prevent pieces from overlapping other pieces or rotating incorrectly in tight spaces.
 
-David: 
+David: Added the ability to check and clear lines that are full of squares. I also added lines cleared, score, and level to the game view and made them accurate to established mechanics.
+
+5/29/22:
+
+David: I modified move() so that only moves that are called when down key is pressed give points. This feature will make way for tick(), which will move() the Piece according to a set timer and not add points.
+
+Afia:
