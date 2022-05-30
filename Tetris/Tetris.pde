@@ -1,6 +1,7 @@
 Board board = new Board();
 Piece tee = new Piece(5, 1, (int)random(0,7));
 ArrayList<Piece> piecelist = new ArrayList<Piece>();
+boolean hasStored = false;
 
 void setup() {
   size(960, 540);
@@ -18,6 +19,8 @@ void draw() {
   for(int i=0;i<board.getBoard().length;i++) {if (board.getBoard()[i][1] > 6) {anyAtTop = true;}}
   if (anyAtTop) {
     board = new Board();
+    piecelist = new ArrayList<Piece>();
+    piecelist.add(new Piece(5, 1, (int)random(0,7)));
   }
   if (piecelist.size() >= 2) {
     textSize(20);
@@ -65,28 +68,36 @@ void keyPressed() {
     while(piecelist.get(0).move(board)) {softDropCount++;}
     boolean anyNearSpawn = false; //check for busy spots near spawn, if exist, game will reset
     piecelist.get(0).stamp(board);
+    hasStored = false;
     board.scoreIncrement(softDropCount);
     for(int i=4;i<7;i++) {if (board.getBoard()[i][2] > 6) {anyNearSpawn = true;}}
     if (anyNearSpawn) {
       //textSize(250);
       //text("LOSER", 25, height-50);
       board = new Board();
+      piecelist = new ArrayList<Piece>();
+      piecelist.add(new Piece(5, 1, (int)random(0,7)));
       piecelist.set(0, new Piece(5, 1, (int)random(0,7)));
     } else {
       piecelist.set(0, new Piece(5, 1, (int)random(0,7)));
     }
   } else if (keyCode == BACKSPACE) { //reset
     board = new Board();
-  } else if (key == 'c' || key == 'C') {
-    if (piecelist.size() < 2) {
-      piecelist.add(1, new Piece(5, 1, (int)random(0,7)));
+    piecelist = new ArrayList<Piece>();
+    piecelist.add(new Piece(5, 1, (int)random(0,7)));
+  } else if (key == 'c' || key == 'C') { //switch with storage
+    if (hasStored == false) {
+      if (piecelist.size() < 2) {
+        piecelist.add(1, new Piece(5, 1, (int)random(0,7)));
+      }
+      for (int i=0;i<4;i++) {
+        board.getBoard()[piecelist.get(0).getPositions().get(i)[0]][piecelist.get(0).getPositions().get(i)[1]] = SPACE;
+      }
+      Piece temp = piecelist.get(1);
+      piecelist.set(1, piecelist.get(0));
+      piecelist.set(0, temp);
+      hasStored = true;
     }
-    for (int i=0;i<4;i++) {
-      board.getBoard()[piecelist.get(0).getPositions().get(i)[0]][piecelist.get(0).getPositions().get(i)[1]] = SPACE;
-    }
-    Piece temp = piecelist.get(1);
-    piecelist.set(1, piecelist.get(0));
-    piecelist.set(0, temp);
   }
 }
 
