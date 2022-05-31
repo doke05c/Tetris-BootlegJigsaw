@@ -3,6 +3,7 @@ Piece tee = new Piece(5, 1, (int)random(0,7));
 ArrayList<Piece> piecelist = new ArrayList<Piece>();
 boolean hasStored = false;
 int frameCountEr = 0;
+int speed=60;
 
 void setup() {
   size(960, 540);
@@ -26,7 +27,9 @@ void draw() {
   }
   if(frameCountEr<frameCount){
      piecelist.get(0).move(board);
-     frameCountEr+=60;
+     if(board.getLevel()<=15) speed=60-2*board.getLevel();
+     else speed=30;
+     frameCountEr+=speed;
    }
   if (piecelist.size() >= 2) { //display the stored Piece
     textSize(20);
