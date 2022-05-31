@@ -2,6 +2,7 @@ Board board = new Board();
 Piece tee = new Piece(5, 1, (int)random(0,7));
 ArrayList<Piece> piecelist = new ArrayList<Piece>();
 boolean hasStored = false;
+int frameCountEr = 0;
 
 void setup() {
   size(960, 540);
@@ -9,6 +10,7 @@ void setup() {
 }
 void draw() {
   background(255);
+  frameRate(board.getTickSpeed());
   board.displayBoard();
    for (int j=0;j<4;j++) { //puts Pieces on Board
      board.getBoard()[piecelist.get(0).getPositions().get(j)[0]][piecelist.get(0).getPositions().get(j)[1]] = piecelist.get(0).getType();
@@ -22,6 +24,10 @@ void draw() {
     piecelist = new ArrayList<Piece>();
     piecelist.add(new Piece(5, 1, (int)random(0,7)));
   }
+  if(frameCountEr<frameCount){
+     piecelist.get(0).move(board);
+     frameCountEr+=60;
+   }
   if (piecelist.size() >= 2) { //display the stored Piece
     textSize(20);
     fill(127, 127, 127); text("Storage:", 300, 380);
