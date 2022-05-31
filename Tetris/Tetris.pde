@@ -54,8 +54,9 @@ void draw() {
 
 void keyPressed() {
   if (keyCode == DOWN) { //move down one space
-    board.scoreIncrement(1);
-    piecelist.get(0).move(board);
+    if(piecelist.get(0).move(board)) {
+        board.scoreIncrement(1);
+    }
   } else if (keyCode == RIGHT) { //move right
     piecelist.get(0).move(1, 0, board);
   } else if (keyCode == LEFT) { //move left
@@ -65,12 +66,12 @@ void keyPressed() {
   } else if (key == 'z' || key == 'Z') { //rotate  CCW
      piecelist.get(0).rotate(false);
   } else if (key == ' ') { //soft drop
-    int softDropCount = -1;
+    int softDropCount = 0;
     while(piecelist.get(0).move(board)) {softDropCount++;}
     boolean anyNearSpawn = false; //check for busy spots near spawn, if exist, game will reset
     piecelist.get(0).stamp(board);
     hasStored = false;
-    board.scoreIncrement(softDropCount);
+    board.scoreIncrement(2*softDropCount);
     for(int i=4;i<7;i++) {if (board.getBoard()[i][2] > 6) {anyNearSpawn = true;}}
     if (anyNearSpawn) {
       //textSize(250);
