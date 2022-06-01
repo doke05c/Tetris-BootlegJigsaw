@@ -11,7 +11,7 @@ void setup() {
 }
 void draw() {
   background(255);
-  frameRate(board.getTickSpeed());
+  frameRate(60);
   board.displayBoard();
    for (int j=0;j<4;j++) { //puts Pieces on Board
      board.getBoard()[piecelist.get(0).getPositions().get(j)[0]][piecelist.get(0).getPositions().get(j)[1]] = piecelist.get(0).getType();
@@ -25,12 +25,7 @@ void draw() {
     piecelist = new ArrayList<Piece>();
     piecelist.add(new Piece(5, 1, (int)random(0,7)));
   }
-  if(frameCountEr<frameCount){
-     piecelist.get(0).move(board);
-     if(board.getLevel()<=15) speed=60-2*board.getLevel();
-     else speed=30;
-     frameCountEr+=speed;
-   }
+  tick();
   if (piecelist.size() >= 2) { //display the stored Piece
     textSize(20);
     fill(127, 127, 127); text("Storage:", 300, 380);
@@ -60,6 +55,14 @@ void draw() {
   }
 }
 
+void tick(){
+  if(frameCountEr<frameCount){
+     piecelist.get(0).move(board);
+     if(board.getLevel()<=15) speed=(int)(60/Math.pow(1.35,(double)(board.getLevel()-1)));
+     else speed=30;
+     frameCountEr+=speed;
+   }
+}
 
 void keyPressed() {
   if (keyCode == DOWN) { //move down one space
