@@ -37,8 +37,8 @@ void tick(){
      if (!(piecelist.get(0).move(board))) {
        fullStamp();
      }
-     if(board.getLevel()<=15) speed=(int)(60/Math.pow(1.35,(double)(board.getLevel()-1)));
-     else speed=30;
+     if(board.getLevel()<=15) speed=(int)(60/Math.pow(1.22,(double)(board.getLevel()-1)));
+     else speed=3;
      frameCountEr+=speed;
    }
 }
@@ -82,6 +82,7 @@ void fullStamp() {
       piecelist = new ArrayList<Piece>();
       piecelist.add(new Piece(5, 1, (int)random(0,7)));
       piecelist.set(0, new Piece(5, 1, (int)random(0,7)));
+      anyNearSpawn = false;
     } else {
       piecelist.set(0, new Piece(5, 1, (int)random(0,7)));
     }
