@@ -66,3 +66,7 @@ David: I modified move() so that only moves that are called when down key is pre
 5/30/22:
 
 David: I made the demo branch!
+
+5/31/22:
+
+Afia: I introduced private ints in Tetris.pde to help pieces move down on their own at varying speeds throughout the game.
