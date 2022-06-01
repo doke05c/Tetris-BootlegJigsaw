@@ -57,7 +57,11 @@ void draw() {
 
 void tick(){
   if(frameCountEr<frameCount){
-     piecelist.get(0).move(board);
+     if (!(piecelist.get(0).move(board))) {
+       piecelist.get(0).stamp(board);
+       hasStored = false;
+       piecelist.set(0, new Piece(5, 1, (int)random(0,7)));
+     }
      if(board.getLevel()<=15) speed=(int)(60/Math.pow(1.35,(double)(board.getLevel()-1)));
      else speed=30;
      frameCountEr+=speed;
