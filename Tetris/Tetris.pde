@@ -2,6 +2,8 @@ Board board = new Board();
 Piece tee = new Piece(5, 1, (int)random(0,7));
 ArrayList<Piece> piecelist = new ArrayList<Piece>();
 boolean hasStored = false;
+int frameCountEr = 0;
+int speed=60;
 
 void setup() {
   size(960, 540);
@@ -9,6 +11,7 @@ void setup() {
 }
 void draw() {
   background(255);
+  frameRate(60);
   board.displayBoard();
    for (int j=0;j<4;j++) { //puts Pieces on Board
      board.getBoard()[piecelist.get(0).getPositions().get(j)[0]][piecelist.get(0).getPositions().get(j)[1]] = piecelist.get(0).getType();
@@ -22,6 +25,7 @@ void draw() {
     piecelist = new ArrayList<Piece>();
     piecelist.add(new Piece(5, 1, (int)random(0,7)));
   }
+  tick();
   if (piecelist.size() >= 2) { //display the stored Piece
     textSize(20);
     fill(127, 127, 127); text("Storage:", 300, 380);
@@ -51,11 +55,20 @@ void draw() {
   }
 }
 
+void tick(){
+  if(frameCountEr<frameCount){
+     piecelist.get(0).move(board);
+     if(board.getLevel()<=15) speed=(int)(60/Math.pow(1.35,(double)(board.getLevel()-1)));
+     else speed=30;
+     frameCountEr+=speed;
+   }
+}
 
 void keyPressed() {
   if (keyCode == DOWN) { //move down one space
-    board.scoreIncrement(1);
-    piecelist.get(0).move(board);
+    if(piecelist.get(0).move(board)) {
+        board.scoreIncrement(1);
+    }
   } else if (keyCode == RIGHT) { //move right
     piecelist.get(0).move(1, 0, board);
   } else if (keyCode == LEFT) { //move left
@@ -65,12 +78,12 @@ void keyPressed() {
   } else if (key == 'z' || key == 'Z') { //rotate  CCW
      piecelist.get(0).rotate(false);
   } else if (key == ' ') { //soft drop
-    int softDropCount = -1;
+    int softDropCount = 0;
     while(piecelist.get(0).move(board)) {softDropCount++;}
     boolean anyNearSpawn = false; //check for busy spots near spawn, if exist, game will reset
     piecelist.get(0).stamp(board);
     hasStored = false;
-    board.scoreIncrement(softDropCount);
+    board.scoreIncrement(2*softDropCount);
     for(int i=4;i<7;i++) {if (board.getBoard()[i][2] > 6) {anyNearSpawn = true;}}
     if (anyNearSpawn) {
       //textSize(250);
