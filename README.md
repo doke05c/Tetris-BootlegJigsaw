@@ -69,4 +69,4 @@ David: I made the demo branch!
 
 5/31/22:
 
-Afia: I introduced private ints in Tetris.pde to help pieces move down on their own at varying speeds throughout the game. Also updated tick().
+Afia: I introduced private ints in Tetris.pde to help pieces move down on their own at varying speeds throughout the game.
