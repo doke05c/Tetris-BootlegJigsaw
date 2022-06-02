@@ -3,6 +3,7 @@ Piece tee = new Piece(5, 1, (int)random(0,7));
 ArrayList<Piece> piecelist = new ArrayList<Piece>();
 boolean anyNearSpawn = false; //check for busy spots near spawn, if exist, game will reset
 boolean hasStored = false; //check if the player already stored a piece in the place cycle
+boolean isPaused = false; //whether or not game is paused.
 int frameCountEr = 0;
 int speed=60;
 
@@ -33,13 +34,17 @@ void draw() {
 }
 
 void tick(){
-  if(frameCountEr<frameCount){
-     if (!(piecelist.get(0).move(board))) {
-       fullStamp();
+  if (!isPaused) {
+    if(frameCountEr<frameCount){
+       if (!(piecelist.get(0).move(board))) {
+         fullStamp();
+       }
+       if(board.getLevel()<=15) speed=(int)(60/Math.pow(1.22,(double)(board.getLevel()-1)));
+       else speed=3;
+       frameCountEr+=speed;
      }
-     if(board.getLevel()<=15) speed=(int)(60/Math.pow(1.22,(double)(board.getLevel()-1)));
-     else speed=3;
-     frameCountEr+=speed;
+   } else {
+     frameCount--;
    }
 }
 
@@ -89,24 +94,26 @@ void fullStamp() {
 }
 
 void keyPressed() {
-  if (keyCode == DOWN) { //move down one space
-    if(piecelist.get(0).move(board)) {
+  if (!isPaused) {
+    if (keyCode == DOWN) { //move down one space
+      if(piecelist.get(0).move(board)) {
         board.scoreIncrement(1);
+      }
+    } else if (keyCode == RIGHT) { //move right
+       piecelist.get(0).move(1, 0, board);
+    } else if (keyCode == LEFT) { //move left
+       piecelist.get(0).move(-1, 0, board);
+    } else if (keyCode == UP) { //rotate CW
+       piecelist.get(0).rotate(true);
+    } else if (key == 'z' || key == 'Z') { //rotate  CCW
+       piecelist.get(0).rotate(false);
+    } else if (key == ' ') { //soft drop
+      int softDropCount = 0;
+      while(piecelist.get(0).move(board)) {softDropCount++;}
+      board.scoreIncrement(2*softDropCount);
+      fullStamp();
     }
-  } else if (keyCode == RIGHT) { //move right
-    piecelist.get(0).move(1, 0, board);
-  } else if (keyCode == LEFT) { //move left
-    piecelist.get(0).move(-1, 0, board);
-  } else if (keyCode == UP) { //rotate CW
-     piecelist.get(0).rotate(true);
-  } else if (key == 'z' || key == 'Z') { //rotate  CCW
-     piecelist.get(0).rotate(false);
-  } else if (key == ' ') { //soft drop
-    int softDropCount = 0;
-    while(piecelist.get(0).move(board)) {softDropCount++;}
-    board.scoreIncrement(2*softDropCount);
-    fullStamp();
-  } else if (keyCode == BACKSPACE) { //reset
+  } if (keyCode == BACKSPACE) { //reset
     board = new Board();
     piecelist = new ArrayList<Piece>();
     piecelist.add(new Piece(5, 1, (int)random(0,7)));
@@ -123,6 +130,8 @@ void keyPressed() {
       piecelist.set(0, temp);
       hasStored = true;
     }
+  } else if (key == 'p' || key == 'P') {
+    isPaused = !isPaused;
   }
 }
 
