@@ -4,6 +4,7 @@ ArrayList<Piece> piecelist = new ArrayList<Piece>();
 boolean anyNearSpawn = false; //check for busy spots near spawn, if exist, game will reset
 boolean hasStored = false; //check if the player already stored a piece in the place cycle
 boolean isPaused = false; //whether or not game is paused.
+int failCount = 0; //how many times the game should wait to fail to move a piece before it gets placed
 int frameCountEr = 0;
 int speed=60;
 
@@ -37,6 +38,9 @@ void tick(){
   if (!isPaused) {
     if(frameCountEr<frameCount){
        if (!(piecelist.get(0).move(board))) {
+         failCount++;
+       }
+       if (failCount == board.getLevel()+1) {
          fullStamp();
        }
        if(board.getLevel()<=15) speed=(int)(60/Math.pow(1.22,(double)(board.getLevel()-1)));
@@ -79,6 +83,7 @@ void storeDisp() {
 void fullStamp() {
    piecelist.get(0).stamp(board);
    hasStored = false;
+   failCount = 0;
    for(int i=4;i<7;i++) {if (board.getBoard()[i][2] > 6) {anyNearSpawn = true;}}
     if (anyNearSpawn) {
       //textSize(250);
@@ -117,6 +122,7 @@ void keyPressed() {
     board = new Board();
     piecelist = new ArrayList<Piece>();
     piecelist.add(new Piece(5, 1, (int)random(0,7)));
+    isPaused = false;
   } else if (key == 'c' || key == 'C') { //switch with storage
     if (hasStored == false) {
       if (piecelist.size() < 2) {
