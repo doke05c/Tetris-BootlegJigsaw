@@ -73,4 +73,6 @@ Afia: I introduced private ints in Tetris.pde to help pieces move down on their 
 
 6/1/22:
 
+Afia: David and I both worked on creating a tick() function that controls the speed at which pieces fall, instead of having the code float around in draw().
+
 David: I helped consolidate a lot of the long-winded actions in Tetris.pde into their own void functions.
