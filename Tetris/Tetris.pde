@@ -32,6 +32,7 @@ void draw() {
   if (piecelist.size() >= 2) { //display the stored Piece
     storeDisp();
   }
+  if (isPaused) {fill(255); rect(35, 100, 226, 100); fill(0); textSize(20); text("paused...",105, 155);}
 }
 
 void tick(){
