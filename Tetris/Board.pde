@@ -1,6 +1,6 @@
 public class Board {
   private int score = 0;
-  private int level = 10;
+  private int level = 1;
   private int linesCleared = 0;
   private int linesNeeded = 0;
   private int[][] board;
