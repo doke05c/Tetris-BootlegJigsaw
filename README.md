@@ -79,4 +79,6 @@ David: I helped consolidate a lot of the long-winded actions in Tetris.pde into 
 
 6/2/22:
 
+Afia: I worked on the Loser screen. I created a boolean called Loser that tells you if you are a loser, and moved around a lot of code so that instead of auto-restarting when you lose, you are brought to the losing screen that tells you your stats for the game and prompts you to press backspace to restart the game. Also worked with David on pause because it was originally too fast to move pieces left/right when on top of other pieces and t-spins were basically impossible.
+
 David: Afia and I both worked on the pause function, and giving players some room to move around the piece before it gets placed.
