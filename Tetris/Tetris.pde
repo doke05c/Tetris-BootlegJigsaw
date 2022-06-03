@@ -7,6 +7,7 @@ boolean isPaused = false; //whether or not game is paused.
 int failCount = 0; //how many times the game should wait to fail to move a piece before it gets placed
 int frameCountEr = 0;
 int speed=60;
+boolean loser = false;
 
 void setup() {
   size(960, 540);
@@ -15,10 +16,13 @@ void setup() {
 void draw() {
   background(255);
   frameRate(60);
-  board.displayBoard();
+  if(!loser)board.displayBoard();
+    else{ fill(0); textSize(20); text("LOSER",105, 155); text("Press Backspace to restart", 105, 200);
+    text("Score: " + board.getScore(), 105, 245);text("Level: " + board.getLevel(), 105, 290); text("Lines Cleared: " + board.getLinesCleared(), 105, 335);}
+  if(!loser){
    for (int j=0;j<4;j++) { //puts Pieces on Board
      board.getBoard()[piecelist.get(0).getPositions().get(j)[0]][piecelist.get(0).getPositions().get(j)[1]] = piecelist.get(0).getType();
-   }
+   }}
    board.rowChecked();
   //check for busy spots at the top of any column. if busy, reset the game.
   boolean anyAtTop = false;
@@ -32,7 +36,7 @@ void draw() {
   if (piecelist.size() >= 2) { //display the stored Piece
     storeDisp();
   }
-  if (isPaused) {fill(255); rect(35, 100, 226, 100); fill(0); textSize(20); text("paused...",105, 155);}
+  if (isPaused) {fill(255); rect(35, 100, 226, 100); fill(0); textSize(20); text("paused...",105, 155);}  
 }
 
 void tick(){
@@ -87,13 +91,14 @@ void fullStamp() {
    failCount = 0;
    for(int i=4;i<7;i++) {if (board.getBoard()[i][2] > 6) {anyNearSpawn = true;}}
     if (anyNearSpawn) {
-      //textSize(250);
+      //textSize(250);   
       //text("LOSER", 25, height-50);
-      board = new Board();
+      /*board = new Board();
       piecelist = new ArrayList<Piece>();
       piecelist.add(new Piece(5, 1, (int)random(0,7)));
       piecelist.set(0, new Piece(5, 1, (int)random(0,7)));
-      anyNearSpawn = false;
+      anyNearSpawn = false;*/
+      loser = true;
     } else {
       piecelist.set(0, new Piece(5, 1, (int)random(0,7)));
     }
@@ -114,16 +119,21 @@ void keyPressed() {
     } else if (key == 'z' || key == 'Z') { //rotate  CCW
        piecelist.get(0).rotate(false);
     } else if (key == ' ') { //soft drop
+      if(!loser){
       int softDropCount = 0;
       while(piecelist.get(0).move(board)) {softDropCount++;}
       board.scoreIncrement(2*softDropCount);
       fullStamp();
+      }
     }
   } if (keyCode == BACKSPACE) { //reset
+    loser = false;
     board = new Board();
     piecelist = new ArrayList<Piece>();
     piecelist.add(new Piece(5, 1, (int)random(0,7)));
+    piecelist.set(0, new Piece(5, 1, (int)random(0,7)));
     isPaused = false;
+    anyNearSpawn = false;
   } else if (key == 'c' || key == 'C') { //switch with storage
     if (hasStored == false) {
       if (piecelist.size() < 2) {
