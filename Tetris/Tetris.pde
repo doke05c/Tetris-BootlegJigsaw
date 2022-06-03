@@ -1,7 +1,7 @@
 Board board = new Board();
 Piece tee = new Piece(5, 1, (int)random(0,7));
 ArrayList<Piece> piecelist = new ArrayList<Piece>();
-boolean anyNearSpawn = false; //check for busy spots near spawn, if exist, game will reset
+boolean anyAtTop = false; //check for busy spots near spawn, if exist, game will reset
 boolean hasStored = false; //check if the player already stored a piece in the place cycle
 boolean isPaused = false; //whether or not game is paused.
 int failCount = 0; //how many times the game should wait to fail to move a piece before it gets placed
@@ -17,8 +17,8 @@ void draw() {
   background(255);
   frameRate(60);
   if(!loser)board.displayBoard();
-    else{ fill(0); textSize(20); text("LOSER",105, 155); text("Press Backspace to restart", 105, 200);///The stupid white box: stroke(255); fill(255); rect(300, 365, 77, 75); stroke(0); 
-    text("Score: " + board.getScore(), 105, 245);text("Level: " + board.getLevel(), 105, 290); text("Lines Cleared: " + board.getLinesCleared(), 105, 335);}
+    else{board.displayBoard(); fill(0); textSize(20); text("LOSER",505, 155); text("Press Backspace to restart", 505, 200);///The stupid white box: stroke(255); fill(255); rect(300, 365, 77, 75); stroke(0); 
+    text("Score: " + board.getScore(), 505, 245);text("Level: " + board.getLevel(), 505, 290); text("Lines Cleared: " + board.getLinesCleared(), 505, 335);}
   if(!loser){
    for (int j=0;j<4;j++) { //puts Pieces on Board
      board.getBoard()[piecelist.get(0).getPositions().get(j)[0]][piecelist.get(0).getPositions().get(j)[1]] = piecelist.get(0).getType();
@@ -87,15 +87,15 @@ void fullStamp() {
    piecelist.get(0).stamp(board);
    hasStored = false;
    failCount = 0;
-   for(int i=4;i<7;i++) {if (board.getBoard()[i][2] > 6) {anyNearSpawn = true;}}
-    if (anyNearSpawn) {
+   for(int i=1;i<board.getBoard().length-1;i++) {if (board.getBoard()[i][1] > 6) {anyAtTop = true;}}
+    if (anyAtTop) {
       //textSize(250);   
       //text("LOSER", 25, height-50);
       /*board = new Board();
       piecelist = new ArrayList<Piece>();
       piecelist.add(new Piece(5, 1, (int)random(0,7)));
       piecelist.set(0, new Piece(5, 1, (int)random(0,7)));
-      anyNearSpawn = false;*/
+      anyAtTop = false;*/
       loser = true;
     } else {
       piecelist.set(0, new Piece(5, 1, (int)random(0,7)));
@@ -131,7 +131,7 @@ void keyPressed() {
     piecelist.add(new Piece(5, 1, (int)random(0,7)));
     piecelist.set(0, new Piece(5, 1, (int)random(0,7)));
     isPaused = false;
-    anyNearSpawn = false;
+    anyAtTop = false;
   } else if (key == 'c' || key == 'C') { //switch with storage
     if (hasStored == false) {
       if (piecelist.size() < 2) {
