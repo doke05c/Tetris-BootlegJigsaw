@@ -5,7 +5,7 @@ Group Members: Afia Bidica, David Oke
 
 Brief Project Description: 
 
-This project's goal is to mimick Tetris as closely as possible. This is to be accomplished using a 2-dimensional area of space, with Pieces moving through the space. Pieces collide with one antoher, meaning it's impossible for a piece to move through another. If an entire row is horizontally consumed with pieces, it will "clear" by emptying the entire row and shifting every block above it down by the number of rows cleared. A new piece is summoned when all pieces currently on the board are stamped on to the board. Pieces have rotation states to allow clockwise and counterclockwise rotation.
+This project's goal is to mimick Tetris as closely as possible. This is to be accomplished using a 2-dimensional area of space, with Pieces moving through the space. Pieces collide with one antoher, meaning it's impossible for a piece to move through another. If an entire row is horizontally consumed with pieces, it will "clear" by emptying the entire row and shifting every block above it down by the number of rows cleared. A new piece is summoned when all pieces currently on the board are stamped on to the board. Pieces have rotation states to allow clockwise and counterclockwise rotation. Backspace resets the game, and the 'p' key a pauses unpauses the game.
 
 Prototype Document: https://docs.google.com/document/d/1B44WfTRtLe2xEvWqtp4nwDef8D6y4Bqnm71EcUexJMU/edit?usp=sharing 
 
@@ -81,4 +81,4 @@ David: I helped consolidate a lot of the long-winded actions in Tetris.pde into 
 
 Afia: I worked on the Loser screen. I created a boolean called Loser that tells you if you are a loser, and moved around a lot of code so that instead of auto-restarting when you lose, you are brought to the losing screen that tells you your stats for the game and prompts you to press backspace to restart the game. Also worked with David on pause because it was originally too fast to move pieces left/right when on top of other pieces and t-spins were basically impossible.
 
-David: Afia and I both worked on the pause function, and giving players some room to move around the piece before it gets placed.
+David: Afia and I both worked on the pause function, and giving players some room to move around the piece before it gets placed. I added a pause screen that is triggered instantly, but does not immediately go away when the player hits unpause, in order to avoid pause buffering the game.
