@@ -28,9 +28,7 @@ void draw() {
   boolean anyAtTop = false;
   for(int i=0;i<board.getBoard().length;i++) {if (board.getBoard()[i][1] > 6) {anyAtTop = true;}}
   if (anyAtTop) {
-    board = new Board();
-    piecelist = new ArrayList<Piece>();
-    piecelist.add(new Piece(5, 1, (int)random(0,7)));
+    loser = true;
   }
   tick();
   if (piecelist.size() >= 2) { //display the stored Piece
