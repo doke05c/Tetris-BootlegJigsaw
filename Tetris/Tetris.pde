@@ -138,6 +138,9 @@ void keyPressed() {
       hasStored = true;
     }
   } else if (key == 'p' || key == 'P') {
+    if (isPaused) {
+      delay(1500);
+    }
     isPaused = !isPaused;
   }
 }
