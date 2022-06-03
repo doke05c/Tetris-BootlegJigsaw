@@ -17,7 +17,7 @@ void draw() {
   background(255);
   frameRate(60);
   if(!loser)board.displayBoard();
-    else{ fill(0); textSize(20); text("LOSER",105, 155); text("Press Backspace to restart", 105, 200);
+    else{ fill(0); textSize(20); text("LOSER",105, 155); text("Press Backspace to restart", 105, 200);///The stupid white box: stroke(255); fill(255); rect(300, 365, 77, 75); stroke(0); 
     text("Score: " + board.getScore(), 105, 245);text("Level: " + board.getLevel(), 105, 290); text("Lines Cleared: " + board.getLinesCleared(), 105, 335);}
   if(!loser){
    for (int j=0;j<4;j++) { //puts Pieces on Board
@@ -32,7 +32,7 @@ void draw() {
   }
   tick();
   if (piecelist.size() >= 2) { //display the stored Piece
-    storeDisp();
+    if(!loser)storeDisp();
   }
   if (isPaused) {fill(255); rect(35, 100, 226, 100); fill(0); textSize(20); text("paused...",105, 155);}  
 }
