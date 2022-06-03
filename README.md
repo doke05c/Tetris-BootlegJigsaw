@@ -11,7 +11,7 @@ Prototype Document: https://docs.google.com/document/d/1B44WfTRtLe2xEvWqtp4nwDef
 
 Compile/Run instructions:
 
-This program runs in processing. Download the file, open it in processing, and click run. Use left/right arrow keys to shift pieces in those respective directions. Up arrow rotates the piece clockwise while the 'z' key rotates it counterclockwise, and the down arrow shifts the piece down. 'c' key adds a Piece to storage to be used at a later time. (Player can only put a piece in storage once per place cycle.) The spacebar stamps the piece on to the board and summons a new piece.
+This program runs in processing. Download the file, open it in processing, and click run. Use left/right arrow keys to shift pieces in those respective directions. Up arrow rotates the piece clockwise while the 'z' key rotates it counterclockwise, and the down arrow shifts the piece down. 'c' key adds a Piece to storage to be used at a later time. (Player can only put a piece in storage once per place cycle.) The spacebar stamps the piece on to the board and summons a new piece. Backspace resets the game, and the 'p' key pauses/unpauses the game.
 
 Development Log:
 
@@ -76,3 +76,7 @@ Afia: I introduced private ints in Tetris.pde to help pieces move down on their 
 Afia: David and I both worked on creating a tick() function that controls the speed at which pieces fall, instead of having the code float around in draw().
 
 David: I helped consolidate a lot of the long-winded actions in Tetris.pde into their own void functions.
+
+6/2/22:
+
+David: Afia and I both worked on the pause function, and giving players some room to move around the piece before it gets placed.
