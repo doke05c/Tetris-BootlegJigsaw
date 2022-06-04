@@ -88,9 +88,6 @@ public class Board {
     }
   }
 
-  void tick(int tickSpeed) {
-  }
-
   public void displayBoard() {
     for (int r=0; r<board.length; r++) {
       for (int c=0; c<board[0].length; c++) {
