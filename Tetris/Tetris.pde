@@ -103,7 +103,7 @@ void fullStamp() {
 }
 
 void keyPressed() {
-  if (!isPaused) {
+  if (!isPaused && !loser) {
     if (keyCode == DOWN) { //move down one space
       if(piecelist.get(0).move(board)) {
         board.scoreIncrement(1);
@@ -132,7 +132,7 @@ void keyPressed() {
     piecelist.set(0, new Piece(5, 1, (int)random(0,7)));
     isPaused = false;
     anyAtTop = false;
-  } else if (key == 'c' || key == 'C') { //switch with storage
+  } else if (key == 'c' || key == 'C' && !loser) { //switch with storage
     if (hasStored == false) {
       if (piecelist.size() < 2) {
         piecelist.add(1, new Piece(5, 1, (int)random(0,7)));
@@ -145,7 +145,7 @@ void keyPressed() {
       piecelist.set(0, temp);
       hasStored = true;
     }
-  } else if (key == 'p' || key == 'P') {
+  } else if (key == 'p' || key == 'P' && !loser) {
     if (isPaused) {
       delay(1500);
     }
