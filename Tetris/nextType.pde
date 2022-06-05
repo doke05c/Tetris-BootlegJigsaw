@@ -61,9 +61,16 @@ public class nextType{
       square(x+(2*side), y, side); square(x, y+side, side);
       square(x+side, y+side, side); square(x+(2*side), y+side, side); 
     }
-    else if (type==RED_Z) {}
-    else if (type==GREEN_Z1) {}
-    
+    else if (type==RED_Z) {
+      fill(255, 0, 0);
+      square(x, y, side); square(x+side, y, side);
+      square(x+side, y+side, side); square(x+(2*side), y+side, side);
+    }
+    else if (type==GREEN_Z1) {
+      fill(0, 255, 0);
+      square(x+side, y, side); square(x+(2*side), y, side);
+      square(x, y+side, side); square(x+side, y+side, side);
+    }
   }
   
 }
