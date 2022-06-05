@@ -9,14 +9,23 @@ int failCount = 0; //how many times the game should wait to fail to move a piece
 int frameCountEr = 0;
 int speed=60;
 boolean loser = false;
+int[] preview = new int[4];
 
 void setup() {
   size(960, 540);
   piecelist.add(tee);
+  preview = type.getPreviewTypes();
 }
 void draw() {
   background(255);
   frameRate(60);
+  
+  text("NEXT:", 300, 30);
+  //rect(300, 40, 100, 250);
+  text(""+preview[0]+","+preview[1]+","+preview[2]+","+preview[3], 310, 45);
+  for(int i=0; i<4; i++) type.drawPiece(preview[i], i);
+  preview = type.getPreviewTypes();
+  
   if(!loser)board.displayBoard();
     else{board.displayBoard(); fill(0); textSize(20); text("LOSER",505, 155); text("Press Backspace to restart", 505, 200);///The stupid white box: stroke(255); fill(255); rect(300, 365, 77, 75); stroke(0); 
     text("Score: " + board.getScore(), 505, 245);text("Level: " + board.getLevel(), 505, 290); text("Lines Cleared: " + board.getLinesCleared(), 505, 335);}
