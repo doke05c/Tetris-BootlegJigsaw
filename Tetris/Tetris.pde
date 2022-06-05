@@ -41,7 +41,7 @@ void draw() {
   }
   tick();
   if (piecelist.size() >= 2) { //display the stored Piece
-    if(!loser)storeDisp();
+    storeDisp();
   }
   if (isPaused) {fill(255); rect(35, 100, 226, 100); fill(0); textSize(20); text("paused...",105, 155);}  
 }
@@ -141,7 +141,8 @@ void keyPressed() {
     piecelist.set(0, new Piece(5, 1, type.getNextType()));
     isPaused = false;
     anyAtTop = false;
-  } else if (key == 'c' || key == 'C' && !loser) { //switch with storage
+  } else if (key == 'c' || key == 'C') { //switch with storage
+    if(!loser){
     if (hasStored == false) {
       if (piecelist.size() < 2) {
         piecelist.add(1, new Piece(5, 1, type.getNextType()));
@@ -153,12 +154,15 @@ void keyPressed() {
       piecelist.set(1, piecelist.get(0));
       piecelist.set(0, temp);
       hasStored = true;
+      }
     }
-  } else if (key == 'p' || key == 'P' && !loser) {
-    if (isPaused) {
-      delay(1500);
+  } else if (key == 'p' || key == 'P') {
+    if(!loser){
+      if (isPaused) {
+        delay(1500);
+       }
+      isPaused = !isPaused;
     }
-    isPaused = !isPaused;
   }
 }
 
