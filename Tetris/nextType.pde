@@ -41,10 +41,26 @@ public class nextType{
       square(x+(2*side), y, side); square(x+(3*side), y, side); 
     }
     
-    else if (type==PURPLE_T) {}
-    else if (type==YELLOW_SQ) {}
-    else if (type==BLUE_L1) {}
-    else if (type==ORANGE_L) {}
+    else if (type==PURPLE_T) {
+      fill(255, 0, 255);
+      square(x+side, y, side); square(x, y+side, side);
+      square(x+side, y+side, side); square(x+(2*side), y+side, side);
+    }
+    else if (type==YELLOW_SQ) {
+      fill(255, 255, 0);
+      square(x, y, side); square(x+side, y, side);
+      square(x, y+side, side); square(x+side, y+side, side);
+    }
+    else if (type==BLUE_L1) {
+      fill(0, 0, 255);
+      square(x, y, side); square(x, y+side, side);
+      square(x+side, y+side, side); square(x+(2*side), y+side, side); 
+    }
+    else if (type==ORANGE_L) {
+      fill(255, 69, 0);
+      square(x+(2*side), y, side); square(x, y+side, side);
+      square(x+side, y+side, side); square(x+(2*side), y+side, side); 
+    }
     else if (type==RED_Z) {}
     else if (type==GREEN_Z1) {}
     
