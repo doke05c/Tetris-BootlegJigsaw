@@ -1,5 +1,6 @@
 Board board = new Board();
-Piece tee = new Piece(5, 1, (int)random(0,7));
+nextType type = new nextType();
+Piece tee = new Piece(5, 1, type.getNextType());
 ArrayList<Piece> piecelist = new ArrayList<Piece>();
 boolean anyAtTop = false; //check for busy spots near spawn, if exist, game will reset
 boolean hasStored = false; //check if the player already stored a piece in the place cycle
@@ -98,7 +99,7 @@ void fullStamp() {
       anyAtTop = false;*/
       loser = true;
     } else {
-      piecelist.set(0, new Piece(5, 1, (int)random(0,7)));
+      piecelist.set(0, new Piece(5, 1, type.getNextType()));
     }
 }
 
@@ -128,14 +129,14 @@ void keyPressed() {
     loser = false;
     board = new Board();
     piecelist = new ArrayList<Piece>();
-    piecelist.add(new Piece(5, 1, (int)random(0,7)));
-    piecelist.set(0, new Piece(5, 1, (int)random(0,7)));
+    piecelist.add(new Piece(5, 1, type.getNextType()));
+    piecelist.set(0, new Piece(5, 1, type.getNextType()));
     isPaused = false;
     anyAtTop = false;
   } else if (key == 'c' || key == 'C' && !loser) { //switch with storage
     if (hasStored == false) {
       if (piecelist.size() < 2) {
-        piecelist.add(1, new Piece(5, 1, (int)random(0,7)));
+        piecelist.add(1, new Piece(5, 1, type.getNextType()));
       }
       for (int i=0;i<4;i++) {
         board.getBoard()[piecelist.get(0).getPositions().get(i)[0]][piecelist.get(0).getPositions().get(i)[1]] = SPACE;
