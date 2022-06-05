@@ -21,8 +21,7 @@ void draw() {
   frameRate(60);
   
   text("NEXT:", 300, 30);
-  //rect(300, 40, 100, 250);
-  text(""+preview[0]+","+preview[1]+","+preview[2]+","+preview[3], 310, 45);
+  //rect(300, 40, 100, 250); text(""+preview[0]+","+preview[1]+","+preview[2]+","+preview[3], 310, 45);
   for(int i=0; i<4; i++) type.drawPiece(preview[i], i);
   preview = type.getPreviewTypes();
   
