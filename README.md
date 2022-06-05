@@ -86,3 +86,7 @@ David: Afia and I both worked on the pause function, and giving players some roo
 6/3/22:
 
 Afia: David and I worked on fixing glitches with losing the game prematurely by changing the parameters checked for losing the game.
+
+6/4/22:
+
+David: I fixed an issue where the loser screen would break the game when the player tried to hit non-reset buttons.
