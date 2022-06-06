@@ -75,21 +75,12 @@ public class Board {
     }
     if (toDelete.size()==2) {
       scoreIncrement(level*100);
-      for (int i=0;i<1000;i++) {
-        text("Double!", 400, 300);
-      }
     }
     if (toDelete.size()==3) {
       scoreIncrement(level*200);
-      for (int i=0;i<1000;i++) {
-        text("Triple!", 400, 300);
-      }
     }
     if (toDelete.size()==4) {
       scoreIncrement(level*400);
-      for (int i=0;i<1000;i++) {
-        text("TETRIS!", 400, 300);
-      }
     }
     while (toDelete.size() > 0) {
        for (int j=toDelete.get(0);j>=2;j--) {
