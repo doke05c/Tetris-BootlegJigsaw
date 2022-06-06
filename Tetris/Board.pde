@@ -73,6 +73,15 @@ public class Board {
       }
       if (allFilled) {toDelete.add(i);}
     }
+    if (toDelete.size()==2) {
+      scoreIncrement(level*100);
+    }
+    if (toDelete.size()==3) {
+      scoreIncrement(level*200);
+    }
+    if (toDelete.size()==4) {
+      scoreIncrement(level*400);
+    }
     while (toDelete.size() > 0) {
        for (int j=toDelete.get(0);j>=2;j--) {
         for (int i=1;i<board.length-1;i++) {
@@ -86,9 +95,6 @@ public class Board {
       toDelete.remove(0);
       linesClearedIncrement();
     }
-  }
-
-  void tick(int tickSpeed) {
   }
 
   public void displayBoard() {

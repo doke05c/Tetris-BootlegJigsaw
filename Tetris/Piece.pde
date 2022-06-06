@@ -239,7 +239,7 @@ public class Piece {
       }
     }
   }
-
+  
   public Piece(int xPos, int yPos, int type) {
     this(xPos, yPos, type, 0);
   }

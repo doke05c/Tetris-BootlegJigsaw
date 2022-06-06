@@ -86,3 +86,11 @@ David: Afia and I both worked on the pause function, and giving players some roo
 6/3/22:
 
 Afia: David and I worked on fixing glitches with losing the game prematurely by changing the parameters checked for losing the game.
+
+6/4/22:
+
+David: I fixed an issue where the loser screen would break the game when the player tried to hit non-reset buttons.
+
+6/5/22:
+
+Afia: I created nextType class so that when generating piece types, all 7 types are gone through before repeating. Since the nextTypes are stored in an arrayList, I went ahead an made the piece previews as well by adding a method in the nextType class to draw the pieces at the right positions.

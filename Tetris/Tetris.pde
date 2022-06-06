@@ -1,5 +1,6 @@
 Board board = new Board();
-Piece tee = new Piece(5, 1, (int)random(0,7));
+nextType type = new nextType();
+Piece tee = new Piece(5, 1, type.getNextType());
 ArrayList<Piece> piecelist = new ArrayList<Piece>();
 boolean anyAtTop = false; //check for busy spots near spawn, if exist, game will reset
 boolean hasStored = false; //check if the player already stored a piece in the place cycle
@@ -8,14 +9,22 @@ int failCount = 0; //how many times the game should wait to fail to move a piece
 int frameCountEr = 0;
 int speed=60;
 boolean loser = false;
+int[] preview = new int[4];
 
 void setup() {
   size(960, 540);
   piecelist.add(tee);
+  preview = type.getPreviewTypes();
 }
 void draw() {
   background(255);
   frameRate(60);
+  
+  fill(0); text("NEXT:", 300, 30);
+  //rect(300, 40, 100, 250); text(""+preview[0]+","+preview[1]+","+preview[2]+","+preview[3], 310, 45);
+  for(int i=0; i<4; i++) type.drawPiece(preview[i], i);
+  preview = type.getPreviewTypes();
+  
   if(!loser)board.displayBoard();
     else{board.displayBoard(); fill(0); textSize(20); text("LOSER",505, 155); text("Press Backspace to restart", 505, 200);///The stupid white box: stroke(255); fill(255); rect(300, 365, 77, 75); stroke(0); 
     text("Score: " + board.getScore(), 505, 245);text("Level: " + board.getLevel(), 505, 290); text("Lines Cleared: " + board.getLinesCleared(), 505, 335);}
@@ -32,7 +41,7 @@ void draw() {
   }
   tick();
   if (piecelist.size() >= 2) { //display the stored Piece
-    if(!loser)storeDisp();
+    storeDisp();
   }
   if (isPaused) {fill(255); rect(35, 100, 226, 100); fill(0); textSize(20); text("paused...",105, 155);}  
 }
@@ -98,12 +107,12 @@ void fullStamp() {
       anyAtTop = false;*/
       loser = true;
     } else {
-      piecelist.set(0, new Piece(5, 1, (int)random(0,7)));
+      piecelist.set(0, new Piece(5, 1, type.getNextType()));
     }
 }
 
 void keyPressed() {
-  if (!isPaused) {
+  if (!isPaused && !loser) {
     if (keyCode == DOWN) { //move down one space
       if(piecelist.get(0).move(board)) {
         board.scoreIncrement(1);
@@ -128,14 +137,15 @@ void keyPressed() {
     loser = false;
     board = new Board();
     piecelist = new ArrayList<Piece>();
-    piecelist.add(new Piece(5, 1, (int)random(0,7)));
-    piecelist.set(0, new Piece(5, 1, (int)random(0,7)));
+    piecelist.add(new Piece(5, 1, type.getNextType()));
+    piecelist.set(0, new Piece(5, 1, type.getNextType()));
     isPaused = false;
     anyAtTop = false;
   } else if (key == 'c' || key == 'C') { //switch with storage
+    if(!loser){
     if (hasStored == false) {
       if (piecelist.size() < 2) {
-        piecelist.add(1, new Piece(5, 1, (int)random(0,7)));
+        piecelist.add(1, new Piece(5, 1, type.getNextType()));
       }
       for (int i=0;i<4;i++) {
         board.getBoard()[piecelist.get(0).getPositions().get(i)[0]][piecelist.get(0).getPositions().get(i)[1]] = SPACE;
@@ -144,12 +154,15 @@ void keyPressed() {
       piecelist.set(1, piecelist.get(0));
       piecelist.set(0, temp);
       hasStored = true;
+      }
     }
   } else if (key == 'p' || key == 'P') {
-    if (isPaused) {
-      delay(1500);
+    if(!loser){
+      if (isPaused) {
+        delay(1500);
+       }
+      isPaused = !isPaused;
     }
-    isPaused = !isPaused;
   }
 }
 
