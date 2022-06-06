@@ -23,7 +23,7 @@ public class nextType{
     ArrayList<Integer> list = new ArrayList<Integer>();
     for (int i=0; i<7; i++) list.add(i);
     Collections.shuffle(list);
-    for (int i=0; i<7; i++) typeS.add(list.get(i));
+    for (int i=0; i<7; i++) typeS.add(list.remove(i));
   }
   
   void drawPiece( int type, int query){
