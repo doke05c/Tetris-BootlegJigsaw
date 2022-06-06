@@ -13,6 +13,7 @@ int failCount = 0; //how many times the game should wait to fail to move a piece
 int frameCountEr = 0;
 int speed=60;
 boolean loser = false;
+boolean scoreStored = false;
 int[] preview = new int[4];
 
 void setup() {
@@ -33,6 +34,9 @@ void draw() {
     else{board.displayBoard(); fill(0); textSize(20); text("LOSER",505, 155); text("Press Backspace to restart", 505, 200);///The stupid white box: stroke(255); fill(255); rect(300, 365, 77, 75); stroke(0); 
     text("Score: " + board.getScore(), 505, 245);text("Level: " + board.getLevel(), 505, 290); text("Lines Cleared: " + board.getLinesCleared(), 505, 335);
     text("Would you like to save your score?", 505, 375); text("Hit ENTER to save your score!", 505, 400);
+      if (scoreStored) {
+        text("Saved!", 575, 450);
+      }
     }
   if(!loser){
    for (int j=0;j<4;j++) { //puts Pieces on Board
@@ -118,16 +122,19 @@ void fullStamp() {
 }
 
 void saveScore() {
-  File scoreFile = new File("scorefiles.txt");
-  if (scoreFile.exists()) {
-  } else {
-    output = createWriter("scorefiles.txt");  
+  if (!scoreStored) {
+    File scoreFile = new File("scorefiles.txt");
+    if (scoreFile.exists()) {
+    } else {
+      output = createWriter("scorefiles.txt");  
+    }
+    if (loser) {
+        output.println(board.getScore() + ", Time: " + new Timestamp(System.currentTimeMillis())); // Write the score to the file
+    }
+    output.flush(); // Writes the remaining data to the file
+    output.close(); // Finishes the file
+    scoreStored = true;
   }
-  if (loser) {
-      output.println(board.getScore() + ", Time: " + new Timestamp(System.currentTimeMillis())); // Write the score to the file
-  }
-  output.flush(); // Writes the remaining data to the file
-  output.close(); // Finishes the file
 }
 
 void keyPressed() {
@@ -154,6 +161,7 @@ void keyPressed() {
     }
   } if (keyCode == BACKSPACE) { //reset
     loser = false;
+    scoreStored = false;
     board = new Board();
     piecelist = new ArrayList<Piece>();
     piecelist.add(new Piece(5, 1, type.getNextType()));
@@ -182,7 +190,7 @@ void keyPressed() {
        }
       isPaused = !isPaused;
     }
-  } else if (keyCode == ENTER) {
+  } else if (keyCode == ENTER && loser) {
     saveScore();
   }
 }
