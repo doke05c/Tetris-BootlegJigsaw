@@ -1,7 +1,11 @@
+import java.io.File;
+import java.sql.Timestamp;
+
 Board board = new Board();
 nextType type = new nextType();
 Piece tee = new Piece(5, 1, type.getNextType());
 ArrayList<Piece> piecelist = new ArrayList<Piece>();
+PrintWriter output;
 boolean anyAtTop = false; //check for busy spots near spawn, if exist, game will reset
 boolean hasStored = false; //check if the player already stored a piece in the place cycle
 boolean isPaused = false; //whether or not game is paused.
@@ -27,7 +31,9 @@ void draw() {
   
   if(!loser)board.displayBoard();
     else{board.displayBoard(); fill(0); textSize(20); text("LOSER",505, 155); text("Press Backspace to restart", 505, 200);///The stupid white box: stroke(255); fill(255); rect(300, 365, 77, 75); stroke(0); 
-    text("Score: " + board.getScore(), 505, 245);text("Level: " + board.getLevel(), 505, 290); text("Lines Cleared: " + board.getLinesCleared(), 505, 335);}
+    text("Score: " + board.getScore(), 505, 245);text("Level: " + board.getLevel(), 505, 290); text("Lines Cleared: " + board.getLinesCleared(), 505, 335);
+    text("Would you like to save your score?", 505, 375); text("Hit ENTER to save your score!", 505, 400);
+    }
   if(!loser){
    for (int j=0;j<4;j++) { //puts Pieces on Board
      board.getBoard()[piecelist.get(0).getPositions().get(j)[0]][piecelist.get(0).getPositions().get(j)[1]] = piecelist.get(0).getType();
@@ -111,6 +117,19 @@ void fullStamp() {
     }
 }
 
+void saveScore() {
+  File scoreFile = new File("scorefiles.txt");
+  if (scoreFile.exists()) {
+  } else {
+    output = createWriter("scorefiles.txt");  
+  }
+  if (loser) {
+      output.println(board.getScore() + ", Time: " + new Timestamp(System.currentTimeMillis())); // Write the score to the file
+  }
+  output.flush(); // Writes the remaining data to the file
+  output.close(); // Finishes the file
+}
+
 void keyPressed() {
   if (!isPaused && !loser) {
     if (keyCode == DOWN) { //move down one space
@@ -163,6 +182,8 @@ void keyPressed() {
        }
       isPaused = !isPaused;
     }
+  } else if (keyCode == ENTER) {
+    saveScore();
   }
 }
 
