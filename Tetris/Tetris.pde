@@ -1,9 +1,11 @@
 import java.io.*;
+import java.util.*;
 import java.sql.Timestamp;
 
 Board board = new Board();
 nextType type = new nextType();
 Piece tee = new Piece(5, 1, type.getNextType());
+PrintWriter add;
 ArrayList<Piece> piecelist = new ArrayList<Piece>();
 boolean anyAtTop = false; //check for busy spots near spawn, if exist, game will reset
 boolean hasStored = false; //check if the player already stored a piece in the place cycle
@@ -133,26 +135,24 @@ void fullStamp() {
 }
 
 void saveScore() {
-  PrintWriter add;
-  FileWriter addf;
+  String exists = "";
   if (!scoreStored) {
     try {
       File scoreFile = new File("scorefiles.txt");
-      if (!scoreFile.exists()) {
-        //add = createWriter("scorefiles.txt");
-         addf = new FileWriter("scorefiles.txt", true);
-        //add = new PrintWriter(addf);
-      } else {
-        //add = createWriter("scorefiles.txt");
-        //FileWriter addf = new FileWriter("scorefiles.txt", true);
-        addf = new FileWriter("scorefiles.txt", true); 
+      if (scoreFile.exists()) {
+        Scanner s = new Scanner(scoreFile);
+        while (s.hasNextLine()) {
+          exists += s.nextLine();
+        }
+        s.close();
       }
+      add = createWriter("scorefiles.txt");
         if (loser) {
             String write = board.getScore() + ", Time: " + new Timestamp(System.currentTimeMillis());
-            addf.write(write, 0, write.length()); // Write the score to the file
+            add.println(exists + write);
         }
-      addf.flush(); // Writes the remaining data to the file
-      addf.close(); // Finishes the file
+      add.flush(); // Writes the remaining data to the file
+      add.close(); // Finishes the file
       scoreStored = true;
     } catch (IOException e) {
     System.out.println("lol");
