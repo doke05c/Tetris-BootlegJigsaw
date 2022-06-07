@@ -27,7 +27,7 @@ void draw() {
   
   if(!loser)board.displayBoard();
     else{board.displayBoard(); fill(0); textSize(20); text("LOSER",505, 155); text("Press Backspace to restart", 505, 200);///The stupid white box: stroke(255); fill(255); rect(300, 365, 77, 75); stroke(0); 
-    text("Score: " + board.getScore(), 505, 245);text("Level: " + board.getLevel(), 505, 290); text("Lines Cleared: " + board.getLinesCleared(), 505, 335);}
+    text("Score: " + board.getScore(), 505, 245);text("Level: " + board.getLevel(), 505, 290); text("Lines Cleared: " + board.getLinesCleared(), 505, 335); text("Time Played: "+frameCountEr/60+" seconds", 505, 500);}
   if(!loser){
    for (int j=0;j<4;j++) { //puts Pieces on Board
      board.getBoard()[piecelist.get(0).getPositions().get(j)[0]][piecelist.get(0).getPositions().get(j)[1]] = piecelist.get(0).getType();
@@ -69,7 +69,7 @@ void tick(){
        }
        if(board.getLevel()<=15) speed=(int)(60/Math.pow(1.22,(double)(board.getLevel()-1)));
        else speed=3;
-       frameCountEr+=speed;
+       if(!loser) frameCountEr+=speed;
      }
    } else {
      frameCount--;
