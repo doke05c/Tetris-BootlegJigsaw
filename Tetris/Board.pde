@@ -4,6 +4,13 @@
   private int linesCleared = 0;
   private int linesNeeded = 0;
   private int[][] board;
+  private boolean lines2;
+  private int howLong2;
+  private boolean lines3;
+  private int howLong3;
+  private boolean lines4;
+  private int howLong4;
+  
 
   static final int SPACE = -2;
   static final int WALL = -1;
@@ -42,6 +49,14 @@
     return board;
   }
 
+  boolean getLines2(){return lines2;}
+  boolean getLines3(){return lines3;}
+  boolean getLines4(){return lines4;}
+
+  public void shortHowLong2(){ howLong2 -= 1; if(howLong2 ==0) lines2 = false;}
+  public void shortHowLong3(){ howLong3 -= 1; if(howLong3 ==0) lines3 = false;}
+  public void shortHowLong4(){ howLong4 -= 1; if(howLong4 ==0) lines4 = false;}
+
   public void scoreIncrement(int scoreAmt) {
     score += scoreAmt;
   }
@@ -75,12 +90,18 @@
     }
     if (toDelete.size()==2) {
       scoreIncrement(level*100);
+      lines2 = true;
+      howLong2 = 90;
     }
     if (toDelete.size()==3) {
       scoreIncrement(level*200);
+      lines3 = true;
+      howLong3 = 90;
     }
     if (toDelete.size()==4) {
       scoreIncrement(level*400);
+      lines4 = true;
+      howLong4 = 90;
     }
     while (toDelete.size() > 0) {
        for (int j=toDelete.get(0);j>=2;j--) {

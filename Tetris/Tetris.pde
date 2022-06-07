@@ -42,6 +42,18 @@ void draw() {
      board.getBoard()[piecelist.get(0).getPositions().get(j)[0]][piecelist.get(0).getPositions().get(j)[1]] = piecelist.get(0).getType();
    }}
    board.rowChecked();
+   if(board.getLines2()){
+     text("2 Lines Cleared!",455, 155);
+     board.shortHowLong2();
+   }
+   if(board.getLines3()){
+     text("3 Lines Cleared!",505, 155);
+     board.shortHowLong3();
+   }
+   if(board.getLines4()){
+     text("4 Lines Cleared!",555, 155);
+     board.shortHowLong4();
+   }
   //check for busy spots at the top of any column. if busy, reset the game.
   boolean anyAtTop = false;
   for(int i=0;i<board.getBoard().length;i++) {if (board.getBoard()[i][1] > 6) {anyAtTop = true;}}

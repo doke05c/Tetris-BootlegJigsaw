@@ -94,3 +94,7 @@ David: I fixed an issue where the loser screen would break the game when the pla
 6/5/22:
 
 Afia: I created nextType class so that when generating piece types, all 7 types are gone through before repeating. Since the nextTypes are stored in an arrayList, I went ahead an made the piece previews as well by adding a method in the nextType class to draw the pieces at the right positions.
+
+6/6/22:
+
+Afia: I added instance variables and methods to the Board class that allow the Tetris class to display 1.5 second messages whenever a player clears 2/3/4 lines at a time.
