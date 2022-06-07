@@ -138,18 +138,21 @@ void saveScore() {
   String exists = "";
   if (!scoreStored) {
     try {
-      File scoreFile = new File("scorefiles.txt");
+      File scoreFile = new File("scorefile.txt");
       if (scoreFile.exists()) {
         Scanner s = new Scanner(scoreFile);
+        exists += s.nextLine() + '\n';
         while (s.hasNextLine()) {
-          exists += s.nextLine();
+          exists += s.nextLine() + '\n';
         }
         s.close();
+      } else {
+        System.out.println("file DNE");
       }
-      add = createWriter("scorefiles.txt");
+      add = createWriter("scorefile.txt");
         if (loser) {
             String write = board.getScore() + ", Time: " + new Timestamp(System.currentTimeMillis());
-            add.println(exists + write);
+            add.println(exists + write + '\n');
         }
       add.flush(); // Writes the remaining data to the file
       add.close(); // Finishes the file
