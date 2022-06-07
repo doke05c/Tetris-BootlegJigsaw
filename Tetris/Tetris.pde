@@ -43,7 +43,7 @@ void draw() {
    }}
    board.rowChecked();
    if(board.getLines2()){
-     text("2 Lines Cleared!",455, 155);
+     text("2 Lines Cleared!",505, 105);
      board.shortHowLong2();
    }
    if(board.getLines3()){
@@ -51,7 +51,7 @@ void draw() {
      board.shortHowLong3();
    }
    if(board.getLines4()){
-     text("4 Lines Cleared!",555, 155);
+     text("4 Lines Cleared!",505, 205);
      board.shortHowLong4();
    }
   //check for busy spots at the top of any column. if busy, reset the game.
@@ -133,26 +133,26 @@ void fullStamp() {
 }
 
 void saveScore() {
-  FileWriter exists;
-  PrintWriter newfile;
+  PrintWriter add;
+  FileWriter addf;
   if (!scoreStored) {
     try {
       File scoreFile = new File("scorefiles.txt");
-      if (!scoreFile.createNewFile()) {
-        exists = new FileWriter("scorefiles.txt", true);
-        if (loser) {
-            exists.append(board.getScore() + ", Exists, Time: " + new Timestamp(System.currentTimeMillis())); // Write the score to the file
-        }
-        exists.flush(); // Writes the remaining data to the file
-        exists.close(); // Finishes the file
+      if (!scoreFile.exists()) {
+        //add = createWriter("scorefiles.txt");
+         addf = new FileWriter("scorefiles.txt", true);
+        //add = new PrintWriter(addf);
       } else {
-          newfile = createWriter("scorefiles.txt");
-        if (loser) {
-            newfile.println(board.getScore() + ", New File, Time: " + new Timestamp(System.currentTimeMillis())); // Write the score to the file
-        }
-        newfile.flush(); // Writes the remaining data to the file
-        newfile.close(); // Finishes the file
+        //add = createWriter("scorefiles.txt");
+        //FileWriter addf = new FileWriter("scorefiles.txt", true);
+        addf = new FileWriter("scorefiles.txt", true); 
       }
+        if (loser) {
+            String write = board.getScore() + ", Time: " + new Timestamp(System.currentTimeMillis());
+            addf.write(write, 0, write.length()); // Write the score to the file
+        }
+      addf.flush(); // Writes the remaining data to the file
+      addf.close(); // Finishes the file
       scoreStored = true;
     } catch (IOException e) {
     System.out.println("lol");
