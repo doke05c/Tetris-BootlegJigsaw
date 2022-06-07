@@ -141,10 +141,12 @@ void saveScore() {
       File scoreFile = new File("scorefile.txt");
       if (scoreFile.exists()) {
         Scanner s = new Scanner(scoreFile);
-        exists += s.nextLine() + '\n';
+        //exists += s.nextLine() + '\n';
         while (s.hasNextLine()) {
           exists += s.nextLine() + '\n';
         }
+        System.out.println("exists");
+        System.out.println("a " + exists);
         s.close();
       } else {
         System.out.println("file DNE");
