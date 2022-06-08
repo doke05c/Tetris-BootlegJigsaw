@@ -41,10 +41,11 @@ void draw() {
     }
   if(!loser){
    for (int j=0;j<4;j++) { //puts Pieces & GhostPieces on Board
-     board.getBoard()[ghost.getPositions().get(j)[0]][ghost.getPositions().get(j)[1]] = ghost.getType()+GHOST;
+       board.getBoard()[ghost.getPositions().get(j)[0]][ghost.getPositions().get(j)[1]] = ghost.getType()+GHOST;
      while (ghost.move(board)) {}
+     if (board.getBoard()[ghost.getPositions().get(j)[0]][ghost.getPositions().get(j)[1]]<STAMP || board.getBoard()[ghost.getPositions().get(j)[0]][ghost.getPositions().get(j)[1]]>=GHOST) {
      board.getBoard()[piecelist.get(0).getPositions().get(j)[0]][piecelist.get(0).getPositions().get(j)[1]] = piecelist.get(0).getType();
-   }}
+   }}}
    board.rowChecked();
    if(board.getLines2()){
      text("2 Lines Cleared!",505, 105);
@@ -188,8 +189,9 @@ void keyPressed() {
            if (board.getBoard()[i][j] >= GHOST) {board.getBoard()[i][j] = SPACE;}
          }
        }
-       piecelist.get(0).move(1, 0, board);
+       if (piecelist.get(0).move(1, 0, board)) {
        ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
+       }
     } else if (keyCode == LEFT) { //move left
        for (int i=1;i<board.getBoard().length-1;i++) {
          for (int j=1;j<board.getBoard()[0].length-1;j++) {
