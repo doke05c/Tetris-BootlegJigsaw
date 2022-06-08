@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 Board board = new Board();
 nextType type = new nextType();
 Piece tee = new Piece(5, 1, type.getNextType());
-//PrintWriter add;
+PrintWriter add;
 ArrayList<Integer> leaderboard = new ArrayList<Integer>();
 ArrayList<Piece> piecelist = new ArrayList<Piece>();
 boolean anyAtTop = false; //check for busy spots near spawn, if exist, game will reset
@@ -138,42 +138,42 @@ void fullStamp() {
 }
 
 void saveScore() {
-  if (!scoreStored && loser) {
-    leaderboard.add(board.getScore());
-    Collections.sort(leaderboard, Collections.reverseOrder());
-    if (leaderboard.size() > 5) {
-      leaderboard.remove(5);
-    }
-    scoreStored = true;
-  }  
-  //String exists = "";
-  //if (!scoreStored) {
-  //  try {
-  //    File scoreFile = new File("scorefile.txt");
-  //    if (scoreFile.exists()) {
-  //      Scanner s = new Scanner(scoreFile);
-  //      //exists += s.nextLine() + '\n';
-  //      while (s.hasNextLine()) {
-  //        exists += s.nextLine() + '\n';
-  //      }
-  //      System.out.println("exists");
-  //      System.out.println("a " + exists);
-  //      s.close();
-  //    } else {
-  //      System.out.println("file DNE");
-  //    }
-  //    add = createWriter("scorefile.txt");
-  //      if (loser) {
-  //          String write = board.getScore() + ", Time: " + new Timestamp(System.currentTimeMillis());
-  //          add.println(exists + write + '\n');
-  //      }
-  //    add.flush(); // Writes the remaining data to the file
-  //    add.close(); // Finishes the file
-  //    scoreStored = true;
-  //  } catch (IOException e) {
-  //  System.out.println("lol");
+  //if (!scoreStored && loser) {
+  //  leaderboard.add(board.getScore());
+  //  Collections.sort(leaderboard, Collections.reverseOrder());
+  //  if (leaderboard.size() > 5) {
+  //    leaderboard.remove(5);
   //  }
-  //}
+  //  scoreStored = true;
+  //}  
+  String exists = "";
+  if (!scoreStored) {
+    try {
+      File scoreFile = new File("scorefile.txt");
+      if (scoreFile.exists()) {
+        Scanner s = new Scanner(scoreFile);
+        //exists += s.nextLine() + '\n';
+        while (s.hasNextLine()) {
+          exists += s.nextLine() + '\n';
+        }
+        System.out.println("exists");
+        System.out.println("a " + exists);
+        s.close();
+      } else {
+        System.out.println("file DNE");
+      }
+      add = createWriter("scorefile.txt");
+        if (loser) {
+            String write = Integer.toString(board.getScore());
+            add.println(exists + write + '\n');
+        }
+      add.flush(); // Writes the remaining data to the file
+      add.close(); // Finishes the file
+      scoreStored = true;
+    } catch (IOException e) {
+    System.out.println("lol");
+    }
+  }
 }
 
 void keyPressed() {
