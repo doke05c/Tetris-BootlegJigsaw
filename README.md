@@ -1,4 +1,7 @@
 # Tetris-BootlegJigsaw 
+<!DOCTYPE html>
+<html>
+<body>
 <h3>Group Name:</h3> "Tetris: Master and Noob"
 
 <h3>Group Members:</h3> Afia Bidica, David Oke
@@ -15,6 +18,7 @@
 
 <h1>Development Log:</h1>
 
+<p>
 <b>5/22/22:</b>
 
 Today we started testing out branching and merging.
@@ -106,3 +110,6 @@ Afia: I added instance variables and methods to the Board class that allow the T
 David: I added a local leaderboard/score-saving feature.
 
 Afia: I added the time (in seconds) a player has been playing to the losing screen.
+</p>
+</body>
+</html>
