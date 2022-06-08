@@ -164,7 +164,7 @@ void saveScore() {
   //    }
   //    add = createWriter("scorefile.txt");
   //      if (loser) {
-  //          String write = Integer.toString(board.getScore());
+  //          String write = board.getScore() + ", Time: " + new Timestamp(System.currentTimeMillis());
   //          add.println(exists + write + '\n');
   //      }
   //    add.flush(); // Writes the remaining data to the file
