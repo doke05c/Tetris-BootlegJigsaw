@@ -23,6 +23,9 @@ public class Piece {
   }
 
   void stamp(Board cBoard) {
+    if(type == PURPLE_T){
+     if(cBoard.getBoard());//find the corners to see if t-spin 
+    }
     for (int sq = 0; sq<positions.size(); sq++) {
       cBoard.getBoard()[positions.get(sq)[0]][positions.get(sq)[1]]=type+STAMP;//(-1 + type/10+.1);
     }
