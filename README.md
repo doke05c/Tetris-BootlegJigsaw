@@ -11,7 +11,7 @@ Prototype Document: https://docs.google.com/document/d/1B44WfTRtLe2xEvWqtp4nwDef
 
 Compile/Run instructions:
 
-This program runs in processing. Download the file, open it in processing, and click run. Use left/right arrow keys to shift pieces in those respective directions. Up arrow rotates the piece clockwise while the 'z' key rotates it counterclockwise, and the down arrow shifts the piece down. 'c' key adds a Piece to storage to be used at a later time. (Player can only put a piece in storage once per place cycle.) The spacebar stamps the piece on to the board and summons a new piece. Backspace resets the game, and the 'p' key pauses/unpauses the game.
+This program runs in processing. Download the file, open it in processing, and click run. Use left/right arrow keys to shift pieces in those respective directions. Up arrow rotates the piece clockwise while the 'z' key rotates it counterclockwise, and the down arrow shifts the piece down. 'c' key adds a Piece to storage to be used at a later time. (Player can only put a piece in storage once per place cycle.) The spacebar stamps the piece on to the board and summons a new piece. Backspace resets the game, and the 'p' key pauses/unpauses the game. The ENTER key allows players to save their scores onto the local leaderboard upon losing.
 
 Development Log:
 
@@ -98,3 +98,7 @@ Afia: I created nextType class so that when generating piece types, all 7 types 
 6/6/22:
 
 Afia: I added instance variables and methods to the Board class that allow the Tetris class to display 1.5 second messages whenever a player clears 2/3/4 lines at a time.
+
+6/7/22:
+
+David: I added a local leaderboard/score-saving feature.
