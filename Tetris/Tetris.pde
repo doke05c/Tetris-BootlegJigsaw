@@ -1,7 +1,3 @@
-import java.io.*;
-import java.util.*;
-import java.sql.Timestamp;
-
 Board board = new Board();
 nextType type = new nextType();
 Piece tee = new Piece(5, 1, type.getNextType());
@@ -61,7 +57,7 @@ void draw() {
    }
   //check for busy spots at the top of any column. if busy, reset the game.
   boolean anyAtTop = false;
-  for(int i=0;i<board.getBoard().length;i++) {if (board.getBoard()[i][1] > 6) {anyAtTop = true;}}
+  for(int i=0;i<board.getBoard().length;i++) {if (board.getBoard()[i][1] >= STAMP && board.getBoard()[i][1] < GHOST) {anyAtTop = true;}}
   if (anyAtTop) {
     loser = true;
   }
@@ -122,7 +118,7 @@ void fullStamp() {
    piecelist.get(0).stamp(board);
    hasStored = false;
    failCount = 0;
-   for(int i=1;i<board.getBoard().length-1;i++) {if (board.getBoard()[i][1] > 6) {anyAtTop = true;}}
+   for(int i=1;i<board.getBoard().length-1;i++) {if (board.getBoard()[i][1] >= STAMP && board.getBoard()[i][1] < GHOST) {anyAtTop = true;}}
     if (anyAtTop) {
       //textSize(250);   
       //text("LOSER", 25, height-50);
@@ -244,3 +240,4 @@ static final int ORANGE_L = 4;
 static final int GREEN_Z1 = 5;
 static final int RED_Z = 6;
 static final int STAMP = 7;
+static final int GHOST = 14;

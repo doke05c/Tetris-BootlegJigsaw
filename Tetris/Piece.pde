@@ -252,7 +252,7 @@ public class Piece {
       boolean yOver = positions.get(i)[1]+y > board.getBoard()[0].length-1;
       boolean yUnder = positions.get(i)[1]+y < 1;
       boolean isWall = board.getBoard()[positions.get(i)[0]+x][positions.get(i)[1]+y] == WALL;
-      boolean isStamped = board.getBoard()[positions.get(i)[0]+x][positions.get(i)[1]+y] > 6;
+      boolean isStamped = board.getBoard()[positions.get(i)[0]+x][positions.get(i)[1]+y] >= STAMP && board.getBoard()[positions.get(i)[0]+x][positions.get(i)[1]+y] < GHOST;
       if (xOver || xUnder || yOver || yUnder || isWall || isStamped) {
         return false;
       }

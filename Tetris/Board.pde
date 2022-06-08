@@ -10,10 +10,6 @@
   private int howLong3;
   private boolean lines4;
   private int howLong4;
-  
-
-  static final int SPACE = -2;
-  static final int WALL = -1;
 
   public Board(int x, int y) {
     board = new int[x][y];
@@ -135,11 +131,17 @@
         case CYAN_I+STAMP:
           fill(0, 255, 255);
           break;
+        case CYAN_I+GHOST:
+          fill(0, 127, 127);
+          break;
         case PURPLE_T:
           fill(255, 0, 255);
           break;
         case PURPLE_T+STAMP:
           fill(255, 0, 255);
+          break;
+        case PURPLE_T+GHOST:
+          fill(127, 0, 127);
           break;
         case YELLOW_SQ:
           fill(255, 255, 0);
@@ -147,11 +149,17 @@
         case YELLOW_SQ+STAMP:
           fill(255, 255, 0);
           break;
+        case YELLOW_SQ+GHOST:
+          fill(127, 127, 0);
+          break;
         case BLUE_L1:
           fill(0, 0, 255);
           break;
         case BLUE_L1+STAMP:
           fill(0, 0, 255);
+          break;
+        case BLUE_L1+GHOST:
+          fill(0, 0, 127);
           break;
         case ORANGE_L:
           fill(255, 69, 0);
@@ -159,17 +167,26 @@
         case ORANGE_L+STAMP:
           fill(255, 69, 0);
           break;
+        case ORANGE_L+GHOST:
+          fill(127, 34, 0);
+          break;
         case GREEN_Z1:
           fill(0, 255, 0);
           break;
         case GREEN_Z1+STAMP:
           fill(0, 255, 0);
           break;
+        case GREEN_Z1+GHOST:
+          fill(0, 127, 0);
+          break;
         case RED_Z:
           fill(255, 0, 0);
           break;
         case RED_Z+STAMP:
           fill(255, 0, 0);
+          break;
+        case RED_Z+GHOST:
+          fill(127, 0, 0);
           break;
         }
         rect(10.0+r*sz, 10.0+c*sz, sz, sz);
