@@ -97,6 +97,8 @@ Afia: I created nextType class so that when generating piece types, all 7 types 
 
 6/6/22:
 
+David: I added point bonuses for clearing 2/3/4 lines at a time.
+
 Afia: I added instance variables and methods to the Board class that allow the Tetris class to display 1.5 second messages whenever a player clears 2/3/4 lines at a time.
 
 6/7/22:
