@@ -111,5 +111,6 @@ David: I added a local leaderboard/score-saving feature.
 
 Afia: I added the time (in seconds) a player has been playing to the losing screen.
 </p>
+  <h6> Jump to end </h6> 
 </body>
 </html>
