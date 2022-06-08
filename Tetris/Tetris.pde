@@ -1,6 +1,7 @@
 Board board = new Board();
 nextType type = new nextType();
 Piece tee = new Piece(5, 1, type.getNextType());
+GhostPiece ghost = new GhostPiece(tee.getX(), tee.getY(), tee.getType());
 //PrintWriter add;
 ArrayList<Integer> leaderboard = new ArrayList<Integer>();
 ArrayList<Piece> piecelist = new ArrayList<Piece>();
@@ -39,8 +40,9 @@ void draw() {
       }
     }
   if(!loser){
-   for (int j=0;j<4;j++) { //puts Pieces on Board
+   for (int j=0;j<4;j++) { //puts Pieces & GhostPieces on Board
      board.getBoard()[piecelist.get(0).getPositions().get(j)[0]][piecelist.get(0).getPositions().get(j)[1]] = piecelist.get(0).getType();
+     board.getBoard()[ghost.getPositions().get(j)[0]][ghost.getPositions().get(j)[1]] = ghost.getType()+GHOST;
    }}
    board.rowChecked();
    if(board.getLines2()){
