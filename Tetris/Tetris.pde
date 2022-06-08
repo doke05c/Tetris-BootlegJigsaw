@@ -196,8 +196,9 @@ void keyPressed() {
            if (board.getBoard()[i][j] >= GHOST) {board.getBoard()[i][j] = SPACE;}
          }
        }
-       piecelist.get(0).move(-1, 0, board);
-       ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
+       if (piecelist.get(0).move(-1, 0, board)) {
+         ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
+       }
     } else if (keyCode == UP) { //rotate CW
        for (int i=1;i<board.getBoard().length-1;i++) {
          for (int j=1;j<board.getBoard()[0].length-1;j++) {

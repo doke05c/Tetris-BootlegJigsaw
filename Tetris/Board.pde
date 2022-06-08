@@ -132,7 +132,7 @@
           fill(0, 255, 255);
           break;
         case CYAN_I+GHOST:
-          fill(0, 127, 127);
+          fill(127, 255, 255);
           break;
         case PURPLE_T:
           fill(255, 0, 255);
@@ -141,7 +141,7 @@
           fill(255, 0, 255);
           break;
         case PURPLE_T+GHOST:
-          fill(127, 0, 127);
+          fill(255, 127, 255);
           break;
         case YELLOW_SQ:
           fill(255, 255, 0);
@@ -150,7 +150,7 @@
           fill(255, 255, 0);
           break;
         case YELLOW_SQ+GHOST:
-          fill(127, 127, 0);
+          fill(255, 255, 127);
           break;
         case BLUE_L1:
           fill(0, 0, 255);
@@ -159,7 +159,7 @@
           fill(0, 0, 255);
           break;
         case BLUE_L1+GHOST:
-          fill(0, 0, 127);
+          fill(127, 127, 255);
           break;
         case ORANGE_L:
           fill(255, 69, 0);
@@ -168,7 +168,7 @@
           fill(255, 69, 0);
           break;
         case ORANGE_L+GHOST:
-          fill(127, 34, 0);
+          fill(255, 162, 127);
           break;
         case GREEN_Z1:
           fill(0, 255, 0);
@@ -177,7 +177,7 @@
           fill(0, 255, 0);
           break;
         case GREEN_Z1+GHOST:
-          fill(0, 127, 0);
+          fill(127, 255, 127);
           break;
         case RED_Z:
           fill(255, 0, 0);
@@ -186,7 +186,7 @@
           fill(255, 0, 0);
           break;
         case RED_Z+GHOST:
-          fill(127, 0, 0);
+          fill(255, 127, 127);
           break;
         }
         rect(10.0+r*sz, 10.0+c*sz, sz, sz);
