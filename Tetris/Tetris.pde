@@ -41,8 +41,8 @@ void draw() {
     }
   if(!loser){
    for (int j=0;j<4;j++) { //puts Pieces & GhostPieces on Board
-     board.getBoard()[piecelist.get(0).getPositions().get(j)[0]][piecelist.get(0).getPositions().get(j)[1]] = piecelist.get(0).getType();
      board.getBoard()[ghost.getPositions().get(j)[0]][ghost.getPositions().get(j)[1]] = ghost.getType()+GHOST;
+     board.getBoard()[piecelist.get(0).getPositions().get(j)[0]][piecelist.get(0).getPositions().get(j)[1]] = piecelist.get(0).getType();
      while (ghost.move(board)) {}
    }
    ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
@@ -184,12 +184,32 @@ void keyPressed() {
         board.scoreIncrement(1);
       }
     } else if (keyCode == RIGHT) { //move right
+       for (int i=1;i<board.getBoard().length-1;i++) {
+         for (int j=1;j<board.getBoard()[0].length-1;j++) {
+           if (board.getBoard()[i][j] >= GHOST) {board.getBoard()[i][j] = SPACE;}
+         }
+       }
        piecelist.get(0).move(1, 0, board);
     } else if (keyCode == LEFT) { //move left
+       for (int i=1;i<board.getBoard().length-1;i++) {
+         for (int j=1;j<board.getBoard()[0].length-1;j++) {
+           if (board.getBoard()[i][j] >= GHOST) {board.getBoard()[i][j] = SPACE;}
+         }
+       }
        piecelist.get(0).move(-1, 0, board);
     } else if (keyCode == UP) { //rotate CW
+       for (int i=1;i<board.getBoard().length-1;i++) {
+         for (int j=1;j<board.getBoard()[0].length-1;j++) {
+           if (board.getBoard()[i][j] >= GHOST) {board.getBoard()[i][j] = SPACE;}
+         }
+       }
        piecelist.get(0).rotate(true);
     } else if (key == 'z' || key == 'Z') { //rotate  CCW
+       for (int i=1;i<board.getBoard().length-1;i++) {
+         for (int j=1;j<board.getBoard()[0].length-1;j++) {
+           if (board.getBoard()[i][j] >= GHOST) {board.getBoard()[i][j] = SPACE;}
+         }
+       }
        piecelist.get(0).rotate(false);
     } else if (key == ' ') { //soft drop
       if(!loser){
