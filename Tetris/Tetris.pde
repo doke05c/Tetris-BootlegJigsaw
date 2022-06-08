@@ -5,7 +5,8 @@ import java.sql.Timestamp;
 Board board = new Board();
 nextType type = new nextType();
 Piece tee = new Piece(5, 1, type.getNextType());
-PrintWriter add;
+//PrintWriter add;
+ArrayList<Integer> leaderboard = new ArrayList<Integer>();
 ArrayList<Piece> piecelist = new ArrayList<Piece>();
 boolean anyAtTop = false; //check for busy spots near spawn, if exist, game will reset
 boolean hasStored = false; //check if the player already stored a piece in the place cycle
@@ -25,6 +26,8 @@ void setup() {
 void draw() {
   background(255);
   frameRate(60);
+  
+  fill(0); text("Leaderboard",770, 25); fill(255); for(int i=0;i<5;i++) rect(785, 50+25*i, 100, 25); fill(0); for(int i=0;i<leaderboard.size();i++) text(leaderboard.get(i), 786, 70+25*i);
   
   fill(0); text("NEXT:", 300, 30);
   //rect(300, 40, 100, 250); text(""+preview[0]+","+preview[1]+","+preview[2]+","+preview[3], 310, 45);
@@ -135,34 +138,42 @@ void fullStamp() {
 }
 
 void saveScore() {
-  String exists = "";
-  if (!scoreStored) {
-    try {
-      File scoreFile = new File("scorefile.txt");
-      if (scoreFile.exists()) {
-        Scanner s = new Scanner(scoreFile);
-        //exists += s.nextLine() + '\n';
-        while (s.hasNextLine()) {
-          exists += s.nextLine() + '\n';
-        }
-        System.out.println("exists");
-        System.out.println("a " + exists);
-        s.close();
-      } else {
-        System.out.println("file DNE");
-      }
-      add = createWriter("scorefile.txt");
-        if (loser) {
-            String write = board.getScore() + ", Time: " + new Timestamp(System.currentTimeMillis());
-            add.println(exists + write + '\n');
-        }
-      add.flush(); // Writes the remaining data to the file
-      add.close(); // Finishes the file
-      scoreStored = true;
-    } catch (IOException e) {
-    System.out.println("lol");
+  if (!scoreStored && loser) {
+    leaderboard.add(board.getScore());
+    Collections.sort(leaderboard, Collections.reverseOrder());
+    if (leaderboard.size() > 5) {
+      leaderboard.remove(5);
     }
-  }
+    scoreStored = true;
+  }  
+  //String exists = "";
+  //if (!scoreStored) {
+  //  try {
+  //    File scoreFile = new File("scorefile.txt");
+  //    if (scoreFile.exists()) {
+  //      Scanner s = new Scanner(scoreFile);
+  //      //exists += s.nextLine() + '\n';
+  //      while (s.hasNextLine()) {
+  //        exists += s.nextLine() + '\n';
+  //      }
+  //      System.out.println("exists");
+  //      System.out.println("a " + exists);
+  //      s.close();
+  //    } else {
+  //      System.out.println("file DNE");
+  //    }
+  //    add = createWriter("scorefile.txt");
+  //      if (loser) {
+  //          String write = board.getScore() + ", Time: " + new Timestamp(System.currentTimeMillis());
+  //          add.println(exists + write + '\n');
+  //      }
+  //    add.flush(); // Writes the remaining data to the file
+  //    add.close(); // Finishes the file
+  //    scoreStored = true;
+  //  } catch (IOException e) {
+  //  System.out.println("lol");
+  //  }
+  //}
 }
 
 void keyPressed() {
