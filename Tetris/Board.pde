@@ -1,4 +1,4 @@
-public class Board {
+ public class Board {
   private int score = 0;
   private int level = 1;
   private int linesCleared = 0;

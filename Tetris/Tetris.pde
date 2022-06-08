@@ -1,6 +1,12 @@
+import java.io.*;
+import java.util.*;
+import java.sql.Timestamp;
+
 Board board = new Board();
 nextType type = new nextType();
 Piece tee = new Piece(5, 1, type.getNextType());
+//PrintWriter add;
+ArrayList<Integer> leaderboard = new ArrayList<Integer>();
 ArrayList<Piece> piecelist = new ArrayList<Piece>();
 boolean anyAtTop = false; //check for busy spots near spawn, if exist, game will reset
 boolean hasStored = false; //check if the player already stored a piece in the place cycle
@@ -9,6 +15,7 @@ int failCount = 0; //how many times the game should wait to fail to move a piece
 int frameCountEr = 0;
 int speed=60;
 boolean loser = false;
+boolean scoreStored = false;
 int[] preview = new int[4];
 
 void setup() {
@@ -20,6 +27,8 @@ void draw() {
   background(255);
   frameRate(60);
   
+  fill(0); text("Leaderboard",770, 25); fill(255); for(int i=0;i<5;i++) rect(785, 50+25*i, 100, 25); fill(0); for(int i=0;i<leaderboard.size();i++) text(leaderboard.get(i), 786, 70+25*i);
+  
   fill(0); text("NEXT:", 300, 30);
   //rect(300, 40, 100, 250); text(""+preview[0]+","+preview[1]+","+preview[2]+","+preview[3], 310, 45);
   for(int i=0; i<4; i++) type.drawPiece(preview[i], i);
@@ -27,14 +36,19 @@ void draw() {
   
   if(!loser)board.displayBoard();
     else{board.displayBoard(); fill(0); textSize(20); text("LOSER",505, 155); text("Press Backspace to restart", 505, 200);///The stupid white box: stroke(255); fill(255); rect(300, 365, 77, 75); stroke(0); 
-    text("Score: " + board.getScore(), 505, 245);text("Level: " + board.getLevel(), 505, 290); text("Lines Cleared: " + board.getLinesCleared(), 505, 335); text("Time Played: "+frameCountEr/60+" seconds", 505, 500);}
+    text("Score: " + board.getScore(), 505, 245);text("Level: " + board.getLevel(), 505, 290); text("Lines Cleared: " + board.getLinesCleared(), 505, 335); text("Time Played: "+frameCountEr/60+" seconds", 505, 500);
+    text("Would you like to save your score?", 505, 375); text("Hit ENTER to save your score!", 505, 400);
+      if (scoreStored) {
+        text("Saved!", 575, 450);
+      }
+    }
   if(!loser){
    for (int j=0;j<4;j++) { //puts Pieces on Board
      board.getBoard()[piecelist.get(0).getPositions().get(j)[0]][piecelist.get(0).getPositions().get(j)[1]] = piecelist.get(0).getType();
    }}
    board.rowChecked();
    if(board.getLines2()){
-     text("2 Lines Cleared!",455, 155);
+     text("2 Lines Cleared!",505, 105);
      board.shortHowLong2();
    }
    if(board.getLines3()){
@@ -42,7 +56,7 @@ void draw() {
      board.shortHowLong3();
    }
    if(board.getLines4()){
-     text("4 Lines Cleared!",555, 155);
+     text("4 Lines Cleared!",505, 205);
      board.shortHowLong4();
    }
   //check for busy spots at the top of any column. if busy, reset the game.
@@ -123,6 +137,45 @@ void fullStamp() {
     }
 }
 
+void saveScore() {
+  if (!scoreStored && loser) {
+    leaderboard.add(board.getScore());
+    Collections.sort(leaderboard, Collections.reverseOrder());
+    if (leaderboard.size() > 5) {
+      leaderboard.remove(5);
+    }
+    scoreStored = true;
+  }  
+  //String exists = "";
+  //if (!scoreStored) {
+  //  try {
+  //    File scoreFile = new File("scorefile.txt");
+  //    if (scoreFile.exists()) {
+  //      Scanner s = new Scanner(scoreFile);
+  //      //exists += s.nextLine() + '\n';
+  //      while (s.hasNextLine()) {
+  //        exists += s.nextLine() + '\n';
+  //      }
+  //      System.out.println("exists");
+  //      System.out.println("a " + exists);
+  //      s.close();
+  //    } else {
+  //      System.out.println("file DNE");
+  //    }
+  //    add = createWriter("scorefile.txt");
+  //      if (loser) {
+  //          String write = Integer.toString(board.getScore());
+  //          add.println(exists + write + '\n');
+  //      }
+  //    add.flush(); // Writes the remaining data to the file
+  //    add.close(); // Finishes the file
+  //    scoreStored = true;
+  //  } catch (IOException e) {
+  //  System.out.println("lol");
+  //  }
+  //}
+}
+
 void keyPressed() {
   if (!isPaused && !loser) {
     if (keyCode == DOWN) { //move down one space
@@ -147,6 +200,7 @@ void keyPressed() {
     }
   } if (keyCode == BACKSPACE) { //reset
     loser = false;
+    scoreStored = false;
     board = new Board();
     piecelist = new ArrayList<Piece>();
     piecelist.add(new Piece(5, 1, type.getNextType()));
@@ -175,6 +229,8 @@ void keyPressed() {
        }
       isPaused = !isPaused;
     }
+  } else if (keyCode == ENTER && loser) {
+    saveScore();
   }
 }
 
