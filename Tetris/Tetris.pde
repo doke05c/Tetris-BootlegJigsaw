@@ -23,7 +23,7 @@ void setup() {
 void draw() {
   background(255);
   frameRate(60);
-  
+
   fill(0); text("Leaderboard",770, 25); fill(255); for(int i=0;i<5;i++) rect(785, 50+25*i, 100, 25); fill(0); for(int i=0;i<leaderboard.size();i++) text(leaderboard.get(i), 786, 70+25*i);
   
   fill(0); text("NEXT:", 300, 30);
@@ -44,9 +44,7 @@ void draw() {
      board.getBoard()[ghost.getPositions().get(j)[0]][ghost.getPositions().get(j)[1]] = ghost.getType()+GHOST;
      while (ghost.move(board)) {}
      board.getBoard()[piecelist.get(0).getPositions().get(j)[0]][piecelist.get(0).getPositions().get(j)[1]] = piecelist.get(0).getType();
-   }
-   //ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
-   }
+   }}
    board.rowChecked();
    if(board.getLines2()){
      text("2 Lines Cleared!",505, 105);
@@ -135,6 +133,7 @@ void fullStamp() {
       loser = true;
     } else {
       piecelist.set(0, new Piece(5, 1, type.getNextType()));
+      ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
     }
 }
 
@@ -189,32 +188,32 @@ void keyPressed() {
            if (board.getBoard()[i][j] >= GHOST) {board.getBoard()[i][j] = SPACE;}
          }
        }
-       ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
        piecelist.get(0).move(1, 0, board);
+       ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
     } else if (keyCode == LEFT) { //move left
        for (int i=1;i<board.getBoard().length-1;i++) {
          for (int j=1;j<board.getBoard()[0].length-1;j++) {
            if (board.getBoard()[i][j] >= GHOST) {board.getBoard()[i][j] = SPACE;}
          }
        }
-       ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
        piecelist.get(0).move(-1, 0, board);
+       ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
     } else if (keyCode == UP) { //rotate CW
        for (int i=1;i<board.getBoard().length-1;i++) {
          for (int j=1;j<board.getBoard()[0].length-1;j++) {
            if (board.getBoard()[i][j] >= GHOST) {board.getBoard()[i][j] = SPACE;}
          }
        }
-       ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
        piecelist.get(0).rotate(true);
+       ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
     } else if (key == 'z' || key == 'Z') { //rotate  CCW
        for (int i=1;i<board.getBoard().length-1;i++) {
          for (int j=1;j<board.getBoard()[0].length-1;j++) {
            if (board.getBoard()[i][j] >= GHOST) {board.getBoard()[i][j] = SPACE;}
          }
        }
-       ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
        piecelist.get(0).rotate(false);
+       ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
     } else if (key == ' ') { //soft drop
       if(!loser){
       int softDropCount = 0;
@@ -232,6 +231,7 @@ void keyPressed() {
     piecelist.set(0, new Piece(5, 1, type.getNextType()));
     isPaused = false;
     anyAtTop = false;
+    ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
   } else if (key == 'c' || key == 'C') { //switch with storage
     if(!loser){
     if (hasStored == false) {
@@ -245,7 +245,13 @@ void keyPressed() {
       piecelist.set(1, piecelist.get(0));
       piecelist.set(0, temp);
       hasStored = true;
+      ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
+      for (int i=1;i<board.getBoard().length-1;i++) {
+         for (int j=1;j<board.getBoard()[0].length-1;j++) {
+           if (board.getBoard()[i][j] >= GHOST) {board.getBoard()[i][j] = SPACE;}
+         }
       }
+    }
     }
   } else if (key == 'p' || key == 'P') {
     if(!loser){

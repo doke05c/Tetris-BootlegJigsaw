@@ -78,7 +78,7 @@
     for (int i=1;i<board[0].length-1;i++) {
       boolean allFilled = true;
       for (int j=1;j<board.length-1;j++) {
-        if (board[j][i] < STAMP) {
+        if (board[j][i] < STAMP || board[j][i] >= GHOST) {
           allFilled = false;
         }
       }
