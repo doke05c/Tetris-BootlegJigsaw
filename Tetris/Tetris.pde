@@ -45,7 +45,7 @@ void draw() {
      while (ghost.move(board)) {}
      board.getBoard()[piecelist.get(0).getPositions().get(j)[0]][piecelist.get(0).getPositions().get(j)[1]] = piecelist.get(0).getType();
    }
-   ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
+   //ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
    }
    board.rowChecked();
    if(board.getLines2()){
@@ -189,6 +189,7 @@ void keyPressed() {
            if (board.getBoard()[i][j] >= GHOST) {board.getBoard()[i][j] = SPACE;}
          }
        }
+       ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
        piecelist.get(0).move(1, 0, board);
     } else if (keyCode == LEFT) { //move left
        for (int i=1;i<board.getBoard().length-1;i++) {
@@ -196,6 +197,7 @@ void keyPressed() {
            if (board.getBoard()[i][j] >= GHOST) {board.getBoard()[i][j] = SPACE;}
          }
        }
+       ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
        piecelist.get(0).move(-1, 0, board);
     } else if (keyCode == UP) { //rotate CW
        for (int i=1;i<board.getBoard().length-1;i++) {
@@ -203,6 +205,7 @@ void keyPressed() {
            if (board.getBoard()[i][j] >= GHOST) {board.getBoard()[i][j] = SPACE;}
          }
        }
+       ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
        piecelist.get(0).rotate(true);
     } else if (key == 'z' || key == 'Z') { //rotate  CCW
        for (int i=1;i<board.getBoard().length-1;i++) {
@@ -210,6 +213,7 @@ void keyPressed() {
            if (board.getBoard()[i][j] >= GHOST) {board.getBoard()[i][j] = SPACE;}
          }
        }
+       ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
        piecelist.get(0).rotate(false);
     } else if (key == ' ') { //soft drop
       if(!loser){
