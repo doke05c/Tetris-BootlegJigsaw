@@ -1,7 +1,7 @@
 Board board = new Board();
 nextType type = new nextType();
 Piece tee = new Piece(5, 1, type.getNextType());
-GhostPiece ghost = new GhostPiece(tee.getX(), tee.getY(), tee.getType());
+GhostPiece ghost = new GhostPiece(tee.getX(), tee.getY(), tee.getType(), tee.getRotation());
 //PrintWriter add;
 ArrayList<Integer> leaderboard = new ArrayList<Integer>();
 ArrayList<Piece> piecelist = new ArrayList<Piece>();
@@ -43,7 +43,10 @@ void draw() {
    for (int j=0;j<4;j++) { //puts Pieces & GhostPieces on Board
      board.getBoard()[piecelist.get(0).getPositions().get(j)[0]][piecelist.get(0).getPositions().get(j)[1]] = piecelist.get(0).getType();
      board.getBoard()[ghost.getPositions().get(j)[0]][ghost.getPositions().get(j)[1]] = ghost.getType()+GHOST;
-   }}
+     while (ghost.move(board)) {}
+   }
+   ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
+   }
    board.rowChecked();
    if(board.getLines2()){
      text("2 Lines Cleared!",505, 105);
