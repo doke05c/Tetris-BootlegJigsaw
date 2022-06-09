@@ -190,7 +190,12 @@ void keyPressed() {
          }
        }
        if (piecelist.get(0).move(1, 0, board)) {
-       ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
+         //ghost.move(1,-15,board);
+         int greatestPos = ghost.getPositions().get(0)[1];
+         for (int i=0 ; i<4 ; i++) {ghost.getPositions().get(i)[0]++; if (ghost.getPositions().get(i)[1] > greatestPos){ghost.getPositions().get(i)[1] = greatestPos;}}
+         for (int i=0 ; i<4 ;i++) {ghost.getPositions().get(i)[1] -= (greatestPos-5);}
+         while (ghost.move(board));
+         //ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
        }
     } else if (keyCode == LEFT) { //move left
        for (int i=1;i<board.getBoard().length-1;i++) {
@@ -199,7 +204,12 @@ void keyPressed() {
          }
        }
        if (piecelist.get(0).move(-1, 0, board)) {
-         ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
+         //ghost.move(-1,-15,board);
+         int greatestPos = ghost.getPositions().get(0)[1];
+         for (int i=0 ; i<4 ; i++) {ghost.getPositions().get(i)[0]--; if (ghost.getPositions().get(i)[1] > greatestPos){ghost.getPositions().get(i)[1] = greatestPos;}}
+         for (int i=0 ; i<4 ;i++) {ghost.getPositions().get(i)[1] -= (greatestPos-5);}
+         while (ghost.move(board));
+         //ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
        }
     } else if (keyCode == UP) { //rotate CW
        for (int i=1;i<board.getBoard().length-1;i++) {
