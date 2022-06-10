@@ -4,12 +4,13 @@ public class Piece {
   private int rotation;
   private int x;
   private int y;
-  private int tSpinCount = 0;
+  //private int tSpinCount = 0;
   private boolean tSpin = false;
   
-  int getTSpinCount(){ return tSpinCount; }
+  //int getTSpinCount(){ return tSpinCount; }
   boolean getTSpin(){ return tSpin; }
-  public void shortTSpinCount(){ tSpinCount-=1; if(tSpinCount==0) tSpin =false;}
+  //public void shortTSpinCount(){ tSpinCount-=1; if(tSpinCount==0) tSpin =false;}
+  public void noTSpin(){ tSpin = false; }
   
   int getType() { //accessor
     return type;
@@ -40,7 +41,7 @@ public class Piece {
        )
        ){
          tSpin = true;
-         tSpinCount = 90;
+         //tSpinCount = 90;
        }
     }
   }

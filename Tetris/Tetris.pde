@@ -17,6 +17,7 @@ int speed=60;
 boolean loser = false;
 boolean scoreStored = false;
 int[] preview = new int[4];
+int tSpinTrack;
 
 void setup() {
   size(960, 540);
@@ -59,10 +60,10 @@ void draw() {
      text("4 Lines Cleared!",505, 205);
      board.shortHowLong4();
    }
-   if(tee.getTSpin()){
+   if(tSpinTrack>0){
      text("TSPIN!", 505, 255);
-     System.out.println("tspin");
-     tee.shortTSpinCount();
+     tSpinTrack--;
+     if( tSpinTrack == 0) piecelist.get(0).noTSpin();
    }
   //check for busy spots at the top of any column. if busy, reset the game.
   boolean anyAtTop = false;
@@ -125,6 +126,7 @@ void storeDisp() {
 
 void fullStamp() {
    piecelist.get(0).stamp(board);
+   if(piecelist.get(0).getTSpin()) tSpinTrack = 90;
    hasStored = false;
    failCount = 0;
    for(int i=1;i<board.getBoard().length-1;i++) {if (board.getBoard()[i][1] > 6) {anyAtTop = true;}}
