@@ -61,6 +61,7 @@ void draw() {
    }
    if(tee.getTSpin()){
      text("TSPIN!", 505, 255);
+     System.out.println("tspin");
      tee.shortTSpinCount();
    }
   //check for busy spots at the top of any column. if busy, reset the game.

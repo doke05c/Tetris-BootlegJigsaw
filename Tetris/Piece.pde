@@ -4,17 +4,11 @@ public class Piece {
   private int rotation;
   private int x;
   private int y;
-  private int tSpinCount;
-  private boolean tSpin;
+  private int tSpinCount = 0;
+  private boolean tSpin = false;
   
-  int getTSpinCount(){
-   return tSpinCount; 
-  }
-  
-  boolean getTSpin(){
-   return tSpin; 
-  }
-  
+  int getTSpinCount(){ return tSpinCount; }
+  boolean getTSpin(){ return tSpin; }
   public void shortTSpinCount(){ tSpinCount-=1; if(tSpinCount==0) tSpin =false;}
   
   int getType() { //accessor
@@ -33,20 +27,26 @@ public class Piece {
   ArrayList<int[]> getPositions() {
     return positions;
   }
-
-  void stamp(Board cBoard) {
+  
+  void tSpin(Board cBoard){
     if(type == PURPLE_T){
+      int centerX = positions.get(0)[0];
+      int centerY = positions.get(0)[1]; 
      if(//look at "corners"
-       cBoard.getBoard()[positions.get(0)[0]-1][positions.get(1)[0]+1]>=STAMP &&
-       cBoard.getBoard()[positions.get(0)[0]+1][positions.get(1)[0]+1]>=STAMP && (
-       cBoard.getBoard()[positions.get(0)[0]+1][positions.get(1)[0]-1]>=STAMP ||
-       cBoard.getBoard()[positions.get(0)[0]-1][positions.get(1)[0]-1]>=STAMP
+       cBoard.getBoard()[centerX-1][centerY+1]>=STAMP &&
+       cBoard.getBoard()[centerX+1][centerY+1]>=STAMP && (
+       cBoard.getBoard()[centerX+1][centerY-1]>=STAMP ||
+       cBoard.getBoard()[centerX-1][centerY-1]>=STAMP
        )
        ){
          tSpin = true;
          tSpinCount = 90;
        }
     }
+  }
+
+  void stamp(Board cBoard) {
+    tSpin(cBoard);
     for (int sq = 0; sq<positions.size(); sq++) {
       cBoard.getBoard()[positions.get(sq)[0]][positions.get(sq)[1]]=type+STAMP;//(-1 + type/10+.1);
     }
