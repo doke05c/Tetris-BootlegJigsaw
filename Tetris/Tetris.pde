@@ -59,6 +59,10 @@ void draw() {
      text("4 Lines Cleared!",505, 205);
      board.shortHowLong4();
    }
+   if(tee.getTSpin()){
+     text("TSPIN!", 505, 255);
+     tee.shortTSpinCount();
+   }
   //check for busy spots at the top of any column. if busy, reset the game.
   boolean anyAtTop = false;
   for(int i=0;i<board.getBoard().length;i++) {if (board.getBoard()[i][1] > 6) {anyAtTop = true;}}
