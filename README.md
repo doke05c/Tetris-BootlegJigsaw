@@ -118,6 +118,7 @@ David: I started working on a ghost prototype that would stay at the point on th
 <b>6/10/22:</b>
   
 David: I fixed the bugs related to the ghost.
+Afia: I added t-spin detection, where text is displayed when a t-spin occurs, and atleast one rotation is necessary for a t-spin, and score is incrimented accordingly.
   
 </p>
   <h6> Jump to end </h6> 
