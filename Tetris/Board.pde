@@ -74,6 +74,10 @@
     scoreIncrement(level*100);
   }
   
+  public void tSpinIncrement(){
+   scoreIncrement(level*400);
+  }
+  
   void rowChecked() {
     if (level == 1) {
       linesNeeded = level*10;

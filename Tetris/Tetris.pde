@@ -17,7 +17,8 @@ int speed=60;
 boolean loser = false;
 boolean scoreStored = false;
 int[] preview = new int[4];
-int tSpinTrack;
+int tSpinTrack; //frames
+int tPieceRotate;
 
 void setup() {
   size(960, 540);
@@ -126,7 +127,7 @@ void storeDisp() {
 
 void fullStamp() {
    piecelist.get(0).stamp(board);
-   if(piecelist.get(0).getTSpin()) tSpinTrack = 90;
+   if(piecelist.get(0).getTSpin() && tPieceRotate>0){ tSpinTrack = 90; board.tSpinIncrement();}
    hasStored = false;
    failCount = 0;
    for(int i=1;i<board.getBoard().length-1;i++) {if (board.getBoard()[i][1] > 6) {anyAtTop = true;}}
@@ -187,22 +188,28 @@ void keyPressed() {
   if (!isPaused && !loser) {
     if (keyCode == DOWN) { //move down one space
       if(piecelist.get(0).move(board)) {
+        if(piecelist.get(0).type==PURPLE_T && tPieceRotate!=0){tPieceRotate=0;}
         board.scoreIncrement(1);
       }
     } else if (keyCode == RIGHT) { //move right
+       if(piecelist.get(0).type==PURPLE_T && tPieceRotate!=0){tPieceRotate=0;}
        piecelist.get(0).move(1, 0, board);
     } else if (keyCode == LEFT) { //move left
+       if(piecelist.get(0).type==PURPLE_T && tPieceRotate!=0){tPieceRotate=0;}
        piecelist.get(0).move(-1, 0, board);
     } else if (keyCode == UP) { //rotate CW
        piecelist.get(0).rotate(true);
+       if(piecelist.get(0).type==PURPLE_T){tPieceRotate+=1;}
     } else if (key == 'z' || key == 'Z') { //rotate  CCW
        piecelist.get(0).rotate(false);
+       if(piecelist.get(0).type==PURPLE_T){tPieceRotate+=1;}
     } else if (key == ' ') { //soft drop
       if(!loser){
       int softDropCount = 0;
       while(piecelist.get(0).move(board)) {softDropCount++;}
       board.scoreIncrement(2*softDropCount);
       fullStamp();
+      tPieceRotate=0;
       }
     }
   } if (keyCode == BACKSPACE) { //reset
@@ -214,8 +221,10 @@ void keyPressed() {
     piecelist.set(0, new Piece(5, 1, type.getNextType()));
     isPaused = false;
     anyAtTop = false;
+    tPieceRotate=0;
   } else if (key == 'c' || key == 'C') { //switch with storage
     if(!loser){
+      tPieceRotate=0;
     if (hasStored == false) {
       if (piecelist.size() < 2) {
         piecelist.add(1, new Piece(5, 1, type.getNextType()));
