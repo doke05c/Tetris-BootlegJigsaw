@@ -4,7 +4,19 @@ public class Piece {
   private int rotation;
   private int x;
   private int y;
-
+  private int tSpinCount;
+  private boolean tSpin;
+  
+  int getTSpinCount(){
+   return tSpinCount; 
+  }
+  
+  boolean getTSpin(){
+   return tSpin; 
+  }
+  
+  public void shortTSpinCount(){ tSpinCount-=1; if(tSpinCount==0) tSpin =false;}
+  
   int getType() { //accessor
     return type;
   }
@@ -24,7 +36,16 @@ public class Piece {
 
   void stamp(Board cBoard) {
     if(type == PURPLE_T){
-     if(cBoard.getBoard());//find the corners to see if t-spin 
+     if(//look at "corners"
+       cBoard.getBoard()[positions.get(0)[0]-1][positions.get(1)[0]+1]>=STAMP &&
+       cBoard.getBoard()[positions.get(0)[0]+1][positions.get(1)[0]+1]>=STAMP && (
+       cBoard.getBoard()[positions.get(0)[0]+1][positions.get(1)[0]-1]>=STAMP ||
+       cBoard.getBoard()[positions.get(0)[0]-1][positions.get(1)[0]-1]>=STAMP
+       )
+       ){
+         tSpin = true;
+         tSpinCount = 90;
+       }
     }
     for (int sq = 0; sq<positions.size(); sq++) {
       cBoard.getBoard()[positions.get(sq)[0]][positions.get(sq)[1]]=type+STAMP;//(-1 + type/10+.1);
