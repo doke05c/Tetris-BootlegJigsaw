@@ -1,10 +1,7 @@
-import java.io.*;
-import java.util.*;
-import java.sql.Timestamp;
-
 Board board = new Board();
 nextType type = new nextType();
 Piece tee = new Piece(5, 1, type.getNextType());
+GhostPiece ghost = new GhostPiece(tee.getX(), tee.getY(), tee.getType(), tee.getRotation());
 //PrintWriter add;
 ArrayList<Integer> leaderboard = new ArrayList<Integer>();
 ArrayList<Piece> piecelist = new ArrayList<Piece>();
@@ -26,7 +23,7 @@ void setup() {
 void draw() {
   background(255);
   frameRate(60);
-  
+
   fill(0); text("Leaderboard",770, 25); fill(255); for(int i=0;i<5;i++) rect(785, 50+25*i, 100, 25); fill(0); for(int i=0;i<leaderboard.size();i++) text(leaderboard.get(i), 786, 70+25*i);
   
   fill(0); text("NEXT:", 300, 30);
@@ -43,9 +40,12 @@ void draw() {
       }
     }
   if(!loser){
-   for (int j=0;j<4;j++) { //puts Pieces on Board
+   for (int j=0;j<4;j++) { //puts Pieces & GhostPieces on Board
+       board.getBoard()[ghost.getPositions().get(j)[0]][ghost.getPositions().get(j)[1]] = ghost.getType()+GHOST;
+     while (ghost.move(board)) {}
+     if (board.getBoard()[ghost.getPositions().get(j)[0]][ghost.getPositions().get(j)[1]]<STAMP || board.getBoard()[ghost.getPositions().get(j)[0]][ghost.getPositions().get(j)[1]]>=GHOST) {
      board.getBoard()[piecelist.get(0).getPositions().get(j)[0]][piecelist.get(0).getPositions().get(j)[1]] = piecelist.get(0).getType();
-   }}
+   }}}
    board.rowChecked();
    if(board.getLines2()){
      text("2 Lines Cleared!",505, 105);
@@ -61,7 +61,7 @@ void draw() {
    }
   //check for busy spots at the top of any column. if busy, reset the game.
   boolean anyAtTop = false;
-  for(int i=0;i<board.getBoard().length;i++) {if (board.getBoard()[i][1] > 6) {anyAtTop = true;}}
+  for(int i=0;i<board.getBoard().length;i++) {if (board.getBoard()[i][1] >= STAMP && board.getBoard()[i][1] < GHOST) {anyAtTop = true;}}
   if (anyAtTop) {
     loser = true;
   }
@@ -122,7 +122,7 @@ void fullStamp() {
    piecelist.get(0).stamp(board);
    hasStored = false;
    failCount = 0;
-   for(int i=1;i<board.getBoard().length-1;i++) {if (board.getBoard()[i][1] > 6) {anyAtTop = true;}}
+   for(int i=1;i<board.getBoard().length-1;i++) {if (board.getBoard()[i][1] >= STAMP && board.getBoard()[i][1] < GHOST) {anyAtTop = true;}}
     if (anyAtTop) {
       //textSize(250);   
       //text("LOSER", 25, height-50);
@@ -134,6 +134,7 @@ void fullStamp() {
       loser = true;
     } else {
       piecelist.set(0, new Piece(5, 1, type.getNextType()));
+      ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
     }
 }
 
@@ -183,13 +184,83 @@ void keyPressed() {
         board.scoreIncrement(1);
       }
     } else if (keyCode == RIGHT) { //move right
-       piecelist.get(0).move(1, 0, board);
+       for (int i=1;i<board.getBoard().length-1;i++) {
+         for (int j=1;j<board.getBoard()[0].length-1;j++) {
+           if (board.getBoard()[i][j] >= GHOST) {board.getBoard()[i][j] = SPACE;}
+         }
+       }
+       if (piecelist.get(0).move(1, 0, board)) {
+         boolean piecesAbove = false;
+         for (int i=0;i<4;i++) {
+           for (int j=piecelist.get(0).getPositions().get(i)[1];j<=ghost.getPositions().get(i)[1];j++) {
+             if (board.getBoard()[ghost.getPositions().get(i)[0]+1][j] >= STAMP && board.getBoard()[ghost.getPositions().get(i)[0]+1][j] < GHOST) {
+               piecesAbove = true;
+             }
+           }
+         }
+         if (!(ghost.moveCheck(1,0,board)) || piecesAbove) {
+           int upCount = -1;
+            while (!ghost.moveCheck(1,upCount,board) || piecesAbove) {
+             upCount--; //keep incrementing until it moves
+             piecesAbove = false;
+             for (int i=0;i<4;i++) {
+               for (int j=piecelist.get(0).getPositions().get(i)[1];j<=ghost.getPositions().get(i)[1]+upCount;j++) {
+                 if (board.getBoard()[ghost.getPositions().get(i)[0]+1][j] >= STAMP && board.getBoard()[ghost.getPositions().get(i)[0]+1][j] < GHOST) {
+                   piecesAbove = true;
+                 }
+               }
+             }
+           }
+           ghost.move(1,upCount,board);
+         } else {ghost.move(1,0,board);}
+       }
     } else if (keyCode == LEFT) { //move left
-       piecelist.get(0).move(-1, 0, board);
+       for (int i=1;i<board.getBoard().length-1;i++) {
+         for (int j=1;j<board.getBoard()[0].length-1;j++) {
+           if (board.getBoard()[i][j] >= GHOST) {board.getBoard()[i][j] = SPACE;}
+         }
+       }
+       if (piecelist.get(0).move(-1, 0, board)) {
+         boolean piecesAbove = false;
+         for (int i=0;i<4;i++) {
+           for (int j=piecelist.get(0).getPositions().get(i)[1];j<=ghost.getPositions().get(i)[1];j++) {
+             if (board.getBoard()[ghost.getPositions().get(i)[0]-1][j] >= STAMP && board.getBoard()[ghost.getPositions().get(i)[0]-1][j] < GHOST) {
+               piecesAbove = true;
+             }
+           }
+         }
+         if (!(ghost.moveCheck(-1,0,board)) || piecesAbove) {
+           int upCount = -1;
+            while (!ghost.moveCheck(-1,upCount,board) || piecesAbove) {
+             upCount--; //keep incrementing until it moves
+             piecesAbove = false;
+             for (int i=0;i<4;i++) {
+               for (int j=piecelist.get(0).getPositions().get(i)[1];j<=ghost.getPositions().get(i)[1]+upCount;j++) {
+                 if (board.getBoard()[ghost.getPositions().get(i)[0]-1][j] >= STAMP && board.getBoard()[ghost.getPositions().get(i)[0]-1][j] < GHOST) {
+                   piecesAbove = true;
+                 }
+               }
+             }
+           }
+           ghost.move(-1,upCount,board);
+         } else {ghost.move(-1,0,board);}
+       }
     } else if (keyCode == UP) { //rotate CW
+       for (int i=1;i<board.getBoard().length-1;i++) {
+         for (int j=1;j<board.getBoard()[0].length-1;j++) {
+           if (board.getBoard()[i][j] >= GHOST) {board.getBoard()[i][j] = SPACE;}
+         }
+       }
        piecelist.get(0).rotate(true);
+       ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
     } else if (key == 'z' || key == 'Z') { //rotate  CCW
+       for (int i=1;i<board.getBoard().length-1;i++) {
+         for (int j=1;j<board.getBoard()[0].length-1;j++) {
+           if (board.getBoard()[i][j] >= GHOST) {board.getBoard()[i][j] = SPACE;}
+         }
+       }
        piecelist.get(0).rotate(false);
+       ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
     } else if (key == ' ') { //soft drop
       if(!loser){
       int softDropCount = 0;
@@ -207,6 +278,7 @@ void keyPressed() {
     piecelist.set(0, new Piece(5, 1, type.getNextType()));
     isPaused = false;
     anyAtTop = false;
+    ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
   } else if (key == 'c' || key == 'C') { //switch with storage
     if(!loser){
     if (hasStored == false) {
@@ -220,7 +292,13 @@ void keyPressed() {
       piecelist.set(1, piecelist.get(0));
       piecelist.set(0, temp);
       hasStored = true;
+      ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
+      for (int i=1;i<board.getBoard().length-1;i++) {
+         for (int j=1;j<board.getBoard()[0].length-1;j++) {
+           if (board.getBoard()[i][j] >= GHOST) {board.getBoard()[i][j] = SPACE;}
+         }
       }
+    }
     }
   } else if (key == 'p' || key == 'P') {
     if(!loser){
@@ -244,3 +322,4 @@ static final int ORANGE_L = 4;
 static final int GREEN_Z1 = 5;
 static final int RED_Z = 6;
 static final int STAMP = 7;
+static final int GHOST = 14;
