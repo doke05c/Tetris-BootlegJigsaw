@@ -246,17 +246,7 @@ public class Piece {
 
   public boolean move(int x, int y, Board board) {
     //if the intended space any of the bricks of the Piece wants to take up on the Board is busy (wall or other Pieces), deny move() the right to move the Piece.
-    for (int i=0; i<positions.size(); i++) {
-      boolean xOver = positions.get(i)[0]+x > board.getBoard().length-1;
-      boolean xUnder = positions.get(i)[0]+x < 1;
-      boolean yOver = positions.get(i)[1]+y > board.getBoard()[0].length-1;
-      boolean yUnder = positions.get(i)[1]+y < 1;
-      boolean isWall = board.getBoard()[positions.get(i)[0]+x][positions.get(i)[1]+y] == WALL;
-      boolean isStamped = board.getBoard()[positions.get(i)[0]+x][positions.get(i)[1]+y] >= STAMP && board.getBoard()[positions.get(i)[0]+x][positions.get(i)[1]+y] < GHOST;
-      if (xOver || xUnder || yOver || yUnder || isWall || isStamped) {
-        return false;
-      }
-    }
+    if (!moveCheck(x, y, board)) {return false;}
     for (int i=0; i<positions.size(); i++) {
        //otherwise, erase the Piece's old positions from the Board and move the Piece according to the parameters
        board.getBoard()[positions.get(i)[0]][positions.get(i)[1]] = SPACE;
