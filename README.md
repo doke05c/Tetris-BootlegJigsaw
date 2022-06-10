@@ -110,6 +110,15 @@ Afia: I added instance variables and methods to the Board class that allow the T
 David: I added a local leaderboard/score-saving feature.
 
 Afia: I added the time (in seconds) a player has been playing to the losing screen.
+  
+<b>6/8/22:</b>
+  
+David: I started working on a ghost prototype that would stay at the point on the screen where the player would put their piece were they to hard drop.
+
+<b>6/10/22:</b>
+  
+David: I fixed the bugs related to the ghost.
+  
 </p>
   <h6> Jump to end </h6> 
 </body>
