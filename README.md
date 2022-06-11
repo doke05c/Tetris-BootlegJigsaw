@@ -17,8 +17,10 @@
 <p>This program runs in processing. Download the file, open it in processing, and click run. Use left/right arrow keys to shift pieces in those respective directions. Up arrow rotates the piece clockwise while the 'z' key rotates it counterclockwise, and the down arrow shifts the piece down. 'c' key adds a Piece to storage to be used at a later time. (Player can only put a piece in storage once per place cycle.) The spacebar hard drops the piece on to the board and summons a new piece. Backspace resets the game, and the 'p' key pauses/unpauses the game. The enter key allows players to save their scores onto the local leaderboard upon losing.</p>
 
 <h1>Development Log:</h1>
+<a href="https://github.com/doke05c/Tetris-BootlegJigsaw/blob/main/README.md#-end-of-readme-"> Jump to End</a>
 
 <p>
+  
 <b>5/22/22:</b>
 
 Today we started testing out branching and merging.
@@ -119,7 +121,10 @@ David: I started working on a ghost prototype that would stay at the point on th
   
 David: I fixed the bugs related to the ghost.
   
+Afia: I added t-spin detection, where text is displayed when a t-spin occurs, and atleast one rotation is necessary for a t-spin, and score is incrimented accordingly. 
+  
 </p>
-  <h6> Jump to end </h6> 
+  <h6> end of ReadME </h6>
+  <a href="https://github.com/doke05c/Tetris-BootlegJigsaw/blob/main/README.md#tetris-bootlegjigsaw">Jump to Start</a>
 </body>
-</html>
+</html> 

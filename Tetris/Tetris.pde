@@ -78,7 +78,7 @@ void tick(){
        if (!(piecelist.get(0).move(board))) {
          failCount++;
        }
-       if (failCount == ((int)Math.pow(board.getLevel(), 0.5))+1) {
+       if (failCount == ((int)Math.pow(board.getLevel()+8, 2.17)/95)+1) {
          fullStamp();
        }
        if(board.getLevel()<=15) speed=(int)(60/Math.pow(1.22,(double)(board.getLevel()-1)));
