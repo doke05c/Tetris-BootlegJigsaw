@@ -14,6 +14,8 @@ int speed=60;
 boolean loser = false;
 boolean scoreStored = false;
 int[] preview = new int[4];
+int tSpinTrack; //frames
+int tPieceRotate;
 
 void setup() {
   size(960, 540);
@@ -33,7 +35,7 @@ void draw() {
   
   if(!loser)board.displayBoard();
     else{board.displayBoard(); fill(0); textSize(20); text("LOSER",505, 155); text("Press Backspace to restart", 505, 200);///The stupid white box: stroke(255); fill(255); rect(300, 365, 77, 75); stroke(0); 
-    text("Score: " + board.getScore(), 505, 245);text("Level: " + board.getLevel(), 505, 290); text("Lines Cleared: " + board.getLinesCleared(), 505, 335);
+    text("Score: " + board.getScore(), 505, 245);text("Level: " + board.getLevel(), 505, 290); text("Lines Cleared: " + board.getLinesCleared(), 505, 335); text("Time Played: "+frameCountEr/60+" seconds", 505, 500);
     text("Would you like to save your score?", 505, 375); text("Hit ENTER to save your score!", 505, 400);
       if (scoreStored) {
         text("Saved!", 575, 450);
@@ -59,6 +61,11 @@ void draw() {
      text("4 Lines Cleared!",505, 205);
      board.shortHowLong4();
    }
+   if(tSpinTrack>0){
+     text("TSPIN!", 505, 255);
+     tSpinTrack--;
+     if( tSpinTrack == 0) piecelist.get(0).noTSpin();
+   }
   //check for busy spots at the top of any column. if busy, reset the game.
   boolean anyAtTop = false;
   for(int i=0;i<board.getBoard().length;i++) {if (board.getBoard()[i][1] >= STAMP && board.getBoard()[i][1] < GHOST) {anyAtTop = true;}}
@@ -83,7 +90,7 @@ void tick(){
        }
        if(board.getLevel()<=15) speed=(int)(60/Math.pow(1.22,(double)(board.getLevel()-1)));
        else speed=3;
-       frameCountEr+=speed;
+       if(!loser) frameCountEr+=speed;
      }
    } else {
      frameCount--;
@@ -120,6 +127,7 @@ void storeDisp() {
 
 void fullStamp() {
    piecelist.get(0).stamp(board);
+   if(piecelist.get(0).getTSpin() && tPieceRotate>0){ tSpinTrack = 90; board.tSpinIncrement();}
    hasStored = false;
    failCount = 0;
    for(int i=1;i<board.getBoard().length-1;i++) {if (board.getBoard()[i][1] >= STAMP && board.getBoard()[i][1] < GHOST) {anyAtTop = true;}}
@@ -181,9 +189,11 @@ void keyPressed() {
   if (!isPaused && !loser) {
     if (keyCode == DOWN) { //move down one space
       if(piecelist.get(0).move(board)) {
+        if(piecelist.get(0).type==PURPLE_T && tPieceRotate!=0){tPieceRotate=0;}
         board.scoreIncrement(1);
       }
     } else if (keyCode == RIGHT) { //move right
+       if(piecelist.get(0).type==PURPLE_T && tPieceRotate!=0){tPieceRotate=0;}
        for (int i=1;i<board.getBoard().length-1;i++) {
          for (int j=1;j<board.getBoard()[0].length-1;j++) {
            if (board.getBoard()[i][j] >= GHOST) {board.getBoard()[i][j] = SPACE;}
@@ -215,6 +225,7 @@ void keyPressed() {
          } else {ghost.move(1,0,board);}
        }
     } else if (keyCode == LEFT) { //move left
+       if(piecelist.get(0).type==PURPLE_T && tPieceRotate!=0){tPieceRotate=0;}
        for (int i=1;i<board.getBoard().length-1;i++) {
          for (int j=1;j<board.getBoard()[0].length-1;j++) {
            if (board.getBoard()[i][j] >= GHOST) {board.getBoard()[i][j] = SPACE;}
@@ -252,6 +263,7 @@ void keyPressed() {
          }
        }
        piecelist.get(0).rotate(true);
+       if(piecelist.get(0).type==PURPLE_T){tPieceRotate+=1;}
        ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
     } else if (key == 'z' || key == 'Z') { //rotate  CCW
        for (int i=1;i<board.getBoard().length-1;i++) {
@@ -260,6 +272,7 @@ void keyPressed() {
          }
        }
        piecelist.get(0).rotate(false);
+       if(piecelist.get(0).type==PURPLE_T){tPieceRotate+=1;}
        ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
     } else if (key == ' ') { //soft drop
       if(!loser){
@@ -267,6 +280,7 @@ void keyPressed() {
       while(piecelist.get(0).move(board)) {softDropCount++;}
       board.scoreIncrement(2*softDropCount);
       fullStamp();
+      tPieceRotate=0;
       }
     }
   } if (keyCode == BACKSPACE) { //reset
@@ -279,9 +293,11 @@ void keyPressed() {
     piecelist.set(0, new Piece(5, 1, type.getNextType()));
     isPaused = false;
     anyAtTop = false;
+    tPieceRotate=0;
     ghost = new GhostPiece(piecelist.get(0).getX(), piecelist.get(0).getY(), piecelist.get(0).getType(), piecelist.get(0).getRotation());
   } else if (key == 'c' || key == 'C') { //switch with storage
     if(!loser){
+      tPieceRotate=0;
     if (hasStored == false) {
       if (piecelist.size() < 2) {
         piecelist.add(1, new Piece(5, 1, type.getNextType()));
