@@ -122,6 +122,6 @@ David: I fixed the bugs related to the ghost.
 Afia: I added t-spin detection, where text is displayed when a t-spin occurs, and atleast one rotation is necessary for a t-spin, and score is incrimented accordingly. 
   
 </p>
-  <h6> Jump to end </h6> 
+  <a href="https://github.com/doke05c/Tetris-BootlegJigsaw/blob/main/README.md#tetris-bootlegjigsaw">Jump to Start</a>
 </body>
 </html>
