@@ -3,6 +3,7 @@ nextType type = new nextType();
 Piece tee = new Piece(5, 1, type.getNextType());
 GhostPiece ghost = new GhostPiece(tee.getX(), tee.getY(), tee.getType(), tee.getRotation());
 //PrintWriter add;
+PFont arial;
 ArrayList<Integer> leaderboard = new ArrayList<Integer>();
 ArrayList<Piece> piecelist = new ArrayList<Piece>();
 boolean anyAtTop = false; //check for busy spots near spawn, if exist, game will reset
@@ -21,6 +22,8 @@ void setup() {
   size(960, 540);
   piecelist.add(tee);
   preview = type.getPreviewTypes();
+  arial = createFont("font.ttf", 25);
+  textFont(arial);
 }
 void draw() {
   background(255);
@@ -34,7 +37,7 @@ void draw() {
   preview = type.getPreviewTypes();
   
   if(!loser)board.displayBoard();
-    else{board.displayBoard(); fill(0); textSize(20); text("LOSER",505, 155); text("Press Backspace to restart", 505, 200);///The stupid white box: stroke(255); fill(255); rect(300, 365, 77, 75); stroke(0); 
+    else{board.displayBoard(); fill(0); textSize(25); text("LOSER",505, 155); text("Press Backspace to restart", 505, 200);///The stupid white box: stroke(255); fill(255); rect(300, 365, 77, 75); stroke(0); 
     text("Score: " + board.getScore(), 505, 245);text("Level: " + board.getLevel(), 505, 290); text("Lines Cleared: " + board.getLinesCleared(), 505, 335); text("Time Played: "+frameCountEr/60+" seconds", 505, 500);
     text("Would you like to save your score?", 505, 375); text("Hit ENTER to save your score!", 505, 400);
       if (scoreStored) {
@@ -76,7 +79,7 @@ void draw() {
   if (piecelist.size() >= 2) { //display the stored Piece
     storeDisp();
   }
-  if (isPaused) {fill(255); rect(35, 100, 226, 100); fill(0); textSize(20); text("paused...",105, 155);}  
+  if (isPaused) {fill(255); rect(35, 100, 226, 100); fill(0); textSize(25); text("paused...",105, 155);}  
 }
 
 void tick(){
@@ -98,7 +101,7 @@ void tick(){
 }
 
 void storeDisp() {
-    textSize(20);
+    textSize(25);
     fill(127, 127, 127); text("Storage:", 300, 380);
     switch(piecelist.get(1).getType()) {
       case(CYAN_I):

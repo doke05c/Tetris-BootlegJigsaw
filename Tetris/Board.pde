@@ -166,13 +166,13 @@
           fill(127, 127, 255);
           break;
         case ORANGE_L:
-          fill(255, 69, 0);
+          fill(255, 127, 0);
           break;
         case ORANGE_L+STAMP:
-          fill(255, 69, 0);
+          fill(255, 127, 0);
           break;
         case ORANGE_L+GHOST:
-          fill(255, 162, 127);
+          fill(255, 191, 127);
           break;
         case GREEN_Z1:
           fill(0, 255, 0);
@@ -196,7 +196,7 @@
         rect(10.0+r*sz, 10.0+c*sz, sz, sz);
       }
     }
-    textSize(20);
+    textSize(25);
     text("Score: " + score, 300, 475);
     text("Level: " + level, 300, 495);
     text("Lines Cleared: " + linesCleared, 300, 515);
