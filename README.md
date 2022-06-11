@@ -123,6 +123,10 @@ David: I fixed the bugs related to the ghost.
   
 Afia: I added t-spin detection, where text is displayed when a t-spin occurs, and atleast one rotation is necessary for a t-spin, and score is incrimented accordingly. 
   
+<b>6/11/22:</b>
+  
+David: Changed out the time pieces take to settle on the board once they cannot move anymore due to gravity.
+  
 </p>
   <h6> end of ReadME </h6>
   <a href="https://github.com/doke05c/Tetris-BootlegJigsaw/blob/main/README.md#tetris-bootlegjigsaw">Jump to Start</a>
