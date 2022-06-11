@@ -273,6 +273,7 @@ void keyPressed() {
     loser = false;
     scoreStored = false;
     board = new Board();
+    speed = 60;
     piecelist = new ArrayList<Piece>();
     piecelist.add(new Piece(5, 1, type.getNextType()));
     piecelist.set(0, new Piece(5, 1, type.getNextType()));
