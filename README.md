@@ -125,7 +125,7 @@ Afia: I added t-spin detection, where text is displayed when a t-spin occurs, an
   
 <b>6/11/22:</b>
   
-David: Changed out the time pieces take to settle on the board once they cannot move anymore due to gravity.
+David: Changed out the time pieces take to settle on the board once they cannot move anymore due to gravity. I added a custom handwritten font (made by my mom!) to the text of the game, and improved the color of one of the pieces.
   
 </p>
   <h6> end of ReadME </h6>
