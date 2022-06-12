@@ -57,7 +57,7 @@ public class nextType{
       square(x+side, y+side, side); square(x+(2*side), y+side, side); 
     }
     else if (type==ORANGE_L) {
-      fill(255, 69, 0);
+      fill(255, 127, 0);
       square(x+(2*side), y, side); square(x, y+side, side);
       square(x+side, y+side, side); square(x+(2*side), y+side, side); 
     }
